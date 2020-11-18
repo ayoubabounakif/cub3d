@@ -1,0 +1,1 @@
+gcc -g3 -fsanitize=address cub3d.c read_file.c read_map.c draw_minimap.c utils.c random_utils.c get_next_line/*.c -fsanitize=address libft.a -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit -D BUFFER_SIZE=20
