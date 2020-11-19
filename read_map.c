@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/18 04:35:53 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/19 04:49:18 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_map()
 		if (getfirstchar(content))
 		{
 			g_sizeofmap++;
-			if (ft_strlen(content) > g_biglen)
+			if (ft_strlen(content) > (size_t)g_biglen)
 				g_biglen = ft_strlen(content);
 		}
 		temp = temp->next;

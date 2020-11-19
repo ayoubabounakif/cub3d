@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/18 04:33:23 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/19 04:49:17 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		draw_square(int y, int x, int size, int color)
 
 // Initiating my player position
 // so that it spawns on the right x,y axis where 'P' is written
-void		initiate_player()
+void		init_player()
 {
 	ft_bzero(&g_vars, sizeof(t_vars));
 	ft_bzero(&g_player, sizeof(t_player));

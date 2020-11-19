@@ -108,91 +108,6 @@ void		castVertRay(float rayAngle)
 	}
 }
 
-void		init_tex()
-{
-	// Initialise struct variables
-	g_tex.texOffSetX = 0;
-	g_tex.texOffSetY = 0;
-	g_tex.distanceFromTop = 0;
-	g_tex.texelColor = 0;
-
-	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.no, &g_tex.img_width, &g_tex.img_height);
-	g_textnorth = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-
-	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.so, &g_tex.img_width, &g_tex.img_height);
-	g_textsouth = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-
-	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.we, &g_tex.img_width, &g_tex.img_height);
-	g_textwest = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-
-	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.ea, &g_tex.img_width, &g_tex.img_height);
-	g_texteast = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-}
-
-void		render3DProjectionPlane(int i)
-{
-	float	perpDistance = g_rays[i].distance * cos(g_rays[i].rayAngle - g_player.rotation_angle);
-	float	distanceProjPlane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
-	float	projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
-	int		wallStripHeight = (int)projectedWallHeight;
-	
-	int		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2);
-	wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-
-	int		wallBottomPixel = (WIN_HEIGHT / 2) + (wallStripHeight / 2);
-	wallBottomPixel = wallBottomPixel > WIN_HEIGHT ? WIN_HEIGHT : wallBottomPixel;
-
-	// Render the ceiling from 0 to wallTopPixel
-	int		y = 0;
-	while (y < wallTopPixel)
-	{
-		img_update(i, y, 0x404040);
-		y++;
-	}
-
-	// Draw walls
-	y = wallTopPixel;
-	if (g_rays[i].wasHitVertical)	// Calculate textureOffSetX if wallHit was Vert
-		g_tex.texOffSetX = (int)g_rays[i].wallHitY % TILE_SIZE;
-	else							// If the wallHit was Horz
-		g_tex.texOffSetX = (int)g_rays[i].wallHitX % TILE_SIZE;
-	while (y < wallBottomPixel)		// Render the wall from wallTopPixel to wallBottomPixel
-	{
-		g_tex.distanceFromTop = y + (wallStripHeight / 2) - (WIN_HEIGHT / 2);
-		g_tex.texOffSetY = g_tex.distanceFromTop * ((float)TEX_HEIGHT / wallStripHeight);
-		// Set texture
-		if (g_rays[i].isRayFacingDown && !g_rays[i].wasHitVertical)
-		{
-			g_tex.texelColor = g_textnorth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-			img_update(i, y, g_tex.texelColor);
-		}
-		else if (g_rays[i].isRayFacingUp && !g_rays[i].wasHitVertical)
-		{
-			g_tex.texelColor = g_textsouth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-			img_update(i, y, g_tex.texelColor);
-		}
-		else if (g_rays[i].isRayFacingLeft && g_rays[i].wasHitVertical)
-		{
-			g_tex.texelColor = g_textwest[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-			img_update(i, y, g_tex.texelColor);
-		}
-		else if (g_rays[i].isRayFacingRight && g_rays[i].wasHitVertical)
-		{
-			g_tex.texelColor = g_texteast[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-			img_update(i, y, g_tex.texelColor);
-		}
-		y++;
-	}
-
-	// Render the floor from wallBottomPixel to WIN_HEIGHT
-	y = wallBottomPixel;
-	while (y < WIN_HEIGHT)
-	{
-		img_update(i, y, 0x808080);
-		y++;
-	}
-}
-
 void		castAllRays()
 {
 	int		stripId = 0;
@@ -244,7 +159,7 @@ void		castAllRays()
 int		main(void)
 {
 	read_file();
-	initiate_player();
+	init_player();
 
 	g_player.rotation_speed = (float)ROTATION_SPEED;
 	g_mlx.mlx_ptr = mlx_init();

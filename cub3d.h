@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/19 02:05:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/19 04:49:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ float		distanceBetweenPoints(float x1, float y1, float x2, float y2);
 float		normalize_angle(float angle);
 int			wall_collision(float x, float y);
 void		draw_square(int y, int x, int size, int color);
-void		initiate_player();
+void		init_player();
 void		set_rotation_angle(char player_pos);
 
 // RAY CASTING FUNCTIONS
@@ -270,5 +270,10 @@ void		draw_line(int X0, int Y0, int X1, int Y1, int color);
 
 // 3D FUNCTIONS
 void		render3DProjectionPlane(int i);
+void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeight);
+void		draw_ceiling(int i, int wallTopPixel);
+void		draw_floor(int i, int wallBottomPixel);
 
+// INIT FUNCTIONS
+void		init_tex();
 #endif
