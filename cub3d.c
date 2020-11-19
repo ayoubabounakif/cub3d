@@ -110,19 +110,23 @@ void		castVertRay(float rayAngle)
 
 void		init_tex()
 {
-	g_tex.wallTexture = (int *)malloc(sizeof(int) *
-						(int)TEX_WIDTH * (int)TEX_HEIGHT);
-	// g_tex.ptr's 2nd argument should get changed depending not always NO
-	// so the piece of code in render3dprojectionplane should get changed
-	// to draw textures depending on the rays...
-	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.no, &g_tex.img_width, &g_tex.img_height);
-	g_tex.wallTexture = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-
 	// Initialise struct variables
 	g_tex.texOffSetX = 0;
 	g_tex.texOffSetY = 0;
 	g_tex.distanceFromTop = 0;
 	g_tex.texelColor = 0;
+
+	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.no, &g_tex.img_width, &g_tex.img_height);
+	g_textnorth = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
+
+	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.so, &g_tex.img_width, &g_tex.img_height);
+	g_textsouth = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
+
+	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.we, &g_tex.img_width, &g_tex.img_height);
+	g_textwest = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
+
+	g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.ea, &g_tex.img_width, &g_tex.img_height);
+	g_texteast = (int *)mlx_get_data_addr(g_tex.ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 }
 
 void		render3DProjectionPlane(int i)
@@ -145,7 +149,7 @@ void		render3DProjectionPlane(int i)
 		img_update(i, y, 0x404040);
 		y++;
 	}
-	
+
 	// Draw walls
 	y = wallTopPixel;
 	if (g_rays[i].wasHitVertical)	// Calculate textureOffSetX if wallHit was Vert
@@ -157,8 +161,26 @@ void		render3DProjectionPlane(int i)
 		g_tex.distanceFromTop = y + (wallStripHeight / 2) - (WIN_HEIGHT / 2);
 		g_tex.texOffSetY = g_tex.distanceFromTop * ((float)TEX_HEIGHT / wallStripHeight);
 		// Set texture
-		g_tex.texelColor = g_tex.wallTexture[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		img_update(i, y, g_tex.texelColor); // Function that za3im told me to use
+		if (g_rays[i].isRayFacingDown && !g_rays[i].wasHitVertical)
+		{
+			g_tex.texelColor = g_textnorth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
+			img_update(i, y, g_tex.texelColor);
+		}
+		else if (g_rays[i].isRayFacingUp && !g_rays[i].wasHitVertical)
+		{
+			g_tex.texelColor = g_textsouth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
+			img_update(i, y, g_tex.texelColor);
+		}
+		else if (g_rays[i].isRayFacingLeft && g_rays[i].wasHitVertical)
+		{
+			g_tex.texelColor = g_textwest[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
+			img_update(i, y, g_tex.texelColor);
+		}
+		else if (g_rays[i].isRayFacingRight && g_rays[i].wasHitVertical)
+		{
+			g_tex.texelColor = g_texteast[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
+			img_update(i, y, g_tex.texelColor);
+		}
 		y++;
 	}
 

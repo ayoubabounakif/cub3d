@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/18 04:37:09 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/19 01:36:29 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,15 +225,15 @@ void		read_file()
 	}
 	check_map();
 
-	// printf("Height -> %d\n", g_data.win_height);
-	// printf("Width -> %d\n", g_data.win_width);
-	// printf("NO -> %s\n", g_data.paths.no);
-	// printf("SO -> %s\n", g_data.paths.so);
-	// printf("WE -> %s\n", g_data.paths.we);
-	// printf("EA -> %s\n", g_data.paths.ea);
-	// printf("Sprite -> %s\n", g_data.paths.s);
-	// printf("Floor -> %d %d %d\n", floor_rgb.r, floor_rgb.g, floor_rgb.b);
-	// printf("Ceiling -> %d %d %d\n", ceiling_rgb.r, ceiling_rgb.g, ceiling_rgb.b);
+	printf("Height -> %d\n", g_data.win_height);
+	printf("Width -> %d\n", g_data.win_width);
+	printf("NO -> %s\n", g_data.paths.no);
+	printf("SO -> %s\n", g_data.paths.so);
+	printf("WE -> %s\n", g_data.paths.we);
+	printf("EA -> %s\n", g_data.paths.ea);
+	printf("Sprite -> %s\n", g_data.paths.s);
+	printf("Floor -> %d %d %d\n", floor_rgb.r, floor_rgb.g, floor_rgb.b);
+	printf("Ceiling -> %d %d %d\n", ceiling_rgb.r, ceiling_rgb.g, ceiling_rgb.b);
 
 	free(buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/18 04:38:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/19 02:05:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,10 +208,8 @@ typedef struct	s_tex
 	int			texOffSetX;
 	int			texOffSetY;
 	int			distanceFromTop;
-	int			*wallTexture;
 	int			texelColor;
 }				t_tex;
-
 
 // GLOBAL STRUCTURES
 t_mlx			g_mlx;
@@ -228,6 +226,12 @@ t_tex			g_tex;
 char			**g_mapread;
 int				g_sizeofmap;
 int				g_biglen;
+// TEXTURE GLOBAL VARIABLES
+int				*g_textnorth;
+int				*g_textwest;
+int				*g_texteast;
+int				*g_textsouth;
+void			*tempimage;
 
 // // EVENTS | HOOKS | LOOPS (UTILS.C)
 int			key_pressed(int keycode);
