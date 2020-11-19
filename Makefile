@@ -36,7 +36,7 @@ all: $(NAME)
 
 $(LIBNAME):
 	make -C libft/
-	cp libft/$(LIBNAME) .
+	cp libft/$(LIBNAME) ./
 
 $(NAME): $(LIBNAME)
 	gcc $(FLAGS) $(SRC) libft.a -g3 $(MLX)  $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
