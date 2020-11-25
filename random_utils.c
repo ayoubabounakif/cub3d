@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/19 04:49:17 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/20 23:00:09 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int		wall_collision(float x, float y)
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'S')
 		return (0);
 	else if (g_mapread[mapGridIndexY][mapGridIndexX] == '1' ||
-			g_mapread[mapGridIndexY][mapGridIndexX] == ' ' ||
-			g_mapread[mapGridIndexY][mapGridIndexX] == '2')
+			g_mapread[mapGridIndexY][mapGridIndexX] == ' ')
 		return (1);
+	else if (g_mapread[mapGridIndexY][mapGridIndexX] == '2')
+		return (2);
 	else if (x < 0 && x >= WIN_WIDTH && y < 0 && y >= WIN_HEIGHT)	// OUTSIDE THE BOUNDARIES
 		return (1);
 	return (0);
@@ -69,31 +70,5 @@ void		draw_square(int y, int x, int size, int color)
 			x++;
 		}
 		y++;
-	}
-}
-
-// Initiating my player position
-// so that it spawns on the right x,y axis where 'P' is written
-void		init_player()
-{
-	ft_bzero(&g_vars, sizeof(t_vars));
-	ft_bzero(&g_player, sizeof(t_player));
-	while (g_vars.rows < ROWS)
-	{
-		g_vars.cols = 0;
-		while (g_vars.cols < COLS)
-		{
-			if (g_mapread[g_vars.rows][g_vars.cols] == 'N' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'S' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'W' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'E')
-			{
-				set_rotation_angle(g_mapread[g_vars.rows][g_vars.cols]);
-				g_player.y = g_vars.rows * TILE_SIZE + 32;
-				g_player.x = g_vars.cols * TILE_SIZE + 32;
-			}
-			g_vars.cols++;
-		}
-		g_vars.rows++;
 	}
 }

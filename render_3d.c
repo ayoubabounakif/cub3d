@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/19 04:45:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/20 23:11:51 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void		render3DProjectionPlane(int i)
 	draw_ceiling(i, wallTopPixel);
 	draw_wall(i, wallTopPixel, wallBottomPixel, wallStripHeight);
 	draw_floor(i, wallBottomPixel);
+	ft_sprite(i);
 }

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/18 04:38:07 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/25 08:45:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void	draw_map()
 		{
 			if (g_mapread[i][j] == '1')
 				drawsquare(x, y, 0x00ff00);
+			else if (g_mapread[i][j] == '2')
+				drawsquare(x, y, 0x0000FF);
 			else
 				drawemptysquare(x, y, 0xffffff);
 			x += TILE_SIZE;

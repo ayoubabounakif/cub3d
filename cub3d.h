@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/19 04:49:14 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/25 08:41:00 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define RAD(x) (x * M_PI / 180)
 # define DEG(x) (x * 180 / M_PI)
+# define TWO_PI (M_PI * 2)
 
 // KEYS
 # define W_KEY 13
@@ -54,9 +55,8 @@
 
 // PLAYER
 # define SIZE 6
-# define MOVEMENT_SPEED 6	// NEEDS TO CHANGE WITH HYPOTENUSE WHEN I CAST RAYS
-# define ROTATION_SPEED 0.05	// 2 * (M_PI / 180)
-# define RENDERER_LENGTH 50
+# define MOVEMENT_SPEED 6
+# define ROTATION_SPEED 0.05
 
 // RAYS
 # define FOV_ANGLE RAD(60)
@@ -177,7 +177,7 @@ typedef	struct	s_paths
 	char		*so;
 	char		*we;
 	char		*ea;
-	char		*s;
+	char		*sp;
 }				t_paths;
 
 typedef	struct	s_data
@@ -211,6 +211,19 @@ typedef struct	s_tex
 	int			texelColor;
 }				t_tex;
 
+typedef struct	s_sprite
+{
+	void		*ptr;
+	int			*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+
+	float		SptOffSetX;
+	float		SptOffSetY;
+	float		distance;
+}				t_sprite;
+
 // GLOBAL STRUCTURES
 t_mlx			g_mlx;
 t_vars			g_vars;
@@ -221,17 +234,20 @@ t_data			g_data;
 t_rays			*g_rays;
 t_list			*g_file;
 t_tex			g_tex;
+t_sprite		g_sprite;
 
 // GLOBAL VARIABLES
 char			**g_mapread;
 int				g_sizeofmap;
 int				g_biglen;
+
 // TEXTURE GLOBAL VARIABLES
 int				*g_textnorth;
 int				*g_textwest;
 int				*g_texteast;
 int				*g_textsouth;
 void			*tempimage;
+int				g_sprite_count;
 
 // // EVENTS | HOOKS | LOOPS (UTILS.C)
 int			key_pressed(int keycode);
@@ -252,17 +268,17 @@ void		set_rotation_angle(char player_pos);
 // RAY CASTING FUNCTIONS
 void		castAllRays();
 
-// // FILE FUNCTIONS
+// FILE FUNCTIONS
 void		ft_exit(char *msg);
 void		read_file();
 void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb);
-int			resolution(char *buffer);
+void		resolution(char *buffer);
 void		ft_floor(char *buffer, t_color *floor_rgb);
 void		ft_ceiling(char *buffer, t_color *ceiling_rgb);
 void		check_map(void);
 
 // MINIMAP FUNCTIONS
-void    	draw_map();
+void		draw_map();
 void		drawsquare(int x, int y, int color);
 void		drawemptysquare(int x, int y, int color);
 void		put_character();
@@ -273,6 +289,9 @@ void		render3DProjectionPlane(int i);
 void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeight);
 void		draw_ceiling(int i, int wallTopPixel);
 void		draw_floor(int i, int wallBottomPixel);
+
+// SP FUNCTIONS
+void		ft_sprite(int i);
 
 // INIT FUNCTIONS
 void		init_tex();

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/19 04:46:11 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/25 10:08:33 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		check_no_we(char *buffer)
 		else
 			ft_exit("Error\nInvalid name in WE texture!\n");
 	}
+	g_c += 5;
 	return (2);
 }
 
@@ -102,40 +103,77 @@ int		check_so_ea_s(char *buffer)
 		else
 			ft_exit("Eroor\nInvalid name in SO or SP texture!\n");
 	}
+	g_c += 10;
 	return (3);
+}
+
+// THIS FUNCTION CHECKS IF THE EVERYTHING'S IS VALID (HARD CODE D zp)
+int			tex_validity(char *buffer, int k)
+{
+	int		i = 0;
+	char	*tmp = ft_strtrim(buffer + k, "\t");
+	while (tmp[i] != '.')
+	{
+		if (tmp[i] == ' ' || tmp[i] == '\t')
+			ft_exit("Error\nSPACES SPOTTED\n");
+		i++;
+	}
+	ft_strlcpy(tmp, tmp, 9);
+	// if (ft_strncmp(tmp, "textures", 8) != 0)
+	// 	ft_exit("Error\nThere is a problem on textures\n");
+	tmp = ft_strtrim(buffer + k, "\t");
+	tmp = ft_strchr(tmp, '.');
+	if (ft_strncmp(tmp, ".xpm", 4) != 0)
+		ft_exit("Error\nthe .xpm contains an error\n");
+	tmp = ft_strchr(tmp, 'm');
+	i = 1;
+	while (tmp[i] != '\0')
+	{
+		if (tmp[i] == ' ')
+			i++;
+		else
+			ft_exit("Error\nF U BRO DONT F WITH MY EXTENSION\n");
+	}
+	return (0);
 }
 
 // THIS FUNCTION STORE THE PATHS OF NO WE SO EA AND SPRITE
 void		store_paths(char *buffer)
 {
-	if (check_no_we(buffer) == 0)
+	if (check_no_we(buffer) == 0 && tex_validity(buffer, 3) == 0)
 		g_data.paths.no = ft_strtrim(buffer + 3, "\t");
-	else if (check_no_we(buffer) == 1)
+	else if (check_no_we(buffer) == 1 && tex_validity(buffer, 3) == 0)
 		g_data.paths.we = ft_strtrim(buffer + 3, "\t");
-	if (check_so_ea_s(buffer) == 0)
+	else if (check_so_ea_s(buffer) == 0 && tex_validity(buffer, 3) == 0)
 		g_data.paths.so = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 1)
+	else if (check_so_ea_s(buffer) == 1 && tex_validity(buffer, 3) == 0)
 		g_data.paths.ea = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 2)
-		g_data.paths.s = ft_strtrim(buffer + 2, "\t");
-	g_c++;
+	else if (check_so_ea_s(buffer) == 2 && tex_validity(buffer, 2) == 0)
+		g_data.paths.sp = ft_strtrim(buffer + 2, "\t");
 }
 
-// RESOLUTION FUNCTION
-int		resolution(char *buffer)
+// RESOLUTION FUNCTIONs
+void		resolution(char *buffer)
 {
 	char	**arr;
+	int		i;
 
 	arr = ft_split(buffer, ' ');
-	if (ft_strlendoubleptr(arr) != 2)
+	i = 0;
+	while (arr[0][i] || arr[1][i])
 	{
-		ft_exit("Error\nWrong number of arguments in Resolution!\n");
-		return (-1);
+		if (!ft_isdigit(arr[0][i]) || !ft_isdigit(arr[1][i]))
+			ft_exit("Error\nLETTERS INSTEAD OF NUMBERS OR NEGATIVE VALUE\n");
+		i++;
 	}
-	g_data.win_width = ft_atoi(arr[0]);
-	g_data.win_height = ft_atoi(arr[1]);
-	g_c++;
-	return (0);
+	if (ft_strlendoubleptr(arr) != 2)
+		ft_exit("Error\nWrong number of arguments in Resolution!\n");
+	else
+	{
+		g_data.win_width = (ft_atoi(arr[0]) < 2560) ? ft_atoi(arr[0]) : 2560;
+		g_data.win_height = (ft_atoi(arr[1]) < 1440) ? ft_atoi(arr[1]) : 1440;
+		g_c++;
+	}
 }
 
 // FLOOR FUNCTION
@@ -160,7 +198,7 @@ void		ft_floor(char *buffer, t_color *floor_rgb)
 	}
 	else
 		ft_exit("Error\nInvalid floor RGB values!\n");
-	g_c++;
+	g_c += 30;
 }
 
 // CEILING FUNCTION
@@ -185,7 +223,7 @@ void		ft_ceiling(char *buffer, t_color *ceiling_rgb)
 	}
 	else
 		ft_exit("Error\nInvalid ceiling RGB values!\n");
-	g_c++;
+	g_c += 30;
 }
 
 void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
@@ -193,7 +231,11 @@ void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
 	int		i;
 
 	i = 0;
-	if (buffer[i] == 'R' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
+	if (buffer[i] == ' ')
+		i++;
+	if (buffer[i] == 'R' && buffer[i + 1] == 'R')
+		ft_exit("Error\nMULTIPLE R LMOK");
+	else if (buffer[i] == 'R' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
 		resolution(&buffer[i]);
 	else if (buffer[i] == 'N' || buffer[i] == 'S' || buffer[i] == 'W' || buffer[i] == 'E')
 		store_paths(&buffer[i]);
@@ -201,6 +243,8 @@ void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
 		ft_floor(&buffer[i], floor_rgb);
 	else if (buffer[i] == 'C' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
 		ft_ceiling(&buffer[i], ceiling_rgb);
+	else if (g_c > 91)
+		ft_exit("9AWD");
 }
 
 // MAIN
@@ -222,17 +266,17 @@ void		read_file()
 		check(buffer, &floor_rgb, &ceiling_rgb);
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
 	}
-	check_map();
-
-	// printf("Height -> %d\n", g_data.win_height);
-	// printf("Width -> %d\n", g_data.win_width);
-	// printf("NO -> %s\n", g_data.paths.no);
-	// printf("SO -> %s\n", g_data.paths.so);
-	// printf("WE -> %s\n", g_data.paths.we);
-	// printf("EA -> %s\n", g_data.paths.ea);
-	// printf("Sprite -> %s\n", g_data.paths.s);
-	// printf("Floor -> %d %d %d\n", floor_rgb.r, floor_rgb.g, floor_rgb.b);
-	// printf("Ceiling -> %d %d %d\n", ceiling_rgb.r, ceiling_rgb.g, ceiling_rgb.b);
+	if (g_c == 91)
+		check_map();
+	printf("Width -> %d\n", g_data.win_width);
+	printf("Height -> %d\n", g_data.win_height);
+	printf("NO -> %s\n", g_data.paths.no);
+	printf("SO -> %s\n", g_data.paths.so);
+	printf("WE -> %s\n", g_data.paths.we);
+	printf("EA -> %s\n", g_data.paths.ea);
+	printf("Sprite -> %s\n", g_data.paths.sp);
+	printf("Floor -> %d %d %d\n", floor_rgb.r, floor_rgb.g, floor_rgb.b);
+	printf("Ceiling -> %d %d %d\n", ceiling_rgb.r, ceiling_rgb.g, ceiling_rgb.b);
 
 	free(buffer);
 }
