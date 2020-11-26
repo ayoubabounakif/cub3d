@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/25 10:08:33 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/26 03:52:07 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,28 @@ int		check_no_we(char *buffer)
 		else
 			ft_exit("Error\nInvalid name in WE texture!\n");
 	}
-	g_c += 5;
 	return (2);
 }
 
 // THIS FUNCTION CHECK FOR SO EA AND SPRIT
 int		check_so_ea_s(char *buffer)
 {
-	if (buffer[0] == 'E')
-	{
-		if (buffer[1] == 'A')
-			return (0);
-		else
-			ft_exit("Eroor\nInvalid name in EA texture!\n");
-	}
-	else if (buffer[0] == 'S')
+	if (buffer[0] == 'S')
 	{
 		if (buffer[1] == 'O')
-			return (1);
+			return (0);
 		else if (buffer[1] == ' ' || buffer[1] == '\t')
 			return (2);
 		else
-			ft_exit("Eroor\nInvalid name in SO or SP texture!\n");
+			ft_exit("Error\nInvalid name in SO or SP texture!\n");
 	}
-	g_c += 10;
+	else if (buffer[0] == 'E')
+	{
+		if (buffer[1] == 'A')
+			return (1);
+		else
+			ft_exit("Error\nInvalid name in EA texture!\n");
+	}
 	return (3);
 }
 
@@ -111,7 +109,8 @@ int		check_so_ea_s(char *buffer)
 int			tex_validity(char *buffer, int k)
 {
 	int		i = 0;
-	char	*tmp = ft_strtrim(buffer + k, "\t");
+	char	*buf = buffer;
+	char	*tmp = ft_strtrim(buf + k, "\t");
 	while (tmp[i] != '.')
 	{
 		if (tmp[i] == ' ' || tmp[i] == '\t')
@@ -121,7 +120,7 @@ int			tex_validity(char *buffer, int k)
 	ft_strlcpy(tmp, tmp, 9);
 	// if (ft_strncmp(tmp, "textures", 8) != 0)
 	// 	ft_exit("Error\nThere is a problem on textures\n");
-	tmp = ft_strtrim(buffer + k, "\t");
+	tmp = ft_strtrim(buf + k, "\t");
 	tmp = ft_strchr(tmp, '.');
 	if (ft_strncmp(tmp, ".xpm", 4) != 0)
 		ft_exit("Error\nthe .xpm contains an error\n");
@@ -142,14 +141,15 @@ void		store_paths(char *buffer)
 {
 	if (check_no_we(buffer) == 0 && tex_validity(buffer, 3) == 0)
 		g_data.paths.no = ft_strtrim(buffer + 3, "\t");
-	else if (check_no_we(buffer) == 1 && tex_validity(buffer, 3) == 0)
-		g_data.paths.we = ft_strtrim(buffer + 3, "\t");
 	else if (check_so_ea_s(buffer) == 0 && tex_validity(buffer, 3) == 0)
 		g_data.paths.so = ft_strtrim(buffer + 3, "\t");
+	else if (check_no_we(buffer) == 1 && tex_validity(buffer, 3) == 0)
+		g_data.paths.we = ft_strtrim(buffer + 3, "\t");
 	else if (check_so_ea_s(buffer) == 1 && tex_validity(buffer, 3) == 0)
 		g_data.paths.ea = ft_strtrim(buffer + 3, "\t");
 	else if (check_so_ea_s(buffer) == 2 && tex_validity(buffer, 2) == 0)
 		g_data.paths.sp = ft_strtrim(buffer + 2, "\t");
+	g_c += 10;
 }
 
 // RESOLUTION FUNCTIONs
@@ -198,7 +198,7 @@ void		ft_floor(char *buffer, t_color *floor_rgb)
 	}
 	else
 		ft_exit("Error\nInvalid floor RGB values!\n");
-	g_c += 30;
+	g_c += 27;
 }
 
 // CEILING FUNCTION
@@ -223,7 +223,7 @@ void		ft_ceiling(char *buffer, t_color *ceiling_rgb)
 	}
 	else
 		ft_exit("Error\nInvalid ceiling RGB values!\n");
-	g_c += 30;
+	g_c += 72;
 }
 
 void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
@@ -243,8 +243,8 @@ void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
 		ft_floor(&buffer[i], floor_rgb);
 	else if (buffer[i] == 'C' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
 		ft_ceiling(&buffer[i], ceiling_rgb);
-	else if (g_c > 91)
-		ft_exit("9AWD");
+	else if (g_c > 150)
+		ft_exit("9AWD SHI LE3BA M3AWDA");
 }
 
 // MAIN
@@ -266,7 +266,7 @@ void		read_file()
 		check(buffer, &floor_rgb, &ceiling_rgb);
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
 	}
-	if (g_c == 91)
+	if (g_c == 150)
 		check_map();
 	printf("Width -> %d\n", g_data.win_width);
 	printf("Height -> %d\n", g_data.win_height);

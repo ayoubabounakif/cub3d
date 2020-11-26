@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/20 23:11:51 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/26 03:53:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeigh
 	{
 		g_tex.distanceFromTop = y + (wallStripHeight / 2) - (WIN_HEIGHT / 2);
 		g_tex.texOffSetY = g_tex.distanceFromTop * ((float)TEX_HEIGHT / wallStripHeight);
-		if (g_rays[i].isRayFacingDown && !g_rays[i].wasHitVertical)
+		if (g_rays[i].isRayFacingUp && !g_rays[i].wasHitVertical)
 			g_tex.texelColor = g_textnorth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		else if (g_rays[i].isRayFacingUp && !g_rays[i].wasHitVertical)
+		else if (g_rays[i].isRayFacingDown && !g_rays[i].wasHitVertical)
 			g_tex.texelColor = g_textsouth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		else if (g_rays[i].isRayFacingLeft && g_rays[i].wasHitVertical)
-			g_tex.texelColor = g_textwest[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
 		else if (g_rays[i].isRayFacingRight && g_rays[i].wasHitVertical)
+			g_tex.texelColor = g_textwest[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
+		else if (g_rays[i].isRayFacingLeft && g_rays[i].wasHitVertical)
 			g_tex.texelColor = g_texteast[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
 		img_update(i, y, g_tex.texelColor);
 		y++;

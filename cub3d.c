@@ -151,11 +151,11 @@ void		castAllRays()
 	
 		rayAngle += RAD(RAD((FOV_ANGLE) / NUM_RAYS));	// Incrementing the ray after each ray casted
 		rayAngle = normalize_angle(rayAngle);
-		draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
-		// render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
+		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
+		render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
 		stripId++;
 	}
-	draw_map();
+	// draw_map();
 }
 
 int		main(void)
