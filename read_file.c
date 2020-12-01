@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/26 03:52:07 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/29 00:35:38 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void		resolution(char *buffer)
 }
 
 // FLOOR FUNCTION
-void		ft_floor(char *buffer, t_color *floor_rgb)
+void		ft_floor(char *buffer)
 {
 	char	**arr;
 
@@ -189,9 +189,9 @@ void		ft_floor(char *buffer, t_color *floor_rgb)
 		if (ft_atoi(arr[0]) >= 0 && ft_atoi(arr[0]) < 256 && ft_atoi(arr[1]) >= 0 &&
 			ft_atoi(arr[1]) < 256 && ft_atoi(arr[2]) >= 0 && ft_atoi(arr[2]) < 256)
 		{
-			floor_rgb->r = ft_atoi(arr[0]);
-			floor_rgb->g = ft_atoi(arr[1]);
-			floor_rgb->b = ft_atoi(arr[2]);
+			g_floor_rgb.r = ft_atoi(arr[0]);
+			g_floor_rgb.g = ft_atoi(arr[1]);
+			g_floor_rgb.b = ft_atoi(arr[2]);
 		}
 		else
 			ft_exit("Error\nInvalid floor RGB values!\n");
@@ -202,7 +202,7 @@ void		ft_floor(char *buffer, t_color *floor_rgb)
 }
 
 // CEILING FUNCTION
-void		ft_ceiling(char *buffer, t_color *ceiling_rgb)
+void		ft_ceiling(char *buffer)
 {
 	char	**arr;
 
@@ -214,9 +214,9 @@ void		ft_ceiling(char *buffer, t_color *ceiling_rgb)
 		if (ft_atoi(arr[0]) >= 0 && ft_atoi(arr[0]) < 256 && ft_atoi(arr[1]) >= 0 &&
 			ft_atoi(arr[1]) < 256 && ft_atoi(arr[2]) >= 0 && ft_atoi(arr[2]) < 256)
 		{
-			ceiling_rgb->r = ft_atoi(arr[0]);
-			ceiling_rgb->g = ft_atoi(arr[1]);
-			ceiling_rgb->b = ft_atoi(arr[2]);
+			g_ceiling_rgb.r = ft_atoi(arr[0]);
+			g_ceiling_rgb.g = ft_atoi(arr[1]);
+			g_ceiling_rgb.b = ft_atoi(arr[2]);
 		}
 		else
 			ft_exit("Error\nInvalid ceiling RGB values!\n");
@@ -226,7 +226,7 @@ void		ft_ceiling(char *buffer, t_color *ceiling_rgb)
 	g_c += 72;
 }
 
-void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
+void		check(char *buffer)
 {
 	int		i;
 
@@ -240,9 +240,9 @@ void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb)
 	else if (buffer[i] == 'N' || buffer[i] == 'S' || buffer[i] == 'W' || buffer[i] == 'E')
 		store_paths(&buffer[i]);
 	else if (buffer[i] == 'F' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
-		ft_floor(&buffer[i], floor_rgb);
+		ft_floor(&buffer[i]);
 	else if (buffer[i] == 'C' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
-		ft_ceiling(&buffer[i], ceiling_rgb);
+		ft_ceiling(&buffer[i]);
 	else if (g_c > 150)
 		ft_exit("9AWD SHI LE3BA M3AWDA");
 }
@@ -253,8 +253,6 @@ void		read_file()
 	int		fd;
 	char	*buffer;
 	int		n;
-	t_color	floor_rgb;
-	t_color	ceiling_rgb;
 
 	g_c = 0;
 	n = 1;
@@ -263,20 +261,21 @@ void		read_file()
 	while (n != 0)
 	{
 		n = get_next_line(fd, &buffer);
-		check(buffer, &floor_rgb, &ceiling_rgb);
+		check(buffer);
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
 	}
 	if (g_c == 150)
 		check_map();
-	printf("Width -> %d\n", g_data.win_width);
-	printf("Height -> %d\n", g_data.win_height);
-	printf("NO -> %s\n", g_data.paths.no);
-	printf("SO -> %s\n", g_data.paths.so);
-	printf("WE -> %s\n", g_data.paths.we);
-	printf("EA -> %s\n", g_data.paths.ea);
-	printf("Sprite -> %s\n", g_data.paths.sp);
-	printf("Floor -> %d %d %d\n", floor_rgb.r, floor_rgb.g, floor_rgb.b);
-	printf("Ceiling -> %d %d %d\n", ceiling_rgb.r, ceiling_rgb.g, ceiling_rgb.b);
+	
+	// printf("Width -> %d\n", g_data.win_width);
+	// printf("Height -> %d\n", g_data.win_height);
+	// printf("NO -> %s\n", g_data.paths.no);
+	// printf("SO -> %s\n", g_data.paths.so);
+	// printf("WE -> %s\n", g_data.paths.we);
+	// printf("EA -> %s\n", g_data.paths.ea);
+	// printf("Sprite -> %s\n", g_data.paths.sp);
+	// printf("Floor -> %d %d %d\n", g_floor_rgb.r, g_floor_rgb.g, g_floor_rgb.b);
+	// printf("Ceiling -> %d %d %d\n", g_ceiling_rgb.r, g_ceiling_rgb.g, g_ceiling_rgb.b);
 
 	free(buffer);
 }

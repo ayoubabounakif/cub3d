@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/20 23:00:09 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/11/29 00:34:12 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ float	normalize_angle(float angle)
     return (angle);
 }
 
+int		rgb_to_int(int r, int g, int b)
+{
+	return ((r * (256 * 256)) + (g * (256)) + (b));
+}
+
 int		wall_collision(float x, float y)
 {
 	unsigned int		mapGridIndexX = floor(x / TILE_SIZE);
 	unsigned int		mapGridIndexY = floor(y / TILE_SIZE);
 
-	// if (mapGridIndexY < 0 || mapGridIndexX < 0)
-	// 	return (0);
 	if (g_mapread[mapGridIndexY][mapGridIndexX] == '0' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'N' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'S' ||

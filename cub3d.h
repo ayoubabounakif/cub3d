@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/25 08:41:00 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/01 12:00:28 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,10 +218,14 @@ typedef struct	s_sprite
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			width;
+	int			height;
 
-	float		SptOffSetX;
-	float		SptOffSetY;
+	float		x;
+	float		y;
 	float		distance;
+	float		angle;
+	float		size;
 }				t_sprite;
 
 // GLOBAL STRUCTURES
@@ -234,12 +238,18 @@ t_data			g_data;
 t_rays			*g_rays;
 t_list			*g_file;
 t_tex			g_tex;
-t_sprite		g_sprite;
+t_sprite		**g_sprite;
+t_color			g_floor_rgb;
+t_color			g_ceiling_rgb;
 
 // GLOBAL VARIABLES
 char			**g_mapread;
 int				g_sizeofmap;
 int				g_biglen;
+
+// GLOBAL VARIABLE FOR FLOOR AND CEILING
+int				*hex_floor;
+int				*hex_ceiling;
 
 // TEXTURE GLOBAL VARIABLES
 int				*g_textnorth;
@@ -252,8 +262,8 @@ int				g_sprite_count;
 // // EVENTS | HOOKS | LOOPS (UTILS.C)
 int			key_pressed(int keycode);
 int			key_released(int keycode);
-int			loop_key();
-int			deal_key();
+int			loop_key(void);
+int			deal_key(void);
 
 // RANDOM UTILS
 void		img_update(int x, int y, int color);
@@ -262,37 +272,38 @@ float		distanceBetweenPoints(float x1, float y1, float x2, float y2);
 float		normalize_angle(float angle);
 int			wall_collision(float x, float y);
 void		draw_square(int y, int x, int size, int color);
-void		init_player();
+void		init_player(void);
 void		set_rotation_angle(char player_pos);
 
 // RAY CASTING FUNCTIONS
-void		castAllRays();
+void		castAllRays(void);
 
 // FILE FUNCTIONS
 void		ft_exit(char *msg);
 void		read_file();
-void		check(char *buffer, t_color *floor_rgb, t_color *ceiling_rgb);
+void		check(char *buffer);
 void		resolution(char *buffer);
-void		ft_floor(char *buffer, t_color *floor_rgb);
-void		ft_ceiling(char *buffer, t_color *ceiling_rgb);
+void		ft_floor(char *buffer);
+void		ft_ceiling(char *buffer);
 void		check_map(void);
 
 // MINIMAP FUNCTIONS
-void		draw_map();
+void		draw_map(void);
 void		drawsquare(int x, int y, int color);
 void		drawemptysquare(int x, int y, int color);
-void		put_character();
+void		put_character(void);
 void		draw_line(int X0, int Y0, int X1, int Y1, int color);
 
 // 3D FUNCTIONS
 void		render3DProjectionPlane(int i);
+int			rgb_to_int(int r, int g, int b);
 void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeight);
 void		draw_ceiling(int i, int wallTopPixel);
 void		draw_floor(int i, int wallBottomPixel);
 
 // SP FUNCTIONS
-void		ft_sprite(int i);
+void		ft_sprite(void);
 
 // INIT FUNCTIONS
-void		init_tex();
+void		init_tex(void);
 #endif

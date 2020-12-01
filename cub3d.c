@@ -155,6 +155,7 @@ void		castAllRays()
 		render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
 		stripId++;
 	}
+	ft_sprite();
 	// draw_map();
 }
 
@@ -171,7 +172,7 @@ int		main(void)
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 
 	init_tex();
-
+	printf("%d\n", g_sprite_count);
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
 	return (0);

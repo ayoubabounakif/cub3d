@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/26 03:53:52 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/01 00:04:09 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		draw_ceiling(int i, int wallTopPixel)
 	y = 0;
 	while (y < wallTopPixel)
 	{
-		img_update(i, y, 0x404040);
+		img_update(i, y, rgb_to_int(g_ceiling_rgb.r, g_ceiling_rgb.g, g_ceiling_rgb.b));
 		y++;
 	}
 }
@@ -29,7 +29,7 @@ void		draw_floor(int i, int wallBottomPixel)
 	int		y = wallBottomPixel;
 	while (y < WIN_HEIGHT)
 	{
-		img_update(i, y, 0x808080);
+		img_update(i, y, rgb_to_int(g_floor_rgb.r, g_floor_rgb.g, g_floor_rgb.b));
 		y++;
 	}
 }
@@ -74,5 +74,4 @@ void		render3DProjectionPlane(int i)
 	draw_ceiling(i, wallTopPixel);
 	draw_wall(i, wallTopPixel, wallBottomPixel, wallStripHeight);
 	draw_floor(i, wallBottomPixel);
-	ft_sprite(i);
 }
