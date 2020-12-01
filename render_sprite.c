@@ -76,7 +76,7 @@ void		ft_sprite_traits(void)
 	float	OffSetY;
 
 	i = g_sprite_count - 1;
-	while (i >= 0)
+	while (i > 0)
 	{
 		g_player.rotation_angle = normalize_angle(g_player.rotation_angle);
 	    g_sprite[i]->angle = atan2(-g_player.y + (g_sprite[i]->y),
