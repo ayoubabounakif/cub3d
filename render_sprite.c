@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/01 12:00:27 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:04:17 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ft_bubble_sort(int n)
 	}
 }
 
-void    render_sprite(int k, float x_fs, float y_fs, t_sprite *spr)
+void    render_sprite(int k, float x_fs, float y_fs)
 {
 	if (!(g_sprite[k]->ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr,
 					g_data.paths.sp, &g_sprite[k]->width, &g_sprite[k]->height)))
@@ -47,54 +47,44 @@ void    render_sprite(int k, float x_fs, float y_fs, t_sprite *spr)
     int i;
     int j;
     int color;
- 
+
     i = -1;
-    j = -1;
-    while (++i < spr->size)
+    while (++i < g_sprite[k]->size)
     {
-        if (x_fs + i <= 0 || x_fs + i >= WIN_WIDTH)
+        if (x_fs + i < 0 || x_fs + i > WIN_WIDTH)
             continue;
-        if (g_rays[(int)(x_fs + i - 1)].distance < spr->distance)
+        if (g_rays[(int)(x_fs + i - 1)].distance < g_sprite[k]->distance)
             continue;
         j = -1;
-        while (++j < spr->size)
+        while (++j < g_sprite[k]->size)
         {
             if (y_fs + j < 0 || y_fs + j > WIN_HEIGHT)
                 continue;
-            color = g_sprite[k]->data[(int)(64 * (j * 64 / spr->size) +
-            (i * 64 / spr->size))];
-            if (color)
+            color = g_sprite[k]->data[(int)(g_sprite[k]->width * (j * g_sprite[k]->height / g_sprite[k]->size) +
+            (i * g_sprite[k]->width / g_sprite[k]->size))];
+			if (color != 0)
 				img_update(x_fs + i, y_fs + j, color);
         }
     }
 }
 
-void		ft_sprite_traits(void)
-{
-	int		i;
-	float	OffSetX;
-	float	OffSetY;
-
-	i = g_sprite_count - 1;
-	while (i > 0)
-	{
-		g_player.rotation_angle = normalize_angle(g_player.rotation_angle);
-	    g_sprite[i]->angle = atan2(-g_player.y + (g_sprite[i]->y),
-                            -g_player.x + (g_sprite[i]->x));
-		i--;
-	}
+void		ft_sprite_traits(int i, float x_offset, float y_offset)
+{	
+	g_player.rotation_angle = normalize_angle(g_player.rotation_angle);
+	g_sprite[i]->angle = atan2(g_sprite[i]->y - g_player.y,
+						g_sprite[i]->x - g_player.x);
     while (g_sprite[i]->angle - g_player.rotation_angle > M_PI)
-        g_sprite[i]->angle -= 2 * M_PI;
+        g_sprite[i]->angle -= TWO_PI;
     while (g_sprite[i]->angle - g_player.rotation_angle < -M_PI)
-        g_sprite[i]->angle += 2 * M_PI;
-    g_sprite[i]->size = (WIN_WIDTH / g_sprite[i]->distance * 64);
-    OffSetX = (g_sprite[i]->angle - g_player.rotation_angle) * WIN_WIDTH
+        g_sprite[i]->angle += TWO_PI;
+    g_sprite[i]->size = (WIN_WIDTH / g_sprite[i]->distance * TILE_SIZE);
+    x_offset = (g_sprite[i]->angle - g_player.rotation_angle) * WIN_WIDTH
     / (FOV_ANGLE) + (WIN_WIDTH / 2 - g_sprite[i]->size / 2);
-    OffSetY = WIN_HEIGHT / 2 - g_sprite[i]->size / 2;
-    render_sprite(i, OffSetX, OffSetY, g_sprite[i]);
+    y_offset = WIN_HEIGHT / 2 - g_sprite[i]->size / 2;
+    render_sprite(i, x_offset, y_offset);
 }
 
-void		ft_sprite(void)
+void		init_sprite(void)
 {
 	int		i;
 
@@ -120,6 +110,22 @@ void		ft_sprite(void)
 		g_vars.rows++;
 	}
 	g_sprite[i] = NULL;
-	ft_bubble_sort(i);	// The distances are now sorted
-	ft_sprite_traits();
+	ft_bubble_sort(i);	// Sort sprite
+}
+
+void		ft_sprite(void)
+{
+	int		i;
+	float	x_offset;
+	float	y_offset;
+
+	init_sprite();
+	i = g_sprite_count - 1;
+	x_offset = 0;
+	y_offset = 0;
+	while (i >= 0)
+	{
+		ft_sprite_traits(i, x_offset, y_offset);
+		i--;
+	}
 }

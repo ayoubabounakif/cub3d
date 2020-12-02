@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/29 00:34:12 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/02 02:43:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int		wall_collision(float x, float y)
 	if (g_mapread[mapGridIndexY][mapGridIndexX] == '0' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'N' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'S' ||
-		g_mapread[mapGridIndexY][mapGridIndexX] == 'E' || 
-		g_mapread[mapGridIndexY][mapGridIndexX] == 'S')
+		g_mapread[mapGridIndexY][mapGridIndexX] == 'W' || 
+		g_mapread[mapGridIndexY][mapGridIndexX] == 'E')
 		return (0);
 	else if (g_mapread[mapGridIndexY][mapGridIndexX] == '1' ||
 			g_mapread[mapGridIndexY][mapGridIndexX] == ' ')
