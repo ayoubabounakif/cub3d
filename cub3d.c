@@ -46,7 +46,7 @@ void		castHorzRay(float rayAngle)
 	{
 		g_ray.xToCheck = g_ray.nextHorzTouchX;
 		g_ray.yToCheck = g_ray.nextHorzTouchY + (g_ray.isRayFacingUp ? -1 : 0);
-		if (wall_collision(g_ray.xToCheck, g_ray.yToCheck))	// If wall is found
+		if (wall_collision(g_ray.xToCheck, g_ray.yToCheck) == 1)	// If wall is found
 		{
 			g_ray.foundHorzWallHit = TRUE;
 			g_ray.horzWallHitX = g_ray.nextHorzTouchX;
@@ -94,7 +94,7 @@ void		castVertRay(float rayAngle)
 	{
 		g_ray.xToCheck = g_ray.nextVertTouchX + (g_ray.isRayFacingLeft ? -1 : 0);
 		g_ray.yToCheck = g_ray.nextVertTouchY;
-		if (wall_collision(g_ray.xToCheck, g_ray.yToCheck))	// Found a wall
+		if (wall_collision(g_ray.xToCheck, g_ray.yToCheck) == 1)	// Found a wall
 		{
 			g_ray.foundVertWallHit = TRUE;
 			g_ray.vertWallHitX = g_ray.nextVertTouchX;

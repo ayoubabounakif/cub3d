@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/02 02:34:38 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/03 09:17:56 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	set_rotation_angle(char player_pos)
 	else if (player_pos == 'S')
 		g_player.rotation_angle = RAD(90);
 	else if (player_pos == 'W')
-		g_player.rotation_angle = RAD(360);
-	else if (player_pos == 'E')
 		g_player.rotation_angle = RAD(180);
+	else if (player_pos == 'E')
+		g_player.rotation_angle = RAD(360);
 }
 
 void	put_character()
