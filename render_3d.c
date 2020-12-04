@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 01:58:06 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:44:20 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void		draw_ceiling(int i, int wallTopPixel)
 
 void		draw_floor(int i, int wallBottomPixel)
 {
-	int		y = wallBottomPixel;
+	int		y;
+
+	y = wallBottomPixel;
 	while (y < WIN_HEIGHT)
 	{
 		img_update(i, y, rgb_to_int(g_floor_rgb.r, g_floor_rgb.g, g_floor_rgb.b));
@@ -62,13 +64,20 @@ void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeigh
 
 void		render3DProjectionPlane(int i)
 {
-	float	perpDistance = g_rays[i].distance * cos(g_rays[i].rayAngle - g_player.rotation_angle);
-	float	distanceProjPlane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
-	float	projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
-	int		wallStripHeight = (int)projectedWallHeight;
-	int		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2);
+	float	perpDistance;
+	float	distanceProjPlane;
+	float	projectedWallHeight;
+	int		wallStripHeight;
+	int		wallTopPixel;
+	int		wallBottomPixel;
+
+	perpDistance = g_rays[i].distance * cos(g_rays[i].rayAngle - g_player.rotation_angle);
+	distanceProjPlane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
+	projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
+	wallStripHeight = (int)projectedWallHeight;
+	wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2);
 	wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-	int		wallBottomPixel = (WIN_HEIGHT / 2) + (wallStripHeight / 2);
+	wallBottomPixel = (WIN_HEIGHT / 2) + (wallStripHeight / 2);
 	wallBottomPixel = wallBottomPixel > WIN_HEIGHT ? WIN_HEIGHT : wallBottomPixel;
 
 	draw_ceiling(i, wallTopPixel);

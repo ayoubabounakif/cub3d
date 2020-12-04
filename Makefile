@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/11/29 10:27:50 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/04 04:23:56 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ EXEC = cub3D
 SRC = cub3d.c render_3d.c render_sprite.c \
 read_file.c read_map.c \
 init.c \
-utils.c random_utils.c \
+utils.c random_utils.c ft_sprite_sort.c \
 draw_minimap.c \
 get_next_line/get_next_line.c \
 get_next_line/get_next_line_utils.c \

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/02 02:43:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:44:10 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ int		rgb_to_int(int r, int g, int b)
 
 int		wall_collision(float x, float y)
 {
-	unsigned int		mapGridIndexX = floor(x / TILE_SIZE);
-	unsigned int		mapGridIndexY = floor(y / TILE_SIZE);
+	unsigned int		mapGridIndexX;
+	unsigned int		mapGridIndexY;
 
+	mapGridIndexX = floor(x / TILE_SIZE);
+	mapGridIndexY = floor(y / TILE_SIZE);
 	if (g_mapread[mapGridIndexY][mapGridIndexX] == '0' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'N' ||
 		g_mapread[mapGridIndexY][mapGridIndexX] == 'S' ||
@@ -58,10 +60,13 @@ int		wall_collision(float x, float y)
 
 void		draw_square(int y, int x, int size, int color)
 {
-	int		x_end = x + size;
-	int		y_end = y + size;
-	int		original_x = x;
+	int		x_end;
+	int		y_end;
+	int		original_x;
 
+	x_end = x + size;
+	y_end = y + size;
+	original_x = x;
 	g_vars.y = y;
 	while (y < y_end)
 	{

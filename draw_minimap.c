@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/03 09:17:56 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:43:56 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ void	draw_line(int X0, int Y0, int X1, int Y1, int color)
 		Y += Yinc;           // increment in y at each step
 		i++;
 	}
-}
-
-void	set_rotation_angle(char player_pos)
-{
-	if (player_pos == 'N')
-		g_player.rotation_angle = RAD(270);
-	else if (player_pos == 'S')
-		g_player.rotation_angle = RAD(90);
-	else if (player_pos == 'W')
-		g_player.rotation_angle = RAD(180);
-	else if (player_pos == 'E')
-		g_player.rotation_angle = RAD(360);
 }
 
 void	put_character()
@@ -75,8 +63,10 @@ void	put_character()
 
 void	drawemptysquare(int x, int y, int color)
 {
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
+
+	i = 0;
 	while (i < TILE_SIZE)
 	{
 		j = 0;
@@ -92,8 +82,10 @@ void	drawemptysquare(int x, int y, int color)
 
 void	drawsquare(int x, int y, int color)
 {
-	int		i = 0;
-	int 	j = 0;
+	int		i;
+	int		j;
+
+	i = 0;
 	while (i < TILE_SIZE)
 	{
 		j = 0;

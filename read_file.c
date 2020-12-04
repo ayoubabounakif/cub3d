@@ -6,16 +6,15 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/29 00:35:38 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:44:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		g_c;		// If c == 8 only then init map
+int		g_c;
 
 // HELPER FUNCTIONS
-
 int		all_n(char *s)
 {
 	int		i;
@@ -118,8 +117,6 @@ int			tex_validity(char *buffer, int k)
 		i++;
 	}
 	ft_strlcpy(tmp, tmp, 9);
-	// if (ft_strncmp(tmp, "textures", 8) != 0)
-	// 	ft_exit("Error\nThere is a problem on textures\n");
 	tmp = ft_strtrim(buf + k, "\t");
 	tmp = ft_strchr(tmp, '.');
 	if (ft_strncmp(tmp, ".xpm", 4) != 0)

@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/11/09 05:13:45 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:43:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ void		castVertRay(float rayAngle)
 
 void		castAllRays()
 {
-	int		stripId = 0;
-	float	rayAngle = g_player.rotation_angle - RAD(30);
+	int		stripId;
+	float	rayAngle;
 
 	g_rays = malloc(sizeof(t_rays) * NUM_RAYS);
+	stripId = 0;
+	rayAngle = g_player.rotation_angle - RAD(30);
 	rayAngle = normalize_angle(rayAngle);
-	ft_bzero(&g_ray, sizeof(t_ray));
-
 	while (stripId < NUM_RAYS)
 	{
 		g_ray.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
@@ -170,7 +170,6 @@ int		main(void)
 	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
-
 	init_tex();
 	printf("%d\n", g_sprite_count);
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
