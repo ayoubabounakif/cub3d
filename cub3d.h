@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/03 10:27:04 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/04 03:43:07 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ typedef struct	s_sprite
 	float		y;
 	float		distance;
 	float		angle;
-	float		size;
+	int			size;
 }				t_sprite;
 
 // GLOBAL STRUCTURES
