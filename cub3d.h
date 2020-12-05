@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:43:36 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 16:42:22 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ typedef struct	s_sprite
 	float		y;
 	float		distance;
 	float		angle;
-	int			size;
+	float		size;
 }				t_sprite;
 
 // GLOBAL STRUCTURES
@@ -243,13 +243,9 @@ t_color			g_floor_rgb;
 t_color			g_ceiling_rgb;
 
 // GLOBAL VARIABLES
-char			**g_mapread;
+char			**g_map;
 int				g_sizeofmap;
 int				g_biglen;
-
-// GLOBAL VARIABLE FOR FLOOR AND CEILING
-int				*hex_floor;
-int				*hex_ceiling;
 
 // TEXTURE GLOBAL VARIABLES
 int				*g_textnorth;
@@ -272,7 +268,7 @@ float		distanceBetweenPoints(float x1, float y1, float x2, float y2);
 float		normalize_angle(float angle);
 int			wall_collision(float x, float y);
 void		draw_square(int y, int x, int size, int color);
-void		set_rotation_angle(char player_pos);
+void		set_rangle(char player_pos);
 
 // RAY CASTING FUNCTIONS
 void		castAllRays(void);
@@ -301,6 +297,7 @@ void		draw_ceiling(int i, int wallTopPixel);
 void		draw_floor(int i, int wallBottomPixel);
 
 // SP FUNCTIONS
+void		init_sprite(void);
 void		ft_sprite_sort(int n);
 void		ft_sprite(void);
 

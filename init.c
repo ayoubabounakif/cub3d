@@ -6,16 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:44:06 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 17:09:34 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Initiating my player position
-// so that it spawns on the right x,y axis where 'P' is written
-
-void	set_rotation_angle(char player_pos)
+void	set_rangle(char player_pos)
 {
 	if (player_pos == 'N')
 		g_player.rotation_angle = RAD(270);
@@ -30,24 +27,25 @@ void	set_rotation_angle(char player_pos)
 void		init_player(void)
 {
 	g_vars.rows = 0;
+	g_sprite_count = 0;
 	while (g_vars.rows < ROWS)
 	{
 		g_vars.cols = 0;
 		while (g_vars.cols < COLS)
 		{
-			if (g_mapread[g_vars.rows][g_vars.cols] == 'N' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'S' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'W' ||
-				g_mapread[g_vars.rows][g_vars.cols] == 'E')
+			if (g_map[g_vars.rows][g_vars.cols] == 'N' ||
+				g_map[g_vars.rows][g_vars.cols] == 'S' ||
+				g_map[g_vars.rows][g_vars.cols] == 'W' ||
+				g_map[g_vars.rows][g_vars.cols] == 'E')
 			{
-				set_rotation_angle(g_mapread[g_vars.rows][g_vars.cols]);
-				g_player.y = g_vars.rows * TILE_SIZE + 32;
-				g_player.x = g_vars.cols * TILE_SIZE + 32;
+				set_rangle(g_map[g_vars.rows][g_vars.cols]);
+				g_player.y = (g_vars.rows * TILE_SIZE) + TILE_SIZE / 2;
+				g_player.x = (g_vars.cols * TILE_SIZE) + TILE_SIZE / 2;
 			}
-			else if (g_mapread[g_vars.rows][g_vars.cols] == '2')
+			else if (g_map[g_vars.rows][g_vars.cols] == '2')
 				g_sprite_count++;
 			g_vars.cols++;
-		}
+		}	
 		g_vars.rows++;
 	}
 }
@@ -64,11 +62,11 @@ void		init_sprite(void)
 		g_vars.cols = 0;
 		while (g_vars.cols < COLS)
 		{
-			if (g_mapread[g_vars.rows][g_vars.cols] == '2')
+			if (g_map[g_vars.rows][g_vars.cols] == '2')
 			{
 				g_sprite[i] = malloc(sizeof(t_sprite));
-				g_sprite[i]->y = (g_vars.rows + 0.5) * (float)TILE_SIZE;
-				g_sprite[i]->x = (g_vars.cols + 0.5) * (float)TILE_SIZE;
+				g_sprite[i]->y = (g_vars.rows * TILE_SIZE) + TILE_SIZE / 2;
+				g_sprite[i]->x = (g_vars.cols * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[i]->distance = distanceBetweenPoints(g_sprite[i]->x, g_sprite[i]->y,
 						g_player.x, g_player.y);
 				i++;
@@ -81,7 +79,6 @@ void		init_sprite(void)
 	ft_sprite_sort(i);
 }
 
-// Initialising my tex vars because its C
 void		init_tex()
 {
 	g_tex.texOffSetX = 0;

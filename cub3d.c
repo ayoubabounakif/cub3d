@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:43:52 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 17:28:42 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		castHorzRay(float rayAngle)
 			g_ray.foundHorzWallHit = TRUE;
 			g_ray.horzWallHitX = g_ray.nextHorzTouchX;
 			g_ray.horzWallHitY = g_ray.nextHorzTouchY;
-			g_ray.horzWallContent = g_mapread[(int)floor(g_ray.yToCheck / TILE_SIZE)][(int)floor(g_ray.xToCheck / TILE_SIZE)];
+			g_ray.horzWallContent = g_map[(int)floor(g_ray.yToCheck / TILE_SIZE)][(int)floor(g_ray.xToCheck / TILE_SIZE)];
 			break ;
 		}
 		else
@@ -99,7 +99,7 @@ void		castVertRay(float rayAngle)
 			g_ray.foundVertWallHit = TRUE;
 			g_ray.vertWallHitX = g_ray.nextVertTouchX;
 			g_ray.vertWallHitY = g_ray.nextVertTouchY;
-			g_ray.vertWallContent = g_mapread[(int)floor(g_ray.yToCheck / TILE_SIZE)][(int)floor(g_ray.xToCheck / TILE_SIZE)];
+			g_ray.vertWallContent = g_map[(int)floor(g_ray.yToCheck / TILE_SIZE)][(int)floor(g_ray.xToCheck / TILE_SIZE)];
 			break ;
 		}
 		else
@@ -155,23 +155,19 @@ void		castAllRays()
 		render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
 		stripId++;
 	}
-	ft_sprite();
 	// draw_map();
 }
 
 int		main(void)
 {
-	g_sprite_count = 0;
 	read_file();
 	init_player();
-
 	g_player.rotation_speed = (float)ROTATION_SPEED;
 	g_mlx.mlx_ptr = mlx_init();
 	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	init_tex();
-	printf("%d\n", g_sprite_count);
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
 	return (0);

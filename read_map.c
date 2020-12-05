@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:44:18 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 09:51:01 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	check_map()
 	}
 	g_biglen += 2;
 	g_sizeofmap += 2;
-	g_mapread = (char **)malloc(sizeof(char *) * (g_sizeofmap + 1));
-	g_mapread[0] = space_filler(g_biglen);
+	g_map = (char **)malloc(sizeof(char *) * (g_sizeofmap + 1));
+	g_map[0] = space_filler(g_biglen);
 	temp2 = g_file;
 	content = NULL;
 
@@ -108,12 +108,12 @@ void	check_map()
 		content = temp2->content;
 		if (getfirstchar(content))
 		{
-			g_mapread[i] = spacer(content, g_biglen);
+			g_map[i] = spacer(content, g_biglen);
 			i++;
 		}
 		temp2 = temp2->next;
 	}
-	g_mapread[i] = space_filler(g_biglen);
+	g_map[i] = space_filler(g_biglen);
 	i++;
-	g_mapread[i] = NULL;
+	g_map[i] = NULL;
 }

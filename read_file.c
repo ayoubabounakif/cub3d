@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:44:14 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 09:53:27 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,16 +263,5 @@ void		read_file()
 	}
 	if (g_c == 150)
 		check_map();
-	
-	// printf("Width -> %d\n", g_data.win_width);
-	// printf("Height -> %d\n", g_data.win_height);
-	// printf("NO -> %s\n", g_data.paths.no);
-	// printf("SO -> %s\n", g_data.paths.so);
-	// printf("WE -> %s\n", g_data.paths.we);
-	// printf("EA -> %s\n", g_data.paths.ea);
-	// printf("Sprite -> %s\n", g_data.paths.sp);
-	// printf("Floor -> %d %d %d\n", g_floor_rgb.r, g_floor_rgb.g, g_floor_rgb.b);
-	// printf("Ceiling -> %d %d %d\n", g_ceiling_rgb.r, g_ceiling_rgb.g, g_ceiling_rgb.b);
-
 	free(buffer);
 }

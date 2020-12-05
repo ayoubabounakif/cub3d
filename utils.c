@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:44:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 14:40:39 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ int		deal_key()
 		g_player.rotation_angle += g_player.rotation_speed;
 	mlx_destroy_image(g_mlx.mlx_ptr, g_mlx.img_ptr);
 	mlx_clear_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
-	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT); // 800 = width ; 600 = height
+	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	castAllRays();
+	ft_sprite();
 	mlx_put_image_to_window(g_mlx.mlx_ptr, g_mlx.win_ptr, g_mlx.img_ptr, 0, 0);
 	return (0);
 }

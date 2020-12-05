@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/04 04:43:56 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 12:54:56 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void	draw_map()
 		x = 0;
 		while (++j < COLS)
 		{
-			if (g_mapread[i][j] == '1')
+			if (g_map[i][j] == '1')
 				drawsquare(x, y, 0x00FF00);
-			else if (g_mapread[i][j] == '2')
+			else if (g_map[i][j] == '2')
 				drawsquare(x, y, 0x0000FF);
 			else
 				drawemptysquare(x, y, 0xFFFFFF);
