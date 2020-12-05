@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 18:33:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 19:33:16 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void		ft_sprite_traits(int i)
     while (g_sprite[i]->angle - g_player.rotation_angle < -M_PI)
         g_sprite[i]->angle += TWO_PI;
 	g_sprite[i]->size = (WIN_WIDTH / g_sprite[i]->distance * 64);
-    x_offset = (g_sprite[i]->angle - g_player.rotation_angle) * WIN_WIDTH
-    / RAD(60) + (WIN_WIDTH / 2 - g_sprite[i]->size / 2);
+	x_offset = (g_sprite[i]->angle - g_player.rotation_angle) * WIN_WIDTH
+	/ (FOV_ANGLE) + (WIN_WIDTH / 2 - g_sprite[i]->size / 2);
     y_offset = WIN_HEIGHT / 2 - g_sprite[i]->size / 2;
 
 	printf("----------######----------\n");
