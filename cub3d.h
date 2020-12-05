@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 16:42:22 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/05 18:33:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 // PLAYER
 # define SIZE 6
 # define MOVEMENT_SPEED 6
-# define ROTATION_SPEED 0.05
+# define ROTATION_SPEED 0.02
 
 // RAYS
 # define FOV_ANGLE RAD(60)
@@ -225,7 +225,7 @@ typedef struct	s_sprite
 	float		y;
 	float		distance;
 	float		angle;
-	float		size;
+	int			size;
 }				t_sprite;
 
 // GLOBAL STRUCTURES
