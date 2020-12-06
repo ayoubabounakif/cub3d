@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 18:33:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 17:28:32 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@
 # define COLS g_biglen
 
 // WINDOW
-# define WIN_WIDTH COLS * TILE_SIZE		// x
-# define WIN_HEIGHT ROWS * TILE_SIZE	// y
-
-# define R_WIDTH g_data.win_width
-# define R_HEIGHT g_data.win_height
+# define WIN_WIDTH 1000 // x
+# define WIN_HEIGHT 700  // y
 
 // TEXTURE
 # define TEX_WIDTH 64
@@ -56,11 +53,10 @@
 // PLAYER
 # define SIZE 6
 # define MOVEMENT_SPEED 6
-# define ROTATION_SPEED 0.02
+# define ROTATION_SPEED 0.04
 
 // RAYS
 # define FOV_ANGLE RAD(60)
-# define NUM_RAYS WIN_WIDTH
 
 /*
     Here is my main struct containing every variables needed by the MLX.
@@ -224,8 +220,6 @@ typedef struct	s_sprite
 	float		x;
 	float		y;
 	float		distance;
-	float		angle;
-	int			size;
 }				t_sprite;
 
 // GLOBAL STRUCTURES

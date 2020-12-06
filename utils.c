@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 14:40:39 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 16:34:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		deal_key()
 		}
 	}
 	if (g_player.move_left == 1) // If 0 or 123 is stroked decrease the rotation angle by rotation speed
-		g_player.rotation_angle -= g_player.rotation_speed;
+		g_player.rotation_angle -= ROTATION_SPEED;
 	if (g_player.move_down == 1) // DOWN
 	{
 		new_player_y = g_player.y - sin(g_player.rotation_angle) * MOVEMENT_SPEED;
@@ -48,13 +48,12 @@ int		deal_key()
 		}
 	}
 	if (g_player.move_right == 1)	// If 0 or 124 is stroked increase the rotation angle by rotation speed
-		g_player.rotation_angle += g_player.rotation_speed;
+		g_player.rotation_angle += ROTATION_SPEED;
 	mlx_destroy_image(g_mlx.mlx_ptr, g_mlx.img_ptr);
 	mlx_clear_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	castAllRays();
-	ft_sprite();
 	mlx_put_image_to_window(g_mlx.mlx_ptr, g_mlx.win_ptr, g_mlx.img_ptr, 0, 0);
 	return (0);
 }

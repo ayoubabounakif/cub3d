@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 17:28:42 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 17:31:25 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		castVertRay(float rayAngle)
 	///////////////////////////////////////////
 	// VERTICAL RAY-GRID INTERSECTION CODE ////
 	///////////////////////////////////////////
-
+	
 	g_ray.foundVertWallHit = FALSE;
 
 	// Find the x-coordinate of the closest VERTICAL grid intersection
@@ -115,20 +115,30 @@ void		castAllRays()
 	int		stripId;
 	float	rayAngle;
 
-	g_rays = malloc(sizeof(t_rays) * NUM_RAYS);
+	g_rays = malloc(sizeof(t_rays) * WIN_WIDTH);
 	stripId = 0;
 	rayAngle = g_player.rotation_angle - RAD(30);
-	rayAngle = normalize_angle(rayAngle);
-	while (stripId < NUM_RAYS)
+	while (stripId < WIN_WIDTH)
 	{
 		g_ray.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
 		g_ray.isRayFacingUp = !g_ray.isRayFacingDown;
-
 		g_ray.isRayFacingRight = rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI;
 		g_ray.isRayFacingLeft = !g_ray.isRayFacingRight;
-				
-		castVertRay(rayAngle);
+
+		/*
+
+			==22143==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000003a1c at pc 0x000101c9de64 bp 0x7ffeedf6ebc0 sp 0x7ffeedf6ebb8
+			READ of size 1 at 0x602000003a1c thread T0
+    		#0 0x101c9de63 in wall_collision random_utils.c:48
+    		#1 0x101c8fef3 in castHorzRay cub3d.c:49
+    		#2 0x101c91e2c in castAllRays cub3d.c:128
+    		#3 0x101c9d522 in deal_key utils.c:56
+    		#4 0x101c9dbc2 in loop_key utils.c:93
+
+			Segf is in -> xtocheck and ytocheck, they become values that are not there on map
+		*/
 		castHorzRay(rayAngle);
+		castVertRay(rayAngle);
 
 		// Calculate both Horz and Vert hit distances and choose the smallest one
 		g_ray.horzHitDistance = (g_ray.foundHorzWallHit)
@@ -149,20 +159,21 @@ void		castAllRays()
 		g_rays[stripId].isRayFacingLeft = g_ray.isRayFacingLeft;
 		g_rays[stripId].isRayFacingRight = g_ray.isRayFacingRight;
 	
-		rayAngle += RAD(RAD((FOV_ANGLE) / NUM_RAYS));	// Incrementing the ray after each ray casted
 		rayAngle = normalize_angle(rayAngle);
-		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
-		render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
+		rayAngle += FOV_ANGLE / WIN_WIDTH;	// Incrementing the ray after each ray casted
+		draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
+		// render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
 		stripId++;
 	}
-	// draw_map();
+	// exit(0);
+	// ft_sprite();
+	draw_map();
 }
 
 int		main(void)
 {
 	read_file();
 	init_player();
-	g_player.rotation_speed = (float)ROTATION_SPEED;
 	g_mlx.mlx_ptr = mlx_init();
 	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);

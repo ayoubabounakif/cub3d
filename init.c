@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 17:09:34 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 13:38:08 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void		init_sprite(void)
 				g_sprite[i] = malloc(sizeof(t_sprite));
 				g_sprite[i]->y = (g_vars.rows * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[i]->x = (g_vars.cols * TILE_SIZE) + TILE_SIZE / 2;
-				g_sprite[i]->distance = distanceBetweenPoints(g_sprite[i]->x, g_sprite[i]->y,
-						g_player.x, g_player.y);
+				g_sprite[i]->distance = distanceBetweenPoints(g_sprite[i]->y, g_sprite[i]->x,
+						g_player.y, g_player.x);
 				i++;
 			}
 			g_vars.cols++;

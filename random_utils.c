@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 14:06:49 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 17:26:51 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,18 @@ int		rgb_to_int(int r, int g, int b)
 
 int		wall_collision(float x, float y)
 {
-	unsigned int		mapGridIndexX;
-	unsigned int		mapGridIndexY;
+	int		grid_x;
+	int		grid_y;
 
-	mapGridIndexX = floor(x / TILE_SIZE);
-	mapGridIndexY = floor(y / TILE_SIZE);
-	if (g_map[mapGridIndexY][mapGridIndexX] == '0' ||
-		g_map[mapGridIndexY][mapGridIndexX] == 'N' ||
-		g_map[mapGridIndexY][mapGridIndexX] == 'S' ||
-		g_map[mapGridIndexY][mapGridIndexX] == 'W' || 
-		g_map[mapGridIndexY][mapGridIndexX] == 'E')
+	grid_x = floor(x / TILE_SIZE);
+	grid_y = floor(y / TILE_SIZE);
+	if (grid_y < 0 || grid_y >= WIN_HEIGHT + 2 ||
+	grid_x < 0 || grid_x >= WIN_WIDTH)
 		return (0);
-	else if (g_map[mapGridIndexY][mapGridIndexX] == '1' ||
-			g_map[mapGridIndexY][mapGridIndexX] == ' ')
+	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
 		return (1);
-	else if (g_map[mapGridIndexY][mapGridIndexX] == '2')
+	if (g_map[grid_y][grid_x] == '2')
 		return (2);
-	else if (x < 0 && x >= WIN_WIDTH && y < 0 && y >= WIN_HEIGHT)	// OUTSIDE THE BOUNDARIES
-		return (1);
 	return (0);
 }
 

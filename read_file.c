@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/05 09:53:27 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/06 16:51:19 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,8 @@ void		read_file()
 		check(buffer);
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
 	}
+	printf("WIDTH -> %d\n", g_data.win_width);
+	printf("HEIGHT -> %d\n", g_data.win_height);
 	if (g_c == 150)
 		check_map();
 	free(buffer);
