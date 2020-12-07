@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/06 14:14:42 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:24:19 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_spt_tex(int k)
 					&g_sprite[k]->bpp, &g_sprite[k]->size_line, &g_sprite[k]->endian);
 }
 
-void    render_sprite(int k, float x_fs, float y_fs, int sp_size)
+void    render_sprite(int k, int x_fs, int y_fs, int sp_size)
 {
     int		i;
     int		j;
@@ -66,7 +66,8 @@ void		ft_sprite_traits(int i)
 	sp_size = (WIN_WIDTH / g_sprite[i]->distance * TILE_SIZE);
 	x_offset = (sp_angle - g_player.rotation_angle) /
 		RAD(60) * WIN_WIDTH + (WIN_WIDTH / 2 - sp_size / 2) + 1;
-    y_offset = WIN_HEIGHT / 2 - sp_size / 2;
+    y_offset = (WIN_HEIGHT / 2 - sp_size / 2) + g_3d.pitch;
+	printf("Sprite %d has Value -> %f\n", i, g_sprite[i]->distance);
     render_sprite(i, x_offset, y_offset, sp_size);
 }
 

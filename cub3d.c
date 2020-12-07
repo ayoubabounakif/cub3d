@@ -6,13 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/06 17:33:16 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:25:51 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int	g_c;
+extern float	g_pitch;
 
 void		castHorzRay(float rayAngle)
 {
@@ -41,8 +41,8 @@ void		castHorzRay(float rayAngle)
 	g_ray.nextHorzTouchY = g_ray.yintercept;
 
 	// Increment xstep and ystep until we find a wall
-	while (g_ray.nextHorzTouchX >= 0 && g_ray.nextHorzTouchX < WIN_WIDTH && 
-	g_ray.nextHorzTouchY >= 0 && g_ray.nextHorzTouchY < WIN_HEIGHT)
+	while (g_ray.nextHorzTouchX >= 0 && g_ray.nextHorzTouchX < COLS * 64 && 
+	g_ray.nextHorzTouchY >= 0 && g_ray.nextHorzTouchY < ROWS * 64)
 	{
 		g_ray.xToCheck = g_ray.nextHorzTouchX;
 		g_ray.yToCheck = g_ray.nextHorzTouchY + (g_ray.isRayFacingUp ? -1 : 0);
@@ -89,8 +89,8 @@ void		castVertRay(float rayAngle)
 	g_ray.nextVertTouchY = g_ray.yintercept;
 
 	// Increment xstep and ystep until we find a wall
-	while (g_ray.nextVertTouchX >= 0 && g_ray.nextVertTouchX < WIN_WIDTH &&
-	g_ray.nextVertTouchY >= 0 && g_ray.nextVertTouchY < WIN_HEIGHT)
+	while (g_ray.nextVertTouchX >= 0 && g_ray.nextVertTouchX < COLS * 64 &&
+	g_ray.nextVertTouchY >= 0 && g_ray.nextVertTouchY < ROWS * 64)
 	{
 		g_ray.xToCheck = g_ray.nextVertTouchX + (g_ray.isRayFacingLeft ? -1 : 0);
 		g_ray.yToCheck = g_ray.nextVertTouchY;
@@ -118,6 +118,7 @@ void		castAllRays()
 	g_rays = malloc(sizeof(t_rays) * WIN_WIDTH);
 	stripId = 0;
 	rayAngle = g_player.rotation_angle - RAD(30);
+	rayAngle = normalize_angle(rayAngle);
 	while (stripId < WIN_WIDTH)
 	{
 		g_ray.isRayFacingDown = rayAngle > 0 && rayAngle < M_PI;
@@ -126,7 +127,6 @@ void		castAllRays()
 		g_ray.isRayFacingLeft = !g_ray.isRayFacingRight;
 
 		/*
-
 			==22143==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000003a1c at pc 0x000101c9de64 bp 0x7ffeedf6ebc0 sp 0x7ffeedf6ebb8
 			READ of size 1 at 0x602000003a1c thread T0
     		#0 0x101c9de63 in wall_collision random_utils.c:48
@@ -137,6 +137,7 @@ void		castAllRays()
 
 			Segf is in -> xtocheck and ytocheck, they become values that are not there on map
 		*/
+
 		castHorzRay(rayAngle);
 		castVertRay(rayAngle);
 
@@ -161,19 +162,17 @@ void		castAllRays()
 	
 		rayAngle = normalize_angle(rayAngle);
 		rayAngle += FOV_ANGLE / WIN_WIDTH;	// Incrementing the ray after each ray casted
-		draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
-		// render3DProjectionPlane(stripId); // Rendering 3D after each ray casted
+		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
 		stripId++;
 	}
-	// exit(0);
-	// ft_sprite();
-	draw_map();
+	// draw_map();
 }
 
 int		main(void)
 {
 	read_file();
 	init_player();
+	g_3d.pitch = 0;
 	g_mlx.mlx_ptr = mlx_init();
 	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);

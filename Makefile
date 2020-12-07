@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/06 16:50:20 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/07 17:10:58 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = cub3D
 
 EXEC = cub3D
 
-SRC = cub3d.c render_3d.c render_sprite.c \
+SRC = cub3d.c render_3d.c render_sprite.c ft_lifebar.c \
 read_file.c read_map.c \
 init.c \
 utils.c random_utils.c ft_sprite_sort.c \
@@ -39,7 +39,7 @@ $(LIBNAME):
 	cp libft/$(LIBNAME) ./
 
 $(NAME): $(LIBNAME)
-	gcc -g3 $(FLAGS) $(SRC) -fsanitize=address libft.a -g3 $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
+	gcc -g3 -Ofast $(FLAGS) $(SRC) libft.a -g3 $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
 	# We can add the flag "-fast" to run the game way more smoothly
 
 clean:

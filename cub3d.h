@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/06 17:28:32 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:25:44 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 # define TWO_PI (M_PI * 2)
 
 // KEYS
-# define W_KEY 13
-# define A_KEY 0
-# define S_KEY 1
-# define D_KEY 2
-# define UP_ARROW 126
-# define LEFT_ARROW 123
-# define DOWN_ARROW 125
-# define RIGHT_ARROW 124
+# define W_KEY 13 // STRAIGHT
+# define A_KEY 0 // LEFT
+# define S_KEY 1 // BACK
+# define D_KEY 2 // RIGHT
+# define UP_ARROW 126 // STRAIGHT AS W_KEY
+# define LEFT_ARROW 123 // LEFT DIRECTION
+# define DOWN_ARROW 125  // BACK AS S_KEY
+# define RIGHT_ARROW 124 // RIGHT DIRECTION
 # define ESC 53
 
 // MAP
@@ -43,8 +43,8 @@
 # define COLS g_biglen
 
 // WINDOW
-# define WIN_WIDTH 1000 // x
-# define WIN_HEIGHT 700  // y
+# define WIN_WIDTH g_data.win_width // x
+# define WIN_HEIGHT g_data.win_height  // y
 
 // TEXTURE
 # define TEX_WIDTH 64
@@ -96,19 +96,27 @@ typedef struct	s_player
 	float		rotation_angle;
 	float		rotation_speed;
     float       movement_speed;
-	int			move_up;
-	int			move_down;
-	int			move_left;
-	int			move_right;
 }				t_player;
 
-// Rays struct
-
-typedef	struct s_vray
+// Key struct
+typedef	struct	s_key
 {
-	float		xToCheck;
-	float		yToCheck;
-}				t_vray;
+	int			move_straight;
+	int			move_back;
+	int			move_left;
+	int			move_right;
+	int			look_up;
+	int			look_down;
+	int			left_dir;
+	int			right_dir;	
+}				t_key;
+
+typedef struct	s_3d
+{
+	float		pitch;
+}				t_3d;
+
+// Rays struct
 
 typedef struct	s_ray
 {
@@ -226,8 +234,9 @@ typedef struct	s_sprite
 t_mlx			g_mlx;
 t_vars			g_vars;
 t_player		g_player;
+t_key			g_key;
+t_3d			g_3d;
 t_ray			g_ray;
-t_vray			g_vray;
 t_data			g_data;
 t_rays			*g_rays;
 t_list			*g_file;
@@ -284,19 +293,23 @@ void		put_character(void);
 void		draw_line(int X0, int Y0, int X1, int Y1, int color);
 
 // 3D FUNCTIONS
-void		render3DProjectionPlane(int i);
+void		render3DProjectionPlane();
 int			rgb_to_int(int r, int g, int b);
-void		draw_wall(int i, int wallTopPixel, int wallBottomPixel, int wallStripHeight);
-void		draw_ceiling(int i, int wallTopPixel);
-void		draw_floor(int i, int wallBottomPixel);
+void		draw_wall(int i, int wallStripHeight);
+void		draw_ceiling(int i);
+void		draw_floor(int i);
 
 // SP FUNCTIONS
 void		init_sprite(void);
-void		ft_sprite_sort(int n);
+void		ft_sprite_sort(void);
 void		ft_sprite(void);
+
+// LIFEBAR
+void		ft_lifebar(void);
 
 // INIT FUNCTIONS
 void		init_player(void);
 void		init_sprite(void);
 void		init_tex(void);
+
 #endif

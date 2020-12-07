@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/06 13:38:08 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/07 17:18:11 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		init_sprite(void)
 		g_vars.rows++;
 	}
 	g_sprite[i] = NULL;
-	ft_sprite_sort(i);
+	ft_sprite_sort();
 }
 
 void		init_tex()
