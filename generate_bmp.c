@@ -22,8 +22,8 @@ unsigned char*	createBitmapInfoHeader(int height, int width);
 
 // int		main(void)
 // {
-//     int height = WIN_HEIGHT;
-//     int width = WIN_WIDTH;
+//     int height = 1000;
+//     int width = 1500;
 //     unsigned char image[height][width][BYTES_PER_PIXEL];
 //     char* imageFileName = (char*) "bitmapImage.bmp";
 
