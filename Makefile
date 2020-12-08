@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/07 17:10:58 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/08 10:43:59 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(LIBNAME):
 	cp libft/$(LIBNAME) ./
 
 $(NAME): $(LIBNAME)
-	gcc -g3 -Ofast $(FLAGS) $(SRC) libft.a -g3 $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
+	gcc -Ofast $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
 	# We can add the flag "-fast" to run the game way more smoothly
 
 clean:

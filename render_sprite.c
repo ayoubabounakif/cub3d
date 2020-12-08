@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 17:24:19 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:44:37 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void		ft_sprite_traits(int i)
 	float	y_offset;
 	float	sp_angle;
 	float	sp_size;
-
 	g_player.rotation_angle = normalize_angle(g_player.rotation_angle);
 	sp_angle = atan2(-g_player.y + (g_sprite[i]->y),
                             -g_player.x + (g_sprite[i]->x));
@@ -65,9 +64,8 @@ void		ft_sprite_traits(int i)
         sp_angle += TWO_PI;
 	sp_size = (WIN_WIDTH / g_sprite[i]->distance * TILE_SIZE);
 	x_offset = (sp_angle - g_player.rotation_angle) /
-		RAD(60) * WIN_WIDTH + (WIN_WIDTH / 2 - sp_size / 2) + 1;
-    y_offset = (WIN_HEIGHT / 2 - sp_size / 2) + g_3d.pitch;
-	printf("Sprite %d has Value -> %f\n", i, g_sprite[i]->distance);
+		RAD(60) * WIN_WIDTH + (WIN_WIDTH / 2 - sp_size / 2);
+    y_offset = (WIN_HEIGHT / 2 - sp_size / 2);
     render_sprite(i, x_offset, y_offset, sp_size);
 }
 

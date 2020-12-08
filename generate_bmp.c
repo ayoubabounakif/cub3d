@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 19:10:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 19:22:39 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:28:20 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ unsigned char*	createBitmapInfoHeader(int height, int width);
 //     for (i = 0; i < height; i++) {
 //         for (j = 0; j < width; j++) {
 //             image[i][j][2] = (unsigned char)(i * 255 / height);					// RED
-//             image[i][j][1] = (unsigned char)(j * 0 / width);					// GREEN
+//             image[i][j][1] = (unsigned char)(j * 255 / width);					// GREEN
 // 			image[i][j][0] = (unsigned char)((i + j) * 255 / (height + width));	// BLUE
 //         }
 //     }

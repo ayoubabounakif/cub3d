@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:22:04 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 13:02:35 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:44:18 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_sprite_sort(void)
 	
 	int			i;
 	int			j;
-	float		tmp;
+	t_sprite	*tmp;
 
 	i = 0;
 	while (i < g_sprite_count)
@@ -27,9 +27,9 @@ void		ft_sprite_sort(void)
 		{
 			if (g_sprite[j]->distance <= g_sprite[j + 1]->distance)
 			{
-				tmp = g_sprite[j]->distance;
-				g_sprite[j]->distance = g_sprite[j + 1]->distance;
-				g_sprite[j + 1]->distance = tmp;
+				tmp = g_sprite[j];
+				g_sprite[j] = g_sprite[j + 1];
+				g_sprite[j + 1] = tmp;
 			}
 			j++;
 		}
