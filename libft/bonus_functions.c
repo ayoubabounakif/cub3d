@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 19:33:02 by aabounak          #+#    #+#             */
-/*   Updated: 2020/10/31 03:30:16 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:53:15 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {	
 	if (lst)
 		(*del)(lst->content);
+	free(lst);
 }
 
 /*
@@ -158,33 +159,3 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		lst = lst->next;
 	}
 }
-
-void	print_list(t_list *head)
-{
-	while (head != NULL)
-	{
-		printf("%s - ", head->content);
-		head = head->next;
-	}
-	printf("\n");
-}
-
-// int		main(void)
-// {
-// 	t_list	*list;
-
-// 	list = ft_lstnew("Yahyoyo");
-// 	ft_lstadd_front(&list, ft_lstnew("Hikkari"));
-// 	ft_lstadd_front(&list, ft_lstnew("Penguin"));
-// 	print_list(list);	// Printing the list after adding items to the front
-// 	printf("%d\n", ft_lstsize(list));	// Length of the list
-// 	printf("%s\n", ft_lstlast(list)->content);	// Last item of the list
-// 	ft_lstadd_back(&list, ft_lstnew("BABY PENGUINS <3"));
-// 	print_list(list);	// Printing the list after adding an element to the end
-
-// 	// ft_lstdelone(list, free);
-// 	ft_lstiter(list, (void *)ft_strlen);
-// 	ft_lstclear(&list, free);
-// 	print_list(list);
-// 	return (0);
-// }

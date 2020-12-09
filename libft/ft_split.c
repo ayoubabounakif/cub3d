@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabounak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:39:17 by aabounak          #+#    #+#             */
-/*   Updated: 2019/10/22 19:17:57 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:53:16 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		fill_string(char *str, char *cas, char c)
 	cas[i] = '\0';
 }
 
-static char		**norminette_ez(char *str, char **tab, char c, int indicator)
+static char		**fill(char *str, char **tab, char c, int indicator)
 {
 	int		i;
 	int		j;
@@ -106,7 +106,7 @@ char			**ft_split(char const *s, char c)
 		return (0);
 	if (!(tab = malloc((number_of_words(str, c) + 1) * 8)))
 		return (0);
-	tab = norminette_ez(str, tab, c, indicator);
+	tab = fill(str, tab, c, indicator);
 	tab[number_of_words(str, c)] = 0;
 	return (tab);
 }
