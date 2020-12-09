@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/08 10:44:37 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 10:16:51 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    render_sprite(int k, int x_fs, int y_fs, int sp_size)
     {
         if (x_fs + i < 0 || x_fs + i > WIN_WIDTH)
             continue;
-        if (g_rays[(int)(x_fs + i)].distance <= g_sprite[k]->distance)
+        if (g_rays[x_fs + i].distance <= g_sprite[k]->distance)
             continue;
         j = -1;
 		while (++j < sp_size)
@@ -55,6 +55,7 @@ void		ft_sprite_traits(int i)
 	float	y_offset;
 	float	sp_angle;
 	float	sp_size;
+
 	g_player.rotation_angle = normalize_angle(g_player.rotation_angle);
 	sp_angle = atan2(-g_player.y + (g_sprite[i]->y),
                             -g_player.x + (g_sprite[i]->x));

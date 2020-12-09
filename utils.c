@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/08 11:02:27 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 10:12:56 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ int		deal_key()
 
 	mlx_destroy_image(g_mlx.mlx_ptr, g_mlx.img_ptr);
 	mlx_clear_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
-	// write(1, "FPS\n", 4);
+
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	
 	castAllRays();
 	render3DProjectionPlane();
 	ft_sprite();
-	// ft_lifebar();
 	
 	mlx_put_image_to_window(g_mlx.mlx_ptr, g_mlx.win_ptr, g_mlx.img_ptr, 0, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 17:25:44 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 09:52:20 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,11 +293,11 @@ void		put_character(void);
 void		draw_line(int X0, int Y0, int X1, int Y1, int color);
 
 // 3D FUNCTIONS
-void		render3DProjectionPlane();
+void		render3DProjectionPlane(void);
 int			rgb_to_int(int r, int g, int b);
-void		draw_wall(int i, int wallStripHeight);
-void		draw_ceiling(int i);
-void		draw_floor(int i);
+void		draw_wall(int i, int wallTopPixel, int wallBotPixel, int wallStripHeight);
+void		draw_ceiling(int i, int wallTopPixel);
+void		draw_floor(int i, int wallBotPixel);
 
 // SP FUNCTIONS
 void		init_sprite(void);

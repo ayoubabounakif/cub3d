@@ -6,32 +6,29 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 17:24:21 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 09:52:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	g_wallTopPixel;
-float	g_wallBotPixel;
-
-void		draw_ceiling(int i)
+void		draw_ceiling(int i, int wallTopPixel)
 {
 	int		y;
 
 	y = 0;
-	while (y < g_wallTopPixel)
+	while (y < wallTopPixel)
 	{
 		img_update(i, y, rgb_to_int(g_ceiling_rgb.r, g_ceiling_rgb.g, g_ceiling_rgb.b));
 		y++;
 	}
 }
 
-void		draw_floor(int i)
+void		draw_floor(int i, int wallBotPixel)
 {
 	int		y;
 
-	y = g_wallBotPixel;
+	y = wallBotPixel;
 	while (y < WIN_HEIGHT)
 	{
 		img_update(i, y, rgb_to_int(g_floor_rgb.r , g_floor_rgb.g, g_floor_rgb.b));
@@ -39,16 +36,16 @@ void		draw_floor(int i)
 	}
 }
 
-void		draw_wall(int i, int wallStripHeight)
+void		draw_wall(int i, int wallTopPixel, int wallBotPixel, int wallStripHeight)
 {
 	int		y;
 
-	y = g_wallTopPixel;
+	y = wallTopPixel;
 	if (g_rays[i].wasHitVertical)	// Calculate textureOffSetX if wallHit was Vert
 		g_tex.texOffSetX = (int)g_rays[i].wallHitY % TILE_SIZE;
 	else							// If the wallHit was Horz
 		g_tex.texOffSetX = (int)g_rays[i].wallHitX % TILE_SIZE;
-	while (y < g_wallBotPixel)		// Render the wall from wallTopPixel to wallBotPixel
+	while (y < wallBotPixel)		// Render the wall from wallTopPixel to wallBotPixel
 	{
 		g_tex.distanceFromTop = y + (wallStripHeight / 2) - (WIN_HEIGHT / 2);
 		g_tex.texOffSetY = g_tex.distanceFromTop * ((float)TEX_HEIGHT / wallStripHeight);
@@ -68,21 +65,23 @@ void		draw_wall(int i, int wallStripHeight)
 void		render3DProjectionPlane(void)
 {
 	int		i;
+	int		wallTopPixel;
+	int		wallBotPixel;
 	float	distanceProjPlane;
 	float	perpDistance;
 	float	wallStripHeight;
 
-	i = 0;
 	distanceProjPlane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
+	i = 0;
 	while (i < WIN_WIDTH)
 	{
 		perpDistance = g_rays[i].distance * cosf(g_rays[i].rayAngle - g_player.rotation_angle);
 		wallStripHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
-		g_wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2) + g_3d.pitch;
-		g_wallBotPixel = g_wallTopPixel + wallStripHeight;
-		draw_ceiling(i);
-		draw_wall(i, wallStripHeight);
-		draw_floor(i);
+		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2) + g_3d.pitch;
+		wallBotPixel = wallTopPixel + wallStripHeight;
+		draw_ceiling(i, wallTopPixel);
+		draw_wall(i, wallTopPixel, wallBotPixel, wallStripHeight);
+		draw_floor(i, wallBotPixel);
 		i++;
 	}
 }

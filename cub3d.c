@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/08 11:02:01 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 10:17:12 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void		castAllRays()
 	int		stripId;
 	float	rayAngle;
 
-	g_rays = malloc(sizeof(t_rays) * WIN_WIDTH);
+	if (!(g_rays = malloc(sizeof(t_rays) * WIN_WIDTH)))
+		return ;
 	stripId = 0;
 	rayAngle = g_player.rotation_angle - RAD(30);
 	rayAngle = normalize_angle(rayAngle);
@@ -125,18 +126,6 @@ void		castAllRays()
 		g_ray.isRayFacingUp = !g_ray.isRayFacingDown;
 		g_ray.isRayFacingRight = rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI;
 		g_ray.isRayFacingLeft = !g_ray.isRayFacingRight;
-
-		/*
-			==22143==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000003a1c at pc 0x000101c9de64 bp 0x7ffeedf6ebc0 sp 0x7ffeedf6ebb8
-			READ of size 1 at 0x602000003a1c thread T0
-    		#0 0x101c9de63 in wall_collision random_utils.c:48
-    		#1 0x101c8fef3 in castHorzRay cub3d.c:49
-    		#2 0x101c91e2c in castAllRays cub3d.c:128
-    		#3 0x101c9d522 in deal_key utils.c:56
-    		#4 0x101c9dbc2 in loop_key utils.c:93
-
-			Segf is in -> xtocheck and ytocheck, they become values that are not there on map
-		*/
 
 		castHorzRay(rayAngle);
 		castVertRay(rayAngle);

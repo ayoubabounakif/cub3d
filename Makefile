@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/08 10:43:59 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/09 09:52:46 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(LIBNAME):
 
 $(NAME): $(LIBNAME)
 	gcc -Ofast $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
-	# We can add the flag "-fast" to run the game way more smoothly
+	# We can add the flag "-Ofast" to run the game way more smoothly
 
 clean:
 	make clean -C libft/
