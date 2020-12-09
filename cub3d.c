@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 10:17:12 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:40:20 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,20 +154,40 @@ void		castAllRays()
 		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
 		stripId++;
 	}
+	free(g_rays);
 	// draw_map();
+}
+
+void	free_map(void)
+{
+	int		i;
+	
+	i = 0;
+	while (1)
+	{
+		free(g_map[i]);
+		i++;
+		if (g_map[i] == NULL)
+			break ;
+	}
+	free(g_map);
 }
 
 int		main(void)
 {
 	read_file();
 	init_player();
-	g_3d.pitch = 0;
+
 	g_mlx.mlx_ptr = mlx_init();
 	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
+
 	init_tex();
+
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
+
+	free_map();
+
 	return (0);
 }

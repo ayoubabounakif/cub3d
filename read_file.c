@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/07 14:51:21 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:49:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,23 +152,21 @@ void		store_paths(char *buffer)
 // RESOLUTION FUNCTIONs
 void		resolution(char *buffer)
 {
-	char	**arr;
 	int		i;
 
-	arr = ft_split(buffer, ' ');
 	i = 0;
-	while (arr[0][i] || arr[1][i])
+	while (ft_split(buffer, ' ')[0][i] || ft_split(buffer, ' ')[1][i])
 	{
-		if (!ft_isdigit(arr[0][i]) || !ft_isdigit(arr[1][i]))
+		if (!ft_isdigit(ft_split(buffer, ' ')[0][i]) || !ft_isdigit(ft_split(buffer, ' ')[1][i]))
 			ft_exit("Error\nLETTERS INSTEAD OF NUMBERS OR NEGATIVE VALUE\n");
 		i++;
 	}
-	if (ft_strlendoubleptr(arr) != 2)
+	if (ft_strlendoubleptr(ft_split(buffer, ' ')) != 2)
 		ft_exit("Error\nWrong number of arguments in Resolution!\n");
 	else
 	{
-		g_data.win_width = (ft_atoi(arr[0]) < 2560) ? ft_atoi(arr[0]) : 2560;
-		g_data.win_height = (ft_atoi(arr[1]) < 1440) ? ft_atoi(arr[1]) : 1440;
+		g_data.win_width = (ft_atoi(ft_split(buffer, ' ')[0]) < 2560) ? ft_atoi(ft_split(buffer, ' ')[0]) : 2560;
+		g_data.win_height = (ft_atoi(ft_split(buffer, ' ')[1]) < 1440) ? ft_atoi(ft_split(buffer, ' ')[1]) : 1440;
 		g_c++;
 	}
 }
@@ -176,50 +174,46 @@ void		resolution(char *buffer)
 // FLOOR FUNCTION
 void		ft_floor(char *buffer)
 {
-	char	**arr;
-
 	buffer = ft_strtrim(buffer + 1, "\t");
 	check_comma(buffer);
-	arr = ft_split(buffer, ',');
-	if (all_n(arr[0]) && all_n(arr[1]) && all_n(arr[2]) && !arr[3])
+	if (all_n(ft_split(buffer, ',')[0]) && all_n(ft_split(buffer, ',')[1]) && all_n(ft_split(buffer, ',')[2]) && !ft_split(buffer, ',')[3])
 	{
-		if (ft_atoi(arr[0]) >= 0 && ft_atoi(arr[0]) < 256 && ft_atoi(arr[1]) >= 0 &&
-			ft_atoi(arr[1]) < 256 && ft_atoi(arr[2]) >= 0 && ft_atoi(arr[2]) < 256)
+		if (ft_atoi(ft_split(buffer, ',')[0]) >= 0 && ft_atoi(ft_split(buffer, ',')[0]) < 256 && ft_atoi(ft_split(buffer, ',')[1]) >= 0 &&
+			ft_atoi(ft_split(buffer, ',')[1]) < 256 && ft_atoi(ft_split(buffer, ',')[2]) >= 0 && ft_atoi(ft_split(buffer, ',')[2]) < 256)
 		{
-			g_floor_rgb.r = ft_atoi(arr[0]);
-			g_floor_rgb.g = ft_atoi(arr[1]);
-			g_floor_rgb.b = ft_atoi(arr[2]);
+			g_floor_rgb.r = ft_atoi(ft_split(buffer, ',')[0]);
+			g_floor_rgb.g = ft_atoi(ft_split(buffer, ',')[1]);
+			g_floor_rgb.b = ft_atoi(ft_split(buffer, ',')[2]);
 		}
 		else
 			ft_exit("Error\nInvalid floor RGB values!\n");
 	}
 	else
 		ft_exit("Error\nInvalid floor RGB values!\n");
+	free(buffer);
 	g_c += 27;
 }
 
 // CEILING FUNCTION
 void		ft_ceiling(char *buffer)
 {
-	char	**arr;
-
 	buffer = ft_strtrim(buffer + 1, "\t");
 	check_comma(buffer);
-	arr = ft_split(buffer, ',');
-	if (all_n(arr[0]) && all_n(arr[1]) && all_n(arr[2]) && !arr[3])
+	if (all_n(ft_split(buffer, ',')[0]) && all_n(ft_split(buffer, ',')[1]) && all_n(ft_split(buffer, ',')[2]) && !ft_split(buffer, ',')[3])
 	{
-		if (ft_atoi(arr[0]) >= 0 && ft_atoi(arr[0]) < 256 && ft_atoi(arr[1]) >= 0 &&
-			ft_atoi(arr[1]) < 256 && ft_atoi(arr[2]) >= 0 && ft_atoi(arr[2]) < 256)
+		if (ft_atoi(ft_split(buffer, ',')[0]) >= 0 && ft_atoi(ft_split(buffer, ',')[0]) < 256 && ft_atoi(ft_split(buffer, ',')[1]) >= 0 &&
+			ft_atoi(ft_split(buffer, ',')[1]) < 256 && ft_atoi(ft_split(buffer, ',')[2]) >= 0 && ft_atoi(ft_split(buffer, ',')[2]) < 256)
 		{
-			g_ceiling_rgb.r = ft_atoi(arr[0]);
-			g_ceiling_rgb.g = ft_atoi(arr[1]);
-			g_ceiling_rgb.b = ft_atoi(arr[2]);
+			g_ceiling_rgb.r = ft_atoi(ft_split(buffer, ',')[0]);
+			g_ceiling_rgb.g = ft_atoi(ft_split(buffer, ',')[1]);
+			g_ceiling_rgb.b = ft_atoi(ft_split(buffer, ',')[2]);
 		}
 		else
 			ft_exit("Error\nInvalid ceiling RGB values!\n");
 	}
 	else
 		ft_exit("Error\nInvalid ceiling RGB values!\n");
+	free(buffer);
 	g_c += 72;
 }
 
@@ -260,9 +254,8 @@ void		read_file()
 		n = get_next_line(fd, &buffer);
 		check(buffer);
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
+		// free(buffer);
 	}
-	printf("WIDTH -> %d\n", g_data.win_width);
-	printf("HEIGHT -> %d\n", g_data.win_height);
 	if (g_c == 150)
 		check_map();
 	free(buffer);
