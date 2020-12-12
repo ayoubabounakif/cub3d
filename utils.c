@@ -6,12 +6,14 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:39:06 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/12 19:33:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <time.h>
+
+int		g_save = 0;
 
 void	img_update(int x, int y, int color)
 {
@@ -84,6 +86,11 @@ int		deal_key()
 	castAllRays();
 	render3DProjectionPlane();
 	ft_sprite();
+	if (g_save == 1)
+	{
+		bmp_save();
+		exit(0);
+	}
 	mlx_put_image_to_window(g_mlx.mlx_ptr, g_mlx.win_ptr, g_mlx.img_ptr, 0, 0);
 	return (0);
 }
@@ -95,6 +102,8 @@ int		key_pressed(int keycode)
 		mlx_destroy_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
 		exit(0);
 	}
+	if (keycode == 7)
+		g_save = 1;
     if (keycode == W_KEY)
         g_key.move_straight = 1;
     if (keycode == S_KEY)

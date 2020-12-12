@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:39:27 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/12 19:54:29 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,8 @@ typedef	struct	s_key
 	int			look_up;
 	int			look_down;
 	int			left_dir;
-	int			right_dir;	
+	int			right_dir;
 }				t_key;
-
-typedef struct	s_3d
-{
-	float		pitch;
-}				t_3d;
 
 // Rays struct
 
@@ -235,7 +230,6 @@ t_mlx			g_mlx;
 t_vars			g_vars;
 t_player		g_player;
 t_key			g_key;
-t_3d			g_3d;
 t_ray			g_ray;
 t_data			g_data;
 t_rays			*g_rays;
@@ -312,4 +306,6 @@ void		init_player(void);
 void		init_sprite(void);
 void		init_tex(void);
 
+// SAVE
+void		bmp_save(void);
 #endif

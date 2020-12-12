@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/09 12:08:49 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/12 17:22:51 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ utils.c random_utils.c ft_sprite_sort.c \
 draw_minimap.c \
 get_next_line/get_next_line.c \
 get_next_line/get_next_line_utils.c \
+generate_bmp.c
 
 OBJ = $(SRC:.c=.o)
 

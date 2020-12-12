@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:39:04 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/12 11:55:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		render3DProjectionPlane(void)
 	{
 		perpDistance = g_rays[i].distance * cosf(g_rays[i].rayAngle - g_player.rotation_angle);
 		wallStripHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
-		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2) + g_3d.pitch;
+		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2);
 		wallBotPixel = wallTopPixel + wallStripHeight;
 		draw_ceiling(i, wallTopPixel);
 		draw_wall(i, wallTopPixel, wallBotPixel, wallStripHeight);

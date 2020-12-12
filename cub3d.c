@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:40:20 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/12 19:24:37 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,10 @@ void		castAllRays()
 		// Calculate both Horz and Vert hit distances and choose the smallest one
 		g_ray.horzHitDistance = (g_ray.foundHorzWallHit)
 		? distanceBetweenPoints(g_player.x, g_player.y, g_ray.horzWallHitX, g_ray.horzWallHitY)
-		: INT32_MAX;
+		: (float)INT32_MAX;
 		g_ray.vertHitDistance = (g_ray.foundVertWallHit)
 		? distanceBetweenPoints(g_player.x, g_player.y, g_ray.vertWallHitX, g_ray.vertWallHitY)
-		: INT32_MAX;
+		: (float)INT32_MAX;
 
 		g_rays[stripId].distance = (g_ray.horzHitDistance < g_ray.vertHitDistance) ? g_ray.horzHitDistance : g_ray.vertHitDistance;
 		g_rays[stripId].wallHitX = (g_ray.horzHitDistance < g_ray.vertHitDistance) ? g_ray.horzWallHitX : g_ray.vertWallHitX;
@@ -151,11 +151,11 @@ void		castAllRays()
 	
 		rayAngle = normalize_angle(rayAngle);
 		rayAngle += FOV_ANGLE / WIN_WIDTH;	// Incrementing the ray after each ray casted
-		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
+		draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
 		stripId++;
 	}
 	free(g_rays);
-	// draw_map();
+	draw_map();
 }
 
 void	free_map(void)
@@ -183,7 +183,6 @@ int		main(void)
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 
 	init_tex();
-
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
 
