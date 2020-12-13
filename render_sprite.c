@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 10:25:00 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/13 09:53:47 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,8 @@ void		ft_sprite(void)
 	i = -1;
 	while (++i < g_sprite_count)
 		ft_sprite_traits(i);
+	i = -1;
+	while (++i < g_sprite_count)
+		free(g_sprite[i]);
 	free(g_sprite);
 }

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 11:46:33 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:52:10 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*space_filler(int biglen)
 void	check_map()
 {
 	t_list	*temp;
-	t_list	*temp2;
 	char	*content;
 
 	g_sizeofmap = 0;
@@ -100,21 +99,29 @@ void	check_map()
 	if (!(g_map = (char **)malloc(sizeof(char *) * (g_sizeofmap + 1))))
 		return ;
 	g_map[0] = space_filler(g_biglen);
-	temp2 = g_file;
+	temp = g_file;
 	content = NULL;
 
 	int     i = 1;
-	while (temp2)
+	while (temp)
 	{
-		content = temp2->content;
+		content = temp->content;
 		if (getfirstchar(content))
 		{
 			g_map[i] = spacer(content, g_biglen);
 			i++;
 		}
-		temp2 = temp2->next;
+		temp = temp->next;
 	}
 	g_map[i] = space_filler(g_biglen);
 	i++;
 	g_map[i] = NULL;
+
+    while (g_file != NULL)
+    {
+       temp = g_file;
+       g_file = g_file->next;
+	   free(temp->content);
+       free(temp);
+    }
 }

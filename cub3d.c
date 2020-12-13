@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/12 19:24:37 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/13 13:24:49 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,25 +151,20 @@ void		castAllRays()
 	
 		rayAngle = normalize_angle(rayAngle);
 		rayAngle += FOV_ANGLE / WIN_WIDTH;	// Incrementing the ray after each ray casted
-		draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
+		// draw_line(g_player.x, g_player.y, g_rays[stripId].wallHitX, g_rays[stripId].wallHitY, 0xFFFFFF);
 		stripId++;
 	}
 	free(g_rays);
-	draw_map();
+	// draw_map();
 }
 
 void	free_map(void)
 {
 	int		i;
-	
-	i = 0;
-	while (1)
-	{
+
+	i = -1;
+	while (++i < g_biglen)
 		free(g_map[i]);
-		i++;
-		if (g_map[i] == NULL)
-			break ;
-	}
 	free(g_map);
 }
 
@@ -187,6 +182,5 @@ int		main(void)
 	mlx_loop(g_mlx.mlx_ptr);
 
 	free_map();
-
 	return (0);
 }

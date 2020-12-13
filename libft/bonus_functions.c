@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 19:33:02 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:53:15 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:50:29 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*head;
 
+	head = NULL;
 	if (!(head = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	head->content = ft_strdup(content);
-	head->next = NULL;
+	(head)->content = ft_strdup(content);
+	(head)->next = NULL;
 	return (head);
 }
 
