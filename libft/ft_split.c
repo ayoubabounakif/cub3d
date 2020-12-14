@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 17:39:17 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 14:53:16 by aabounak         ###   ########.fr       */
+/*   Created: 2020/12/14 18:04:17 by aabounak          #+#    #+#             */
+/*   Updated: 2020/12/14 18:19:17 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char		**fill(char *str, char **tab, char c, int indicator)
 		{
 			if (indicator != 1)
 			{
-				if (!(tab[++j] = malloc(1 + word_size((str + i), c))))
+				if (!(tab[++j] = ft_malloc(1 + word_size((str + i), c))))
 				{
 					while (j--)
 						free(tab[j]);
@@ -104,7 +104,7 @@ char			**ft_split(char const *s, char c)
 	indicator = 0;
 	if (!str)
 		return (0);
-	if (!(tab = malloc((number_of_words(str, c) + 1) * 8)))
+	if (!(tab = ft_malloc((number_of_words(str, c) + 1) * 8)))
 		return (0);
 	tab = fill(str, tab, c, indicator);
 	tab[number_of_words(str, c)] = 0;

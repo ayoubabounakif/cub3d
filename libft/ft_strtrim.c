@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 18:05:07 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 13:20:39 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 18:17:27 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char		*display(char const *s1, int start, int end)
 	int		i;
 
 	i = 0;
-	if (!(str = (char *)malloc(sizeof(char) * ((end + 1) - start) + 1)))
+	if (!(str = (char *)ft_malloc(sizeof(char) * ((end + 1) - start) + 1)))
 		return (0);
 	while (start < (end + 1))
 	{

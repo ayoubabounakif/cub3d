@@ -6,13 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 17:51:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:01:07 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 18:12:06 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int         g_save;
+int			g_save;
 
 int			check_name(char *str)
 {
@@ -27,7 +27,7 @@ int			arg_test(int argc, char **argv)
 {
 	int		fd;
 
-    g_save = 0;
+	g_save = 0;
 	if (argc < 2 || argc > 3)
 		ft_exit("Error\nInvalid number of args!\n");
 	fd = open(argv[1], O_RDONLY);
