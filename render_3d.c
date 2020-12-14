@@ -6,84 +6,88 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 10:41:32 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:41:03 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int 	g_pitch;
+static int	g_y;
 
-void		draw_ceiling(int i, int wallTopPixel)
+void		draw_ceiling(int i, int wall_topp)
 {
-	int		y;
-
-	y = 0;
-	while (y < wallTopPixel)
+	g_y = 0;
+	while (g_y < wall_topp)
 	{
-		img_update(i, y, rgb_to_int(g_ceiling_rgb.r, g_ceiling_rgb.g, g_ceiling_rgb.b));
-		y++;
+		img_update(i, g_y, rgb_to_int(
+			g_ceiling_rgb.r, 
+			g_ceiling_rgb.g,
+			g_ceiling_rgb.b));
+		g_y++;
 	}
 }
 
-void		draw_floor(int i, int wallBotPixel)
+void		draw_floor(int i, int wall_botp)
 {
-	int		y;
-
-	y = wallBotPixel;
-	while (y < WIN_HEIGHT)
+	g_y = wall_botp;
+	while (g_y < WIN_HEIGHT)
 	{
-		img_update(i, y, rgb_to_int(g_floor_rgb.r , g_floor_rgb.g, g_floor_rgb.b));
-		y++;
+		img_update(i, g_y, rgb_to_int(
+			g_floor_rgb.r, 
+			g_floor_rgb.g,
+			g_floor_rgb.b));
+		g_y++;
 	}
 }
 
-void		draw_wall(int i, int wallTopPixel, int wallBotPixel, int wallStripHeight)
+void		draw_wall(int i, int wall_topp, int wall_botp, int wall_striph)
 {
-	int		y;
-
-	y = wallTopPixel;
-	if (g_rays[i].wasHitVertical)	// Calculate textureOffSetX if wallHit was Vert
-		g_tex.texOffSetX = (int)g_rays[i].wallHitY % TILE_SIZE;
+	g_y = wall_topp;
+	if (g_rays[i].was_hit_vert)	// Calculate textureOffSetX if wallHit was Vert
+		g_tex.offset_x = (int)g_rays[i].wall_hit_y % TILE_SIZE;
 	else							// If the wallHit was Horz
-		g_tex.texOffSetX = (int)g_rays[i].wallHitX % TILE_SIZE;
-	while (y < wallBotPixel)		// Render the wall from wallTopPixel to wallBotPixel
+		g_tex.offset_x = (int)g_rays[i].wall_hit_x % TILE_SIZE;
+	while (g_y < wall_botp)		// Render the wall from wall_topp to wall_botp
 	{
-		g_tex.distanceFromTop = y + (wallStripHeight / 2) - (WIN_HEIGHT / 2);
-		g_tex.texOffSetY = g_tex.distanceFromTop * ((float)TEX_HEIGHT / wallStripHeight);
-		if (g_rays[i].isRayFacingUp && !g_rays[i].wasHitVertical)
-			g_tex.texelColor = g_textnorth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		else if (g_rays[i].isRayFacingDown && !g_rays[i].wasHitVertical)
-			g_tex.texelColor = g_textsouth[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		else if (g_rays[i].isRayFacingRight && g_rays[i].wasHitVertical)
-			g_tex.texelColor = g_textwest[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		else if (g_rays[i].isRayFacingLeft && g_rays[i].wasHitVertical)
-			g_tex.texelColor = g_texteast[(TEX_WIDTH * g_tex.texOffSetY) + g_tex.texOffSetX];
-		img_update(i, y, g_tex.texelColor);
-		y++;
+		g_tex.dist_ftop = g_y + (wall_striph / 2) - (WIN_HEIGHT / 2);
+		g_tex.offset_y = g_tex.dist_ftop * ((float)TEX_HEIGHT / wall_striph);
+		if (g_rays[i].isray_up && !g_rays[i].was_hit_vert)
+			g_tex.color = g_texnorth[(TEX_WIDTH * g_tex.offset_y)
+							+ g_tex.offset_x];
+		else if (g_rays[i].isray_down && !g_rays[i].was_hit_vert)
+			g_tex.color = g_texsouth[(TEX_WIDTH * g_tex.offset_y)
+							+ g_tex.offset_x];
+		else if (g_rays[i].isray_right && g_rays[i].was_hit_vert)
+			g_tex.color = g_texwest[(TEX_WIDTH * g_tex.offset_y)
+							+ g_tex.offset_x];
+		else if (g_rays[i].isray_left && g_rays[i].was_hit_vert)
+			g_tex.color = g_texeast[(TEX_WIDTH * g_tex.offset_y)
+							+ g_tex.offset_x];
+		img_update(i, g_y, g_tex.color);
+		g_y++;
 	}
 }
 
-void		render3DProjectionPlane(void)
+void		render_3d(void)
 {
 	int		i;
-	int		wallTopPixel;
-	int		wallBotPixel;
-	float	distanceProjPlane;
-	float	perpDistance;
-	float	wallStripHeight;
+	int		wall_topp;
+	int		wall_botp;
+	float	dist_pplane;
+	float	perp_dist;
+	float	wall_striph;
 
-	distanceProjPlane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
+	dist_pplane = (WIN_WIDTH / 2) / tan(FOV_ANGLE / 2);
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		perpDistance = g_rays[i].distance * cosf(g_rays[i].rayAngle - g_player.rotation_angle);
-		wallStripHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
-		wallTopPixel = (WIN_HEIGHT / 2) - (wallStripHeight / 2);
-		wallBotPixel = wallTopPixel + wallStripHeight;
-		draw_ceiling(i, wallTopPixel);
-		draw_wall(i, wallTopPixel, wallBotPixel, wallStripHeight);
-		draw_floor(i, wallBotPixel);
+		perp_dist = g_rays[i].distance * cosf(g_rays[i].ray_angle - g_player.rangle);
+		wall_striph = (TILE_SIZE / perp_dist) * dist_pplane;
+		wall_topp = (WIN_HEIGHT / 2) - (wall_striph / 2);
+		wall_botp = wall_topp + wall_striph;
+		draw_ceiling(i, wall_topp);
+		draw_wall(i, wall_topp, wall_botp, wall_striph);
+		draw_floor(i, wall_botp);
 		i++;
 	}
 }

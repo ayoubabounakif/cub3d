@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:17:59 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:29:11 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	put_character()
 	float	x;
 	float	y;
 
-	val = g_player.rotation_angle;
+	val = g_player.rangle;
 	r = 4;
 	while (r >= 0)
 	{

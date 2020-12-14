@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:22:04 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:47:20 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:36:12 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void		init_sprite(void)
 				g_sprite[g_spt_id]->y = (g_j * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[g_spt_id]->x = (g_i * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[g_spt_id]->distance = distance_bpts(
-						g_sprite[g_spt_id]->y, g_sprite[g_spt_id]->x,
-						g_player.y, g_player.x);
+					g_sprite[g_spt_id]->y, g_sprite[g_spt_id]->x,
+					g_player.y, g_player.x);
 				g_spt_id++;
 			}
 		}

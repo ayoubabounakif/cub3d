@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 12:14:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:56:48 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:31:00 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@ void	update(void)
 {
 	if (g_key.move_straight == 1)
 	{
-		if (!(wall_collision(g_player.x + cos(g_player.rotation_angle) * 50,
-							g_player.y + sin(g_player.rotation_angle) * 50)))
+		if (!(wall_collision(g_player.x + cos(g_player.rangle) * 50,
+							g_player.y + sin(g_player.rangle) * 50)))
 		{
-			g_player.y += sin(g_player.rotation_angle) * 7;
-			g_player.x += cos(g_player.rotation_angle) * 7;
+			g_player.y += sin(g_player.rangle) * 7;
+			g_player.x += cos(g_player.rangle) * 7;
 		}
 	}
 	if (g_key.move_back == 1)
 	{
-		if (!(wall_collision(g_player.x - cos(g_player.rotation_angle) * 50,
-							g_player.y - sin(g_player.rotation_angle) * 50)))
+		if (!(wall_collision(g_player.x - cos(g_player.rangle) * 50,
+							g_player.y - sin(g_player.rangle) * 50)))
 		{
-			g_player.y -= sin(g_player.rotation_angle) * 7;
-			g_player.x -= cos(g_player.rotation_angle) * 7;
+			g_player.y -= sin(g_player.rangle) * 7;
+			g_player.x -= cos(g_player.rangle) * 7;
 		}
 	}
 	if (g_key.left_dir == 1)
-		g_player.rotation_angle -= ROTATION_SPEED;
+		g_player.rangle -= ROTATION_SPEED;
 	if (g_key.right_dir == 1)
-		g_player.rotation_angle += ROTATION_SPEED;
+		g_player.rangle += ROTATION_SPEED;
 }
 
 int		deal_key(void)
@@ -47,8 +47,8 @@ int		deal_key(void)
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	g_mlx.data = (int *)mlx_get_data_addr(g_mlx.img_ptr, &g_mlx.bpp
 										, &g_mlx.size_line, &g_mlx.endian);
-	castAllRays();
-	render3DProjectionPlane();
+	cast_rays();
+	render_3d();
 	ft_sprite();
 	if (g_save == 1)
 	{

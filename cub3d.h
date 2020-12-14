@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:09:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:42:12 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,13 @@ typedef struct	s_mlx
 	void		*img_ptr;
 }				t_mlx;
 
-typedef struct	s_vars   // This struct contains random variables.
-{
-    int     	i;
-    int     	j;
-    int     	x;
-    int     	y;
-    int     	rows;
-    int     	cols;
-}               t_vars;
-
-// Player struct
 typedef struct	s_player
 {
     float		x;
 	float		y;
-	float		renderer_x;
-	float		renderer_y;
-	float		rotation_angle;
-	float		rotation_speed;
-    float       movement_speed;
+	float		rangle;
 }				t_player;
 
-// Key struct
 typedef	struct	s_key
 {
 	int			move_straight;
@@ -108,61 +92,44 @@ typedef	struct	s_key
 	int			right_dir;
 }				t_key;
 
-// Rays struct
-
 typedef struct	s_ray
 {
-	int			isRayFacingUp;
-	int			isRayFacingDown;
-	int			isRayFacingLeft;
-	int			isRayFacingRight;
-	
+	int			isray_up;
+	int			isray_down;
+	int			isray_left;
+	int			isray_right;
 	float		xintercept;
 	float		yintercept;
-
 	float		xstep;
 	float		ystep;
-
-	// HORIZONTAL
-	int			foundHorzWallHit;
-	float		horzWallHitX;
-	float		horzWallHitY;
-	int			horzWallContent;
-	
-	float		nextHorzTouchX;
-	float		nextHorzTouchY;
-
-	// VERTICAL
-	int			foundVertWallHit;
-	float		vertWallHitX;
-	float		vertWallHitY;
-	int			vertWallContent;
-	
-	float		nextVertTouchX;
-	float		nextVertTouchY;
-	
-	float		xToCheck;
-	float		yToCheck;
-	
-	// OTHER VARS
-	float		horzHitDistance;
-	float		vertHitDistance;
+	int			fhorz_hit;
+	float		horz_hit_x;
+	float		horz_hit_y;
+	float		next_htouch_x;
+	float		next_htouch_y;
+	int			fvert_hit;
+	float		vert_hit_x;
+	float		vert_hit_y;
+	float		next_vtouch_x;
+	float		next_vtouch_y;
+	float		x_check;
+	float		y_check;
+	float		horz_hit_dist;
+	float		vert_hit_dist;
 	
 }				t_ray;
 
 typedef struct	s_rays
 {
-	int			columnId;
-	float		rayAngle;
-	float		wallHitX;
-	float		wallHitY;
+	float		ray_angle;
+	float		wall_hit_x;
+	float		wall_hit_y;
 	float		distance;
-	int			isRayFacingUp;
-	int			isRayFacingDown;
-	int			isRayFacingLeft;
-	int			isRayFacingRight;
-	int			wasHitVertical;
-	int			wallHitContent;
+	int			isray_up;
+	int			isray_down;
+	int			isray_left;
+	int			isray_right;
+	int			was_hit_vert;
 }				t_rays;
 
 // PATHS STRUCTURE
@@ -200,11 +167,10 @@ typedef struct	s_tex
 	int			bpp;
 	int			size_line;
 	int			endian;
-
-	int			texOffSetX;
-	int			texOffSetY;
-	int			distanceFromTop;
-	int			texelColor;
+	int			offset_x;
+	int			offset_y;
+	int			dist_ftop;
+	int			color;
 }				t_tex;
 
 typedef struct	s_sprite
@@ -216,7 +182,6 @@ typedef struct	s_sprite
 	int			endian;
 	int			width;
 	int			height;
-
 	float		x;
 	float		y;
 	float		distance;
@@ -224,7 +189,6 @@ typedef struct	s_sprite
 
 // GLOBAL STRUCTURES
 t_mlx			g_mlx;
-t_vars			g_vars;
 t_player		g_player;
 t_key			g_key;
 t_ray			g_ray;
@@ -242,10 +206,10 @@ int				g_sizeofmap;
 int				g_biglen;
 
 // TEXTURE GLOBAL VARIABLES
-int				*g_textnorth;
-int				*g_textwest;
-int				*g_texteast;
-int				*g_textsouth;
+int				*g_texnorth;
+int				*g_texwest;
+int				*g_texeast;
+int				*g_texsouth;
 void			*tempimage;
 int				g_sprite_count;
 
@@ -269,7 +233,7 @@ float		normalize_angle(float angle);
 int			rgb_to_int(int r, int g, int b);
 
 // RAY CASTING FUNCTIONS
-void		castAllRays(void);
+void		cast_rays(void);
 
 // ARGS FUNCTION
 int			arg_test(int argc, char **argv);
@@ -297,10 +261,10 @@ char		*space_filler(int biglen);
 // void		draw_square(int y, int x, int size, int color);
 
 // 3D FUNCTIONS
-void		render3DProjectionPlane(void);
-void		draw_wall(int i, int wallTopPixel, int wallBotPixel, int wallStripHeight);
-void		draw_ceiling(int i, int wallTopPixel);
-void		draw_floor(int i, int wallBotPixel);
+void		render_3d(void);
+void		draw_wall(int i, int wall_topp, int wall_botp, int wall_striph);
+void		draw_ceiling(int i, int wall_topp);
+void		draw_floor(int i, int wall_botp);
 
 // SP FUNCTIONS
 void		init_sprite(void);

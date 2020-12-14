@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:41:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:41:54 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,28 @@ void	init_player(void)
 
 void	init_tex(void)
 {
-	g_tex.texOffSetX = 0;
-	g_tex.texOffSetY = 0;
-	g_tex.distanceFromTop = 0;
-	g_tex.texelColor = 0;
+	g_tex.offset_x = 0;
+	g_tex.offset_y = 0;
+	g_tex.dist_ftop = 0;
+	g_tex.color = 0;
 	if (!(g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.no,
 	&g_tex.img_width, &g_tex.img_height)))
 		return (ft_exit("Error\nTexture file not found!\n"));
-	g_textnorth = (int *)mlx_get_data_addr(g_tex.ptr,
+	g_texnorth = (int *)mlx_get_data_addr(g_tex.ptr,
 	&g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	if (!(g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.so,
 	&g_tex.img_width, &g_tex.img_height)))
 		return (ft_exit("Error\nTexture file not found!\n"));
-	g_textsouth = (int *)mlx_get_data_addr(g_tex.ptr,
+	g_texsouth = (int *)mlx_get_data_addr(g_tex.ptr,
 	&g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	if (!(g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.we,
 	&g_tex.img_width, &g_tex.img_height)))
 		return (ft_exit("Error\nTexture file not found!\n"));
-	g_textwest = (int *)mlx_get_data_addr(g_tex.ptr,
+	g_texwest = (int *)mlx_get_data_addr(g_tex.ptr,
 	&g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 	if (!(g_tex.ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr, g_data.paths.ea,
 	&g_tex.img_width, &g_tex.img_height)))
 		return (ft_exit("Error\nTexture file not found!\n"));
-	g_texteast = (int *)mlx_get_data_addr(g_tex.ptr,
+	g_texeast = (int *)mlx_get_data_addr(g_tex.ptr,
 	&g_mlx.bpp, &g_mlx.size_line, &g_mlx.endian);
 }
