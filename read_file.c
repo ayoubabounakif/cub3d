@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:12:01 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 18:50:26 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int		g_c;
 
 // HELPER FUNCTIONS
+
+void	ft_exit(char *msg)
+{
+	ft_putstr_fd(msg, 1);
+	exit(-1);
+}
+
 int		all_n(char *s)
 {
 	int		i;
@@ -29,10 +36,19 @@ int		all_n(char *s)
 	return (1);
 }
 
-void	ft_exit(char *msg)
+int		ft_isnum(char *s)
 {
-	ft_putstr_fd(msg, 1);
-	exit(-1);
+	int		i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 int		ft_strlendoubleptr(char **str)
@@ -113,7 +129,7 @@ int			tex_validity(char *buffer, int k)
 	while (tmp[i] != '.')
 	{
 		if (tmp[i] == ' ' || tmp[i] == '\t')
-			ft_exit("Error\nSpaces spotted!\n");
+			ft_exit("Error\nSpaces or wrong path names!\n");
 		i++;
 	}
 	ft_strlcpy(tmp, tmp, 9);
@@ -150,8 +166,6 @@ void		store_paths(char *buffer)
 	g_c += 10;
 }
 
-// Free that str buffer
-
 // RESOLUTION FUNCTIONs
 void		resolution(char *buffer)
 {
@@ -160,18 +174,14 @@ void		resolution(char *buffer)
 
 	i = 0;
 	str = ft_split(buffer, ' ');
-	while (str[0][i] || str[1][i])
-	{
-		if (!ft_isdigit(str[0][i]) || !ft_isdigit(str[1][i]))
+	if (!ft_isnum(str[0]) || !ft_isnum(str[1]))
 			ft_exit("Error\nLetters or negative value!\n");
-		i++;
-	}
 	if (ft_strlendoubleptr(str) != 2)
 		ft_exit("Error\nWrong number of arguments in Resolution!\n");
 	else
 	{
-		g_data.win_width = (ft_atoi(str[0]) < 2560) ? ft_atoi(str[0]) : 2560;
-		g_data.win_height = (ft_atoi(str[1]) < 1440) ? ft_atoi(str[1]) : 1440;
+		g_data.win_width = (ft_atoi(str[0]) > 2560) ? 2560 : ft_atoi(str[0]);
+		g_data.win_height = (ft_atoi(str[1]) > 1440) ? 1440 : ft_atoi(str[1]);
 		g_c++;
 	}
 }
