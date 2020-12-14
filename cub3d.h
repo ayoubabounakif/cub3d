@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 10:51:50 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 13:18:25 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include <math.h>
 # include <errno.h>
+# include <time.h>
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 
@@ -248,7 +249,7 @@ int				*g_textsouth;
 void			*tempimage;
 int				g_sprite_count;
 
-// // EVENTS | HOOKS | LOOPS (UTILS.C)
+// // EVENTS | HOOKS | LOOPS (EVENTS.C)
 int			key_pressed(int keycode);
 int			key_released(int keycode);
 int			loop_key(void);
@@ -260,15 +261,12 @@ void		set_rangle(char player_pos);
 // WALL COLLISION
 int			wall_collision(float x, float y);
 
-// RGB
-int			rgb_to_int(int r, int g, int b);
-
-// RANDOM UTILS
+// UTILS
 void		img_update(int x, int y, int color);
 int			abs(int n);
-float		distanceBetweenPoints(float x1, float y1, float x2, float y2);
+float		distance_bpts(float x1, float y1, float x2, float y2);
 float		normalize_angle(float angle);
-void		draw_square(int y, int x, int size, int color);
+int			rgb_to_int(int r, int g, int b);
 
 // RAY CASTING FUNCTIONS
 void		castAllRays(void);
@@ -280,14 +278,20 @@ void		check(char *buffer);
 void		resolution(char *buffer);
 void		ft_floor(char *buffer);
 void		ft_ceiling(char *buffer);
-void		check_map(void);
 
-// MINIMAP FUNCTIONS
-void		draw_map(void);
-void		drawsquare(int x, int y, int color);
-void		drawemptysquare(int x, int y, int color);
-void		put_character(void);
-void		draw_line(int X0, int Y0, int X1, int Y1, int color);
+// MAP
+void		check_map(void);
+char		get_fchar(char *buffer);
+char		*spacer(char *buffer, int biglen);
+char		*space_filler(int biglen);
+
+// // MINIMAP FUNCTIONS
+// void		draw_map(void);
+// void		drawsquare(int x, int y, int color);
+// void		drawemptysquare(int x, int y, int color);
+// void		put_character(void);
+// void		draw_line(int X0, int Y0, int X1, int Y1, int color);
+// void		draw_square(int y, int x, int size, int color);
 
 // 3D FUNCTIONS
 void		render3DProjectionPlane(void);
@@ -300,10 +304,9 @@ void		init_sprite(void);
 void		ft_sprite_sort(void);
 void		ft_sprite(void);
 
-// INIT FUNCTIONS
+// INIT FUNCTIONS || MLX / PLAYER / TEXTURES
 void		init_mlx(void);
 void		init_player(void);
-void		init_sprite(void);
 void		init_tex(void);
 
 // SAVE

@@ -6,15 +6,18 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:22:04 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 10:51:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:47:20 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static int	g_j;
+static int	g_i;
+static int	g_spt_id;
+
 void		ft_sprite_sort(void)
 {
-	
 	int			i;
 	int			j;
 	t_sprite	*tmp;
@@ -39,32 +42,28 @@ void		ft_sprite_sort(void)
 
 void		init_sprite(void)
 {
-	int		i;
-
 	if (!(g_sprite = malloc(sizeof(t_sprite *) * (g_sprite_count + 1))))
 		return ;
-	i = 0;
-	g_vars.rows = 0;
-	while (g_vars.rows < ROWS)
+	g_spt_id = 0;
+	g_j = -1;
+	while (++g_j < ROWS)
 	{
-		g_vars.cols = 0;
-		while (g_vars.cols < COLS)
+		g_i = -1;
+		while (++g_i < COLS)
 		{
-			if (g_map[g_vars.rows][g_vars.cols] == '2')
+			if (g_map[g_j][g_i] == '2')
 			{
-				if (!(g_sprite[i] = malloc(sizeof(t_sprite))))
+				if (!(g_sprite[g_spt_id] = malloc(sizeof(t_sprite))))
 					return ;
-				g_sprite[i]->y = (g_vars.rows * TILE_SIZE) + TILE_SIZE / 2;
-				g_sprite[i]->x = (g_vars.cols * TILE_SIZE) + TILE_SIZE / 2;
-				g_sprite[i]->distance = distanceBetweenPoints(
-						g_sprite[i]->y, g_sprite[i]->x,
+				g_sprite[g_spt_id]->y = (g_j * TILE_SIZE) + TILE_SIZE / 2;
+				g_sprite[g_spt_id]->x = (g_i * TILE_SIZE) + TILE_SIZE / 2;
+				g_sprite[g_spt_id]->distance = distance_bpts(
+						g_sprite[g_spt_id]->y, g_sprite[g_spt_id]->x,
 						g_player.y, g_player.x);
-				i++;
+				g_spt_id++;
 			}
-			g_vars.cols++;
 		}
-		g_vars.rows++;
 	}
-	g_sprite[i] = NULL;
+	g_sprite[g_spt_id] = NULL;
 	ft_sprite_sort();
 }

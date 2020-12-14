@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 03:21:29 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/09 10:32:16 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:17:59 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,26 @@ void	draw_map()
 	}
 	put_character();
 }
+
+// void		draw_square(int y, int x, int size, int color)
+// {
+// 	int		x_end;
+// 	int		y_end;
+// 	int		original_x;
+
+// 	x_end = x + size;
+// 	y_end = y + size;
+// 	original_x = x;
+// 	g_vars.y = y;
+// 	while (y < y_end)
+// 	{
+// 		x = original_x;
+// 		while (x < x_end)
+// 		{
+// 			if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+// 				g_mlx.data[x + y * WIN_WIDTH] = color;
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }

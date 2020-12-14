@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 11:34:14 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 12:32:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,10 @@ void		castAllRays()
 
 		// Calculate both Horz and Vert hit distances and choose the smallest one
 		g_ray.horzHitDistance = (g_ray.foundHorzWallHit)
-		? distanceBetweenPoints(g_player.x, g_player.y, g_ray.horzWallHitX, g_ray.horzWallHitY)
+		? distance_bpts(g_player.x, g_player.y, g_ray.horzWallHitX, g_ray.horzWallHitY)
 		: (float)INT32_MAX;
 		g_ray.vertHitDistance = (g_ray.foundVertWallHit)
-		? distanceBetweenPoints(g_player.x, g_player.y, g_ray.vertWallHitX, g_ray.vertWallHitY)
+		? distance_bpts(g_player.x, g_player.y, g_ray.vertWallHitX, g_ray.vertWallHitY)
 		: (float)INT32_MAX;
 
 		g_rays[stripId].distance = (g_ray.horzHitDistance < g_ray.vertHitDistance) ? g_ray.horzHitDistance : g_ray.vertHitDistance;
@@ -164,13 +164,6 @@ void	free_map(void)
 	while (++i < g_biglen)
 		free(g_map[i]);
 	free(g_map);
-}
-
-void	init_mlx(void)
-{
-	g_mlx.mlx_ptr = mlx_init();
-	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
-	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 }
 
 int		main(void)
