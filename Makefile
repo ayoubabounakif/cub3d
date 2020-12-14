@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/14 12:55:30 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/14 18:01:04 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME = cub3D
 EXEC = cub3D
 
 SRC = cub3d.c render_3d.c render_sprite.c \
-read_file.c read_map.c map_spacers.c \
+args_error.c read_file.c read_map.c map_spacers.c \
 init.c \
 set_rangle.c wall_collision.c\
 events.c utils.c sprite_utils.c \

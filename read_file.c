@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:15:16 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 18:00:08 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,14 @@ int			tex_validity(char *buffer, int k)
 	while (tmp[i] != '.')
 	{
 		if (tmp[i] == ' ' || tmp[i] == '\t')
-			ft_exit("Error\nSPACES SPOTTED\n");
+			ft_exit("Error\nSpaces spotted!\n");
 		i++;
 	}
 	ft_strlcpy(tmp, tmp, 9);
 	tmp = ft_strtrim(buf + k, "\t");
 	tmp = ft_strchr(tmp, '.');
 	if (ft_strncmp(tmp, ".xpm", 4) != 0)
-		ft_exit("Error\nthe .xpm contains an error\n");
+		ft_exit("Error\nExtension != .xpm\n");
 	tmp = ft_strchr(tmp, 'm');
 	i = 1;
 	while (tmp[i] != '\0')
@@ -128,7 +128,7 @@ int			tex_validity(char *buffer, int k)
 		if (tmp[i] == ' ')
 			i++;
 		else
-			ft_exit("Error\nF U BRO DONT F WITH MY EXTENSION\n");
+			ft_exit("Error\nInvalid extension!\n");
 	}
 	// free(buffer);
 	return (0);
@@ -163,7 +163,7 @@ void		resolution(char *buffer)
 	while (str[0][i] || str[1][i])
 	{
 		if (!ft_isdigit(str[0][i]) || !ft_isdigit(str[1][i]))
-			ft_exit("Error\nLETTERS INSTEAD OF NUMBERS OR NEGATIVE VALUE\n");
+			ft_exit("Error\nLetters or negative value!\n");
 		i++;
 	}
 	if (ft_strlendoubleptr(str) != 2)
@@ -211,8 +211,10 @@ void		ft_ceiling(char *buffer)
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
-		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256 && ft_atoi(str[1]) >= 0 &&
-			ft_atoi(str[1]) < 256 && ft_atoi(str[2]) >= 0 && ft_atoi(str[2]) < 256)
+		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256
+			&& ft_atoi(str[1]) >= 0 &&
+			ft_atoi(str[1]) < 256 && ft_atoi(str[2]) >= 0
+			&& ft_atoi(str[2]) < 256)
 		{
 			g_ceiling_rgb.r = ft_atoi(str[0]);
 			g_ceiling_rgb.g = ft_atoi(str[1]);
@@ -226,29 +228,28 @@ void		ft_ceiling(char *buffer)
 	g_c += 72;
 }
 
-void		check(char *buffer)
+void		check(char *buf)
 {
 	int		i;
 
 	i = 0;
-	if (buffer[i] == ' ')
+	if (buf[i] == ' ')
 		i++;
-	if (buffer[i] == 'R' && buffer[i + 1] == 'R')
-		ft_exit("Error\nMULTIPLE R LMOK");
-	else if (buffer[i] == 'R' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
-		resolution(&buffer[i]);
-	else if (buffer[i] == 'N' || buffer[i] == 'S' || buffer[i] == 'W' || buffer[i] == 'E')
-		store_paths(&buffer[i]);
-	else if (buffer[i] == 'F' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
-		ft_floor(&buffer[i]);
-	else if (buffer[i] == 'C' && (buffer[++i] == ' ' || buffer[++i] == '\t'))
-		ft_ceiling(&buffer[i]);
+	if (buf[i] == 'R' && buf[i + 1] == 'R')
+		ft_exit("Error\nMultiple R!");
+	else if (buf[i] == 'R' && (buf[++i] == ' ' || buf[++i] == '\t'))
+		resolution(&buf[i]);
+	else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' || buf[i] == 'E')
+		store_paths(&buf[i]);
+	else if (buf[i] == 'F' && (buf[++i] == ' ' || buf[++i] == '\t'))
+		ft_floor(&buf[i]);
+	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[++i] == '\t'))
+		ft_ceiling(&buf[i]);
 	else if (g_c > 150)
-		ft_exit("9AWD SHI LE3BA M3AWDA");
+		ft_exit("Error\nSomething is being repeated more than once!");
 }
 
-// MAIN
-void		read_file(void)
+void		read_file(int argc, char **argv)
 {
 	int		fd;
 	char	*buffer;
@@ -256,8 +257,8 @@ void		read_file(void)
 
 	g_c = 0;
 	n = 1;
+	fd = arg_test(argc, argv);
 	buffer = NULL;
-	fd = open("map.cub", O_RDONLY);
 	while (n != 0)
 	{
 		n = get_next_line(fd, &buffer);

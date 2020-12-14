@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 13:18:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:59:34 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,9 +271,12 @@ int			rgb_to_int(int r, int g, int b);
 // RAY CASTING FUNCTIONS
 void		castAllRays(void);
 
+// ARGS FUNCTION
+int			arg_test(int argc, char **argv);
+
 // FILE FUNCTIONS
 void		ft_exit(char *msg);
-void		read_file(void);
+void		read_file(int ac, char **av);
 void		check(char *buffer);
 void		resolution(char *buffer);
 void		ft_floor(char *buffer);

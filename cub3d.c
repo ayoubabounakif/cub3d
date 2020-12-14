@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:32:43 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:59:58 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,9 +166,9 @@ void	free_map(void)
 	free(g_map);
 }
 
-int		main(void)
+int		main(int ac, char **av)
 {
-	read_file();
+	read_file(ac, av);
 	init_player();
 	init_mlx();
 	init_tex();

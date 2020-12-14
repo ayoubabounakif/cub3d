@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 19:10:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:33:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:47:42 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	bmp_save(void)
 	write(fd, bmpfileheader, 14);
 	write(fd, bmpinfoheader, 40);
 	write_bmp_data(fd, bitmap);
+	close(fd);
 	free(g_mlx.data);
 }

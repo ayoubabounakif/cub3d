@@ -6,13 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 12:14:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:28:44 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 17:59:39 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		g_save = 0;
+extern int	g_save;
 
 void	update(void)
 {
@@ -42,7 +42,6 @@ void	update(void)
 
 int		deal_key(void)
 {
-	update();
 	mlx_destroy_image(g_mlx.mlx_ptr, g_mlx.img_ptr);
 	mlx_clear_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
@@ -56,6 +55,7 @@ int		deal_key(void)
 		bmp_save();
 		exit(0);
 	}
+	update();
 	mlx_put_image_to_window(g_mlx.mlx_ptr, g_mlx.win_ptr, g_mlx.img_ptr, 0, 0);
 	return (0);
 }
@@ -67,8 +67,6 @@ int		key_pressed(int keycode)
 		mlx_destroy_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
 		exit(0);
 	}
-	if (keycode == 7)
-		g_save = 1;
 	if (keycode == W_KEY || keycode == UP_ARROW)
 		g_key.move_straight = 1;
 	if (keycode == S_KEY || keycode == DOWN_ARROW)
