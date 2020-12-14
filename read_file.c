@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 13:22:16 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:49:46 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ void		check(char *buffer)
 }
 
 // MAIN
-void		read_file()
+void		read_file(void)
 {
 	int		fd;
 	char	*buffer;

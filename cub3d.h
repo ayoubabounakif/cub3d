@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 13:17:17 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:51:50 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,6 @@ typedef	struct	s_key
 {
 	int			move_straight;
 	int			move_back;
-	int			move_left;
-	int			move_right;
-	int			look_up;
-	int			look_down;
 	int			left_dir;
 	int			right_dir;
 }				t_key;
@@ -258,21 +254,28 @@ int			key_released(int keycode);
 int			loop_key(void);
 int			deal_key(void);
 
+// SET ROTATION ANGLE
+void		set_rangle(char player_pos);
+
+// WALL COLLISION
+int			wall_collision(float x, float y);
+
+// RGB
+int			rgb_to_int(int r, int g, int b);
+
 // RANDOM UTILS
 void		img_update(int x, int y, int color);
 int			abs(int n);
 float		distanceBetweenPoints(float x1, float y1, float x2, float y2);
 float		normalize_angle(float angle);
-int			wall_collision(float x, float y);
 void		draw_square(int y, int x, int size, int color);
-void		set_rangle(char player_pos);
 
 // RAY CASTING FUNCTIONS
 void		castAllRays(void);
 
 // FILE FUNCTIONS
 void		ft_exit(char *msg);
-void		read_file();
+void		read_file(void);
 void		check(char *buffer);
 void		resolution(char *buffer);
 void		ft_floor(char *buffer);
@@ -288,7 +291,6 @@ void		draw_line(int X0, int Y0, int X1, int Y1, int color);
 
 // 3D FUNCTIONS
 void		render3DProjectionPlane(void);
-int			rgb_to_int(int r, int g, int b);
 void		draw_wall(int i, int wallTopPixel, int wallBotPixel, int wallStripHeight);
 void		draw_ceiling(int i, int wallTopPixel);
 void		draw_floor(int i, int wallBotPixel);
@@ -298,10 +300,8 @@ void		init_sprite(void);
 void		ft_sprite_sort(void);
 void		ft_sprite(void);
 
-// LIFEBAR
-void		ft_lifebar(void);
-
 // INIT FUNCTIONS
+void		init_mlx(void);
 void		init_player(void);
 void		init_sprite(void);
 void		init_tex(void);

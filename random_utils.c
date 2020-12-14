@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:06 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/12 17:24:41 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:44:31 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,6 @@ float	normalize_angle(float angle)
 int		rgb_to_int(int r, int g, int b)
 {
 	return ((r * (256 * 256)) + (g * (256)) + (b));
-}
-
-int		wall_collision(float x, float y)
-{
-	int		grid_x;
-	int		grid_y;
-
-	grid_x = floor(x / TILE_SIZE);
-	grid_y = floor(y / TILE_SIZE);
-	if (grid_y < 0 || grid_y >= g_sizeofmap ||
-	grid_x < 0 || grid_x >= g_biglen)
-        return (0);
-	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
-		return (1);
-	return (0);
 }
 
 void		draw_square(int y, int x, int size, int color)

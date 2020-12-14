@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 09:25:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:45:02 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,54 +24,24 @@ void	img_update(int x, int y, int color)
 
 int		deal_key()
 {
-	float	new_player_y;
-	float	new_player_x;
-
 	if (g_key.move_straight == 1)
 	{
-		new_player_y = g_player.y + sin(g_player.rotation_angle) * MOVEMENT_SPEED;
-		new_player_x = g_player.x + cos(g_player.rotation_angle) * MOVEMENT_SPEED; 
-		if (!(wall_collision(new_player_x, new_player_y)))
+		if (!(wall_collision(g_player.x + cos(g_player.rotation_angle) * 50, 
+							g_player.y + sin(g_player.rotation_angle) * 50)))
 		{
-			g_player.y = new_player_y;
-			g_player.x = new_player_x;
+			g_player.y += sin(g_player.rotation_angle) * 7;
+			g_player.x += cos(g_player.rotation_angle) * 7;
 		}
 	}
 	if (g_key.move_back == 1)
 	{
-		new_player_y = g_player.y - sin(g_player.rotation_angle) * MOVEMENT_SPEED;
-		new_player_x = g_player.x - cos(g_player.rotation_angle) * MOVEMENT_SPEED;
-		if (!(wall_collision(new_player_x, new_player_y)))
+		if (!(wall_collision(g_player.x - cos(g_player.rotation_angle) * 50,
+							g_player.y - sin(g_player.rotation_angle) * 50)))
 		{
-			g_player.y = new_player_y;
-			g_player.x = new_player_x;
+			g_player.y -= sin(g_player.rotation_angle) * 7;
+			g_player.x -= cos(g_player.rotation_angle) * 7;
 		}
 	}
-	if (g_key.move_left == 1)
-	{
-		new_player_y = g_player.y - sin(g_player.rotation_angle + RAD(90)) * MOVEMENT_SPEED;
-		new_player_x = g_player.x - cos(g_player.rotation_angle + RAD(90)) * MOVEMENT_SPEED;
-		if (!(wall_collision(new_player_x, new_player_y)))
-		{
-			g_player.y = new_player_y;
-			g_player.x = new_player_x;
-		}
-	}
-	if (g_key.move_right == 1)
-	{
-		new_player_y = g_player.y + sin(g_player.rotation_angle + RAD(90)) * MOVEMENT_SPEED;
-		new_player_x = g_player.x + cos(g_player.rotation_angle + RAD(90)) * MOVEMENT_SPEED;
-		if (!(wall_collision(new_player_x, new_player_y)))
-		{
-			g_player.y = new_player_y;
-			g_player.x = new_player_x;
-		}
-	}
-	// CHANGING PITCH (UP DOWN)
-	// if (g_key.look_up == 1 && g_3d.pitch <= 360)
-	// 	g_3d.pitch += 15;
-	// if (g_key.look_down == 1 && g_3d.pitch >= -360)
-	// 	g_3d.pitch -= 15;
 	if (g_key.left_dir == 1)
 		g_player.rotation_angle -= ROTATION_SPEED;
 	if (g_key.right_dir == 1)
@@ -104,43 +74,27 @@ int		key_pressed(int keycode)
 	}
 	if (keycode == 7)
 		g_save = 1;
-    if (keycode == W_KEY)
+    if (keycode == W_KEY || keycode == UP_ARROW)
         g_key.move_straight = 1;
-    if (keycode == S_KEY)
+    if (keycode == S_KEY || keycode == DOWN_ARROW)
         g_key.move_back = 1;
-    if (keycode == A_KEY)
-        g_key.move_left = 1;
-    if (keycode == D_KEY)
-        g_key.move_right = 1;
-	if (keycode == LEFT_ARROW)
+	if (keycode == A_KEY || keycode == LEFT_ARROW)
         g_key.left_dir = 1;
-    if (keycode == RIGHT_ARROW)
+    if (keycode == D_KEY || keycode == RIGHT_ARROW)
         g_key.right_dir = 1;
-    if (keycode == UP_ARROW)
-        g_key.look_up = 1;
-    if (keycode == DOWN_ARROW)
-        g_key.look_down = 1;
 	return (0);
 }
 
 int		key_released(int keycode)
 {
-    if (keycode == W_KEY)
+    if (keycode == W_KEY || keycode == UP_ARROW)
         g_key.move_straight = 0;
-    if (keycode == S_KEY)
+    if (keycode == S_KEY || keycode == DOWN_ARROW)
         g_key.move_back = 0;
-    if (keycode == A_KEY)
-        g_key.move_left = 0;
-    if (keycode == D_KEY)
-        g_key.move_right = 0;
-	if (keycode == LEFT_ARROW)
+	if (keycode == A_KEY || keycode == LEFT_ARROW)
         g_key.left_dir = 0;
-    if (keycode == RIGHT_ARROW)
+    if (keycode == D_KEY || keycode == RIGHT_ARROW)
         g_key.right_dir = 0;
-    if (keycode == UP_ARROW)
-        g_key.look_up = 0;
-    if (keycode == DOWN_ARROW)
-        g_key.look_down = 0;
     return (0);
 }
 

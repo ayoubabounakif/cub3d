@@ -6,23 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 09:53:50 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:49:40 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	set_rangle(char player_pos)
-{
-	if (player_pos == 'N')
-		g_player.rotation_angle = RAD(270);
-	else if (player_pos == 'S')
-		g_player.rotation_angle = RAD(90);
-	else if (player_pos == 'W')
-		g_player.rotation_angle = RAD(180);
-	else if (player_pos == 'E')
-		g_player.rotation_angle = RAD(360);
-}
 
 void		init_player(void)
 {
@@ -48,37 +36,6 @@ void		init_player(void)
 		}	
 		g_vars.rows++;
 	}
-}
-
-void		init_sprite(void)
-{
-	int		i;
-
-	if (!(g_sprite = malloc(sizeof(t_sprite *) * (g_sprite_count + 1))))
-		return ;
-	i = 0;
-	g_vars.rows = 0;
-	while (g_vars.rows < ROWS)
-	{
-		g_vars.cols = 0;
-		while (g_vars.cols < COLS)
-		{
-			if (g_map[g_vars.rows][g_vars.cols] == '2')
-			{
-				if (!(g_sprite[i] = malloc(sizeof(t_sprite))))
-					return ;
-				g_sprite[i]->y = (g_vars.rows * TILE_SIZE) + TILE_SIZE / 2;
-				g_sprite[i]->x = (g_vars.cols * TILE_SIZE) + TILE_SIZE / 2;
-				g_sprite[i]->distance = distanceBetweenPoints(g_sprite[i]->y, g_sprite[i]->x,
-						g_player.y, g_player.x);
-				i++;
-			}
-			g_vars.cols++;
-		}
-		g_vars.rows++;
-	}
-	g_sprite[i] = NULL;
-	ft_sprite_sort();
 }
 
 void		init_tex()

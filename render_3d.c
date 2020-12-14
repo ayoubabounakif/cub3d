@@ -6,11 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/12 11:55:52 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 10:41:32 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+extern int 	g_pitch;
 
 void		draw_ceiling(int i, int wallTopPixel)
 {

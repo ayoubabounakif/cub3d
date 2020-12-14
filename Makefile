@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/13 09:25:09 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/14 10:51:45 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,15 @@ NAME = cub3D
 
 EXEC = cub3D
 
-SRC = cub3d.c render_3d.c render_sprite.c ft_lifebar.c \
+SRC = cub3d.c render_3d.c render_sprite.c \
 read_file.c read_map.c \
 init.c \
-utils.c random_utils.c ft_sprite_sort.c \
+set_rangle.c wall_collision.c\
+utils.c random_utils.c sprite_utils.c \
+generate_bmp.c \
 draw_minimap.c \
 get_next_line/get_next_line.c \
 get_next_line/get_next_line_utils.c \
-generate_bmp.c
 
 OBJ = $(SRC:.c=.o)
 

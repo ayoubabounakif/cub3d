@@ -6,13 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 13:24:49 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/14 11:34:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-extern float	g_pitch;
 
 void		castHorzRay(float rayAngle)
 {
@@ -168,16 +166,20 @@ void	free_map(void)
 	free(g_map);
 }
 
+void	init_mlx(void)
+{
+	g_mlx.mlx_ptr = mlx_init();
+	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+}
+
 int		main(void)
 {
 	read_file();
 	init_player();
-
-	g_mlx.mlx_ptr = mlx_init();
-	g_mlx.win_ptr = mlx_new_window(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
-	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-
+	init_mlx();
 	init_tex();
+
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
 
