@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 13:14:49 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 14:49:39 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,6 @@ void		cast_vert(float ray_angle)
 
 void		store_data(int strip_id, float ray_angle)
 {
-	g_ray.isray_down = ray_angle > 0 && ray_angle < M_PI;
-	g_ray.isray_up = !g_ray.isray_down;
-	g_ray.isray_right = ray_angle < H_PI || ray_angle > PI_H;
-	g_ray.isray_left = !g_ray.isray_right;
 	cast_horz(ray_angle);
 	cast_vert(ray_angle);
 	g_ray.horz_hit_dist = (g_ray.fhorz_hit)
@@ -119,6 +115,10 @@ void		cast_rays(void)
 	ray_angle = normalize_angle(ray_angle);
 	while (strip_id < WIN_WIDTH)
 	{
+		g_ray.isray_down = ray_angle > 0 && ray_angle < M_PI;
+		g_ray.isray_up = !g_ray.isray_down;
+		g_ray.isray_right = ray_angle < H_PI || ray_angle > PI_H;
+		g_ray.isray_left = !g_ray.isray_right;
 		store_data(strip_id, ray_angle);
 		ray_angle = normalize_angle(ray_angle);
 		ray_angle += FOV_ANGLE / WIN_WIDTH;
