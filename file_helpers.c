@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:03:15 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:05:45 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:29 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	ft_exit(char *msg)
 {

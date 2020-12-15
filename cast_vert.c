@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 16:31:24 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 16:34:42 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:21 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	init_vert(float ray_angle)
 {

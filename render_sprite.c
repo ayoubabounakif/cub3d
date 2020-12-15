@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 16:44:32 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:54 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	init_spt_tex(int k)
 {

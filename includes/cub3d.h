@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:12:37 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:23:38 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <math.h>
 # include <errno.h>
 # include <time.h>
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 
 // Duhh
 # define TRUE 1

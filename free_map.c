@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 13:00:33 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 13:01:21 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:35 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	free_map(void)
 {

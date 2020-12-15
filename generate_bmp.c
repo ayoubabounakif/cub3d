@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 19:10:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 16:51:24 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:37 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	init_headers(unsigned char *bmpfileheader, unsigned char *bmpinfoheader)
 {

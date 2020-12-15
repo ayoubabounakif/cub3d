@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:02:17 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:49 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 static int		g_i;
 static t_list	*g_temp;

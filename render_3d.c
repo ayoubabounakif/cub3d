@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 17:07:31 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 static int	g_wall_topp;
 static int	g_wall_botp;

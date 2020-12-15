@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 17:10:44 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:23 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	store_data(int strip_id, float ray_angle)
 {

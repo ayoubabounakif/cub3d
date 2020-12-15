@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 10:43:35 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:47:33 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:23:06 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 int		wall_collision(float x, float y)
 {

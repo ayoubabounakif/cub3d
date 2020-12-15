@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 12:52:12 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:57:01 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:22:42 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 char	get_fchar(char *buffer)
 {

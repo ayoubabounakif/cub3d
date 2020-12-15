@@ -6,11 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:07:23 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 12:48:07 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:23:04 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 void	img_update(int x, int y, int color)
 {
