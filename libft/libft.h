@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 12:58:09 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:09:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 12:55:43 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-// LK STRUCTURE
-
-typedef	struct s_list
+typedef	struct	s_list
 {
 	void			*content;
-	struct	s_list	*next;
+	struct s_list	*next;
 }				t_list;
-
-// FUNCTIONS PROTOTYPES
 
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_bzero(void *s, size_t n);
@@ -62,8 +58,6 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
-
-// LINKED LISTS PROTOTYPES
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);

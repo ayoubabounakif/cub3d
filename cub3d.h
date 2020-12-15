@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 19:42:12 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:10:24 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define RAD(x) (x * M_PI / 180)
 # define DEG(x) (x * 180 / M_PI)
 # define TWO_PI (M_PI * 2)
+# define H_PI (M_PI / 2)
+# define PI_H (M_PI * 1.5)
 
 // KEYS
 # define W_KEY 13 // STRAIGHT
@@ -98,8 +100,8 @@ typedef struct	s_ray
 	int			isray_down;
 	int			isray_left;
 	int			isray_right;
-	float		xintercept;
-	float		yintercept;
+	float		offs_x;
+	float		offs_y;
 	float		xstep;
 	float		ystep;
 	int			fhorz_hit;
@@ -251,20 +253,21 @@ void		check_map(void);
 char		get_fchar(char *buffer);
 char		*spacer(char *buffer, int biglen);
 char		*space_filler(int biglen);
+void		free_map(void);
 
 // // MINIMAP FUNCTIONS
-// void		draw_map(void);
-// void		drawsquare(int x, int y, int color);
-// void		drawemptysquare(int x, int y, int color);
-// void		put_character(void);
-// void		draw_line(int X0, int Y0, int X1, int Y1, int color);
-// void		draw_square(int y, int x, int size, int color);
+void		draw_map(void);
+void		drawsquare(int x, int y, int color);
+void		drawemptysquare(int x, int y, int color);
+void		put_character(void);
+void		draw_line(int X0, int Y0, int X1, int Y1, int color);
+void		draw_square(int y, int x, int size, int color);
 
 // 3D FUNCTIONS
 void		render_3d(void);
-void		draw_wall(int i, int wall_topp, int wall_botp, int wall_striph);
-void		draw_ceiling(int i, int wall_topp);
-void		draw_floor(int i, int wall_botp);
+void		draw_wall(int i, int wall_striph);
+void		draw_ceiling(int i);
+void		draw_floor(int i);
 
 // SP FUNCTIONS
 void		init_sprite(void);

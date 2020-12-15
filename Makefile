@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/14 18:01:04 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/15 13:14:21 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,13 @@ NAME = cub3D
 EXEC = cub3D
 
 SRC = cub3d.c render_3d.c render_sprite.c \
-args_error.c read_file.c read_map.c map_spacers.c \
+args_error.c read_file.c read_map.c map_spacers.c free_map.c \
 init.c \
 set_rangle.c wall_collision.c\
 events.c utils.c sprite_utils.c \
 generate_bmp.c \
 get_next_line/get_next_line.c \
 get_next_line/get_next_line_utils.c \
-
-# Delete draw_minimap out of the .c files
 
 OBJ = $(SRC:.c=.o)
 
@@ -44,6 +42,7 @@ $(LIBNAME):
 $(NAME): $(LIBNAME)
 	gcc $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
 	# We can add the flag "-Ofast" to run the game way more smoothly
+	# export MallocStackLogging=1
 
 clean:
 	make clean -C libft/

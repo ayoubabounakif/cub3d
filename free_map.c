@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   free_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 10:43:35 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:47:33 by aabounak         ###   ########.fr       */
+/*   Created: 2020/12/15 13:00:33 by aabounak          #+#    #+#             */
+/*   Updated: 2020/12/15 13:01:21 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		wall_collision(float x, float y)
+void	free_map(void)
 {
-	int		grid_x;
-	int		grid_y;
+	int		i;
 
-	grid_x = floor(x / TILE_SIZE);
-	grid_y = floor(y / TILE_SIZE);
-	if (grid_y < 0 || grid_y >= ROWS ||
-	grid_x < 0 || grid_x >= COLS)
-		return (0);
-	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
-		return (1);
-	return (0);
+	i = -1;
+	while (++i < g_biglen)
+		free(g_map[i]);
+	free(g_map);
 }

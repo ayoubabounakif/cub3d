@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 19:29:03 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:13:50 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ void	render_sprite(int k, int x_fs, int y_fs, int sp_size)
 	while (++i < sp_size)
 	{
 		if (x_fs + i < 0 || x_fs + i > WIN_WIDTH)
-			continue;
-		if (g_rays[x_fs + i].distance <= g_sprite[k]->distance)
-			continue;
+			continue ;
+		if (x_fs + i < WIN_WIDTH)
+			if (g_rays[x_fs + i].distance < g_sprite[k]->distance)
+				continue ;
 		j = -1;
 		while (++j < sp_size)
 		{
 			if (y_fs + j < 0 || y_fs + j > WIN_HEIGHT)
-				continue;
+				continue ;
 			color = g_sprite[k]->data[g_sprite[k]->width * (j *
 					g_sprite[k]->height / sp_size) +
 					(i * g_sprite[k]->width / sp_size)];
@@ -82,4 +83,5 @@ void	ft_sprite(void)
 	while (++i < g_sprite_count)
 		free(g_sprite[i]);
 	free(g_sprite);
+	free(g_rays);
 }

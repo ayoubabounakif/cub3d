@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 10:43:35 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:47:33 by aabounak         ###   ########.fr       */
+/*   Created: 2020/12/15 12:52:58 by aabounak          #+#    #+#             */
+/*   Updated: 2020/12/15 12:57:02 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int		wall_collision(float x, float y)
+t_list	*ft_lstlast(t_list *lst)
 {
-	int		grid_x;
-	int		grid_y;
+	t_list	*current;
 
-	grid_x = floor(x / TILE_SIZE);
-	grid_y = floor(y / TILE_SIZE);
-	if (grid_y < 0 || grid_y >= ROWS ||
-	grid_x < 0 || grid_x >= COLS)
-		return (0);
-	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
-		return (1);
-	return (0);
+	current = lst;
+	if (current == NULL) // Return NULL if list is empty
+		return (NULL);
+	while (current->next != NULL)
+		current = current->next;
+	return (current);
 }

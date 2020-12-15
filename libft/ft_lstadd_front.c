@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 10:43:35 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:47:33 by aabounak         ###   ########.fr       */
+/*   Created: 2020/12/15 12:52:31 by aabounak          #+#    #+#             */
+/*   Updated: 2020/12/15 12:56:30 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int		wall_collision(float x, float y)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int		grid_x;
-	int		grid_y;
-
-	grid_x = floor(x / TILE_SIZE);
-	grid_y = floor(y / TILE_SIZE);
-	if (grid_y < 0 || grid_y >= ROWS ||
-	grid_x < 0 || grid_x >= COLS)
-		return (0);
-	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
-		return (1);
-	return (0);
+	if (lst)
+	{
+		if (*lst)
+			new->next = *lst;
+		*lst = new;
+	}
 }

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_collision.c                                   :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 10:43:35 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:47:33 by aabounak         ###   ########.fr       */
+/*   Created: 2020/12/15 12:55:12 by aabounak          #+#    #+#             */
+/*   Updated: 2020/12/15 12:57:15 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int		wall_collision(float x, float y)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int		grid_x;
-	int		grid_y;
+	t_list	*tmp;
 
-	grid_x = floor(x / TILE_SIZE);
-	grid_y = floor(y / TILE_SIZE);
-	if (grid_y < 0 || grid_y >= ROWS ||
-	grid_x < 0 || grid_x >= COLS)
-		return (0);
-	if (g_map[grid_y][grid_x] == '1' || g_map[grid_y][grid_x] == ' ')
-		return (1);
-	return (0);
+	while (*lst)
+	{
+		tmp = *lst;
+		ft_lstdelone(tmp, (*del));
+		*lst = (*lst)->next;
+	}
+	(*del)(*lst);
+	*lst = NULL;
 }
