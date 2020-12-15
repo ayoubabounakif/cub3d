@@ -6,82 +6,14 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 14:49:39 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 16:52:18 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		cast_horz(float ray_angle)
+void	store_data(int strip_id, float ray_angle)
 {
-	g_ray.fhorz_hit = FALSE;
-	g_ray.offs_y = floor(g_player.y / TILE_SIZE) * TILE_SIZE;
-	g_ray.offs_y += g_ray.isray_down ? TILE_SIZE : 0;
-	g_ray.offs_x = g_player.x + (g_ray.offs_y - g_player.y) / tan(ray_angle);
-	g_ray.ystep = TILE_SIZE;
-	g_ray.ystep *= g_ray.isray_up ? -1 : 1;
-	g_ray.xstep = g_ray.ystep / tan(ray_angle);
-	g_ray.xstep *= (g_ray.isray_left && g_ray.xstep > 0) ? -1 : 1;
-	g_ray.xstep *= (g_ray.isray_right && g_ray.xstep < 0) ? -1 : 1;
-	g_ray.next_htouch_x = g_ray.offs_x;
-	g_ray.next_htouch_y = g_ray.offs_y;
-	while (g_ray.next_htouch_x >= 0 && g_ray.next_htouch_x < COLS * 64 &&
-	g_ray.next_htouch_y >= 0 && g_ray.next_htouch_y < ROWS * 64)
-	{
-		g_ray.x_check = g_ray.next_htouch_x;
-		g_ray.y_check = g_ray.next_htouch_y + (g_ray.isray_up ? -1 : 0);
-		if (wall_collision(g_ray.x_check, g_ray.y_check) == 1)
-		{
-			g_ray.fhorz_hit = TRUE;
-			g_ray.horz_hit_x = g_ray.next_htouch_x;
-			g_ray.horz_hit_y = g_ray.next_htouch_y;
-			break ;
-		}
-		else
-		{
-			g_ray.next_htouch_x += g_ray.xstep;
-			g_ray.next_htouch_y += g_ray.ystep;
-		}
-	}
-}
-
-void		cast_vert(float ray_angle)
-{
-	g_ray.fvert_hit = FALSE;
-	g_ray.offs_x = floor(g_player.x / TILE_SIZE) * TILE_SIZE;
-	g_ray.offs_x += g_ray.isray_right ? TILE_SIZE : 0;
-	g_ray.offs_y = g_player.y + (g_ray.offs_x - g_player.x) * tan(ray_angle);
-	g_ray.xstep = TILE_SIZE;
-	g_ray.xstep *= g_ray.isray_left ? -1 : 1;
-	g_ray.ystep = g_ray.xstep * tan(ray_angle);
-	g_ray.ystep *= (g_ray.isray_up && g_ray.ystep > 0) ? -1 : 1;
-	g_ray.ystep *= (g_ray.isray_down && g_ray.ystep < 0) ? -1 : 1;
-	g_ray.next_vtouch_x = g_ray.offs_x;
-	g_ray.next_vtouch_y = g_ray.offs_y;
-	while (g_ray.next_vtouch_x >= 0 && g_ray.next_vtouch_x < COLS * 64 &&
-	g_ray.next_vtouch_y >= 0 && g_ray.next_vtouch_y < ROWS * 64)
-	{
-		g_ray.x_check = g_ray.next_vtouch_x + (g_ray.isray_left ? -1 : 0);
-		g_ray.y_check = g_ray.next_vtouch_y;
-		if (wall_collision(g_ray.x_check, g_ray.y_check) == 1)
-		{
-			g_ray.fvert_hit = TRUE;
-			g_ray.vert_hit_x = g_ray.next_vtouch_x;
-			g_ray.vert_hit_y = g_ray.next_vtouch_y;
-			break ;
-		}
-		else
-		{
-			g_ray.next_vtouch_x += g_ray.xstep;
-			g_ray.next_vtouch_y += g_ray.ystep;
-		}
-	}
-}
-
-void		store_data(int strip_id, float ray_angle)
-{
-	cast_horz(ray_angle);
-	cast_vert(ray_angle);
 	g_ray.horz_hit_dist = (g_ray.fhorz_hit)
 	? distance_bpts(g_player.x, g_player.y, g_ray.horz_hit_x, g_ray.horz_hit_y)
 	: (float)INT32_MAX;
@@ -103,7 +35,7 @@ void		store_data(int strip_id, float ray_angle)
 	g_rays[strip_id].isray_left = !(ray_angle < H_PI || ray_angle > PI_H);
 }
 
-void		cast_rays(void)
+void	cast_rays(void)
 {
 	int		strip_id;
 	float	ray_angle;
@@ -119,6 +51,8 @@ void		cast_rays(void)
 		g_ray.isray_up = !g_ray.isray_down;
 		g_ray.isray_right = ray_angle < H_PI || ray_angle > PI_H;
 		g_ray.isray_left = !g_ray.isray_right;
+		cast_horz(ray_angle);
+		cast_vert(ray_angle);
 		store_data(strip_id, ray_angle);
 		ray_angle = normalize_angle(ray_angle);
 		ray_angle += FOV_ANGLE / WIN_WIDTH;

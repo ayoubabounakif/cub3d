@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 19:10:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 17:47:42 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 16:51:24 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,30 @@ void	init_headers(unsigned char *bmpfileheader, unsigned char *bmpinfoheader)
 
 void	write_bmp_data(int fd, char *bitmap)
 {
-	int		paddingSize;
+	int		padding_size;
 	int		i;
 	int		j;
 
-	paddingSize = (4 - (WIN_WIDTH * 3) % 4) % 4;
+	padding_size = (4 - (WIN_WIDTH * 3) % 4) % 4;
 	i = -1;
 	while (++i < WIN_HEIGHT)
 	{
 		j = -1;
 		while (++j < WIN_WIDTH)
-			write(fd, g_mlx.data + (j + (WIN_HEIGHT - i) * WIN_WIDTH), 3);
-		write(fd, bitmap, paddingSize);
+			write(fd, g_mlx.data + (j + (WIN_HEIGHT - i - 1) * WIN_WIDTH), 3);
+		write(fd, bitmap, padding_size);
 	}
 }
 
 void	bmp_save(void)
 {
-	unsigned char	bmpfileheader[14] = {'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0};
-	unsigned char	bmpinfoheader[40] = {40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 24, 0};
-	char	bitmap[3] = {0, 0, 0};
-	int		fd;
+	static unsigned char	bmpfileheader[14] =
+	{'B', 'M', 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0};
+	static unsigned char	bmpinfoheader[40] =
+	{40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 24, 0};
+	static char				bitmap[3] =
+	{0, 0, 0};
+	int						fd;
 
 	init_headers(bmpfileheader, bmpinfoheader);
 	fd = open("screenshot.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
