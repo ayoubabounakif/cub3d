@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:04:44 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/13 12:01:52 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:31:21 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,6 @@ char	*ft_strchr(const char *s, int c)
 		return ((char*)s);
 	return (0);
 }
-
-/*
- * In this function, we check if k < 0 which means that the number
- * of bytes read is negative (error), we then return -1.
- * We use the ft_strchr function to look for \n in our static variable,
- * if It's not found we look for \0 instead and we set our indicator to 0.
- * (The use of the indicator variable will be clear in a minut).
- * We then allocate enough memory for line (str - *s) + 1
- * If the memory allocation fails we return -1.
- * We copy what's on our static variable to line with len of (str - *s) + 1
- * We then return a string that accepts the whole static variable
- * but starting from the last index of line, we then substract
- * the length of the static variable and *line to give us the remaining.
- * We should free str to avoid memory leaks.
- * We check if indicator == 0 (That means that we got to the EOF)
- * (Remember how we set indicator == 0  when we find \0)
- * If the indicator is indeed == 0 we return 0
- * Else we return 1 as we still have more lines.
- * If BUFFER_SIZE is set to 0 nearly anything of the above will get executed
- * So we return 0.
-*/
 
 int		output(char **line, char **s, int k)
 {
@@ -71,21 +50,6 @@ int		output(char **line, char **s, int k)
 	return (0);
 }
 
-/*
- * The static variable is used, so that whenever the function is called,
- * It remembers the previous call.
- * BUFFER_SIZE might be < 0 || fd < 0 (error) ||
- * **line might be null if there is no memory allocated to it.
- * We start by allocating to our static variable s using ft_strdup,
- * and also to avoid segmentation faults after using ft_strjoin.
- * The function read() if successful, returns the number of bytes read.
- * Inside the loop, the number of bytes read works like an index
- * so we use it to put a '\0' on the end of the buffer.
- * We then read more of the line and join them together using a temp string
- * This temporary string will store the data inside of the static variable
- * It is used to keep track of how much is read and then free the unused data.
-*/
-
 int		get_next_line(int fd, char **line)
 {
 	static char		*s;
@@ -109,27 +73,3 @@ int		get_next_line(int fd, char **line)
 	free(buffer);
 	return (output(line, &s, k));
 }
-
-/*
- * 			WARNING !!
- * Do not push with the main function.
- * It's only purpose is testing.
-*/
-
-// int		main(void)
-// {
-// 	int		fd;
-// 	char	*buffer;
-// 	int		k;
-
-// 	buffer = NULL;
-// 	fd = open("../map.cub", O_RDONLY);
-// 	while ((k = get_next_line(fd, &buffer)) > 0)
-// 	{
-// 		printf("%d | %s\n", k, buffer);
-// 		free(buffer);
-// 	}
-// 	printf("%d | %s\n", k, buffer);
-// 	free(buffer);
-// 	return (0);
-// }

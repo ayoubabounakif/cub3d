@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:23:38 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:36:58 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,108 +192,108 @@ typedef struct	s_sprite
 }				t_sprite;
 
 // Defining the following t_structures as global_structures
-t_mlx		g_mlx;
-t_player	g_player;
-t_key		g_key;
-t_ray		g_ray;
-t_data		g_data;
-t_rays		*g_rays;
-t_list		*g_file;
-t_tex		g_tex;
-t_sprite	**g_sprite;
-t_color		g_floor_rgb;
-t_color		g_ceiling_rgb;
+t_mlx			g_mlx;
+t_player		g_player;
+t_key			g_key;
+t_ray			g_ray;
+t_data			g_data;
+t_rays			*g_rays;
+t_list			*g_file;
+t_tex			g_tex;
+t_sprite		**g_sprite;
+t_color			g_floor_rgb;
+t_color			g_ceiling_rgb;
 
 // Map related global variables
-char		**g_map;
-int			g_sizeofmap;
-int			g_biglen;
+char			**g_map;
+int				g_sizeofmap;
+int				g_biglen;
 
 // Textures related global variables
-int			*g_texnorth;
-int			*g_texwest;
-int			*g_texeast;
-int			*g_texsouth;
-int			g_sprite_count;
+int				*g_texnorth;
+int				*g_texwest;
+int				*g_texeast;
+int				*g_texsouth;
+int				g_sprite_count;
 
 // Events || Hooks || Loops (events.c)
-int			key_pressed(int keycode);
-int			key_released(int keycode);
-int			loop_key(void);
-int			deal_key(void);
+int				key_pressed(int keycode);
+int				key_released(int keycode);
+int				loop_key(void);
+int				deal_key(void);
 
 // Set rotation angle (set_rangle.c)
-void		set_rangle(char player_pos);
+void			set_rangle(char player_pos);
 
 // Wall collision (wall_collision.c)
-int			wall_collision(float x, float y);
+int				wall_collision(float x, float y);
 
 // Utils (utils.c)
-void		img_update(int x, int y, int color);
-int			abs(int n);
-float		distance_bpts(float x1, float y1, float x2, float y2);
-float		normalize_angle(float angle);
-int			rgb_to_int(int r, int g, int b);
+void			img_update(int x, int y, int color);
+int				abs(int n);
+float			distance_bpts(float x1, float y1, float x2, float y2);
+float			normalize_angle(float angle);
+int				rgb_to_int(int r, int g, int b);
 
 // Raycasting functions (cub3d.c || cast_horz.c || cast_vert.c)
-void		cast_rays(void);
-void		cast_horz(float ray_angle);
-void		cast_vert(float ray_angle);
+void			cast_rays(void);
+void			cast_horz(float ray_angle);
+void			cast_vert(float ray_angle);
 
 // Args treatment (args_error.c)
-int			arg_test(int argc, char **argv);
+int				arg_test(int argc, char **argv);
 
 // File helpers (file_helpers.c)
-void		ft_exit(char *msg);
-int			all_n(char *s);
-int			ft_isnum(char *s);
-int			ft_strlendoubleptr(char **str);
-void		check_comma(char *buffer);
+void			ft_exit(char *msg);
+int				all_n(char *s);
+int				ft_isnum(char *s);
+int				ft_strlendoubleptr(char **str);
+void			check_comma(char *buffer);
 
 // File path check (file_pcheck.c)
-int			tex_validity(char *buffer, int k);
-int			check_no_we(char *buffer);
-int			check_so_ea_s(char *buffer);
-void		store_paths(char *buffer);
+int				tex_validity(char *buffer, int k);
+int				check_no_we(char *buffer);
+int				check_so_ea_s(char *buffer);
+void			store_paths(char *buffer);
 
 // File reading handling (read_file.c)
-void		read_file(int ac, char **av);
-void		check(char *buffer);
-void		resolution(char *buffer);
-void		ft_floor(char *buffer);
-void		ft_ceiling(char *buffer);
+void			read_file(int ac, char **av);
+void			check(char *buffer);
+void			resolution(char *buffer);
+void			ft_floor(char *buffer);
+void			ft_ceiling(char *buffer);
 
 // Map reading handling (read_map.c || map_spacers.c)
-void		check_map(void);
-char		get_fchar(char *buffer);
-char		*spacer(char *buffer, int biglen);
-char		*space_filler(int biglen);
-void		free_map(void);
+void			check_map(void);
+char			get_fchar(char *buffer);
+char			*spacer(char *buffer, int biglen);
+char			*space_filler(int biglen);
+void			free_map(void);
 
 // 2D drawing (bin/draw_minimap.c)
-// void		draw_map(void);
-// void		drawsquare(int x, int y, int color);
-// void		drawemptysquare(int x, int y, int color);
-// void		put_character(void);
-// void		draw_line(int X0, int Y0, int X1, int Y1, int color);
-// void		draw_square(int y, int x, int size, int color);
+// void			draw_map(void);
+// void			drawsquare(int x, int y, int color);
+// void			drawemptysquare(int x, int y, int color);
+// void			put_character(void);
+// void			draw_line(int X0, int Y0, int X1, int Y1, int color);
+// void			draw_square(int y, int x, int size, int color);
 
 // 3D Rendering (render_3d.c)
-void		render_3d(void);
-void		draw_wall(int i, int wall_striph);
-void		draw_ceiling(int i);
-void		draw_floor(int i);
+void			render_3d(void);
+void			draw_wall(int i, int wall_striph);
+void			draw_ceiling(int i);
+void			draw_floor(int i);
 
 // Sprite rendering (render_sprite.c || sprite_utils.c)
-void		init_sprite(void);
-void		ft_sprite_sort(void);
-void		ft_sprite(void);
+void			init_sprite(void);
+void			ft_sprite_sort(void);
+void			ft_sprite(void);
 
 // Initialization (init.c)
-void		init_mlx(void);
-void		init_player(void);
-void		init_tex(void);
+void			init_mlx(void);
+void			init_player(void);
+void			init_tex(void);
 
 // Screenshot | Bitmap (generate_bmp.c)
-void		bmp_save(void);
+void			bmp_save(void);
 #endif
