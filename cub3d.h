@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 17:07:35 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:12:37 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,8 +243,20 @@ void		cast_vert(float ray_angle);
 // Args treatment (args_error.c)
 int			arg_test(int argc, char **argv);
 
-// File reading handling (read_file.c)
+// File helpers (file_helpers.c)
 void		ft_exit(char *msg);
+int			all_n(char *s);
+int			ft_isnum(char *s);
+int			ft_strlendoubleptr(char **str);
+void		check_comma(char *buffer);
+
+// File path check (file_pcheck.c)
+int			tex_validity(char *buffer, int k);
+int			check_no_we(char *buffer);
+int			check_so_ea_s(char *buffer);
+void		store_paths(char *buffer);
+
+// File reading handling (read_file.c)
 void		read_file(int ac, char **av);
 void		check(char *buffer);
 void		resolution(char *buffer);

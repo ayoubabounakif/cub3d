@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 12:44:11 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:19:55 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,159 +14,6 @@
 
 int		g_c;
 
-// HELPER FUNCTIONS
-
-void	ft_exit(char *msg)
-{
-	ft_putstr_fd(msg, 1);
-	exit(-1);
-}
-
-int		all_n(char *s)
-{
-	int		i;
-
-	i = -1;
-	if (!s)
-		return (0);
-	s = ft_strtrim(s + 1, "\t");
-	while (s[++i])
-		if (s[i] < 48 || s[i] > 57)
-			return (0);
-	return (1);
-}
-
-int		ft_isnum(char *s)
-{
-	int		i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] >= '0' && s[i] <= '9')
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-int		ft_strlendoubleptr(char **str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	check_comma(char *buffer)
-{
-	int		comma;
-
-	comma = 0;
-	while (*buffer)
-	{
-		if (*buffer == ',')
-		{
-			comma++;
-			if (comma > 2)
-				ft_exit("Error\nYou can't use more than 2 commas!\n");
-		}
-		buffer++;
-	}
-}
-
-// THIS FUNCTION CHECKS FOR NO AND WE
-int		check_no_we(char *buffer)
-{
-	if (buffer[0] == 'N')
-	{
-		if (buffer[1] == 'O')
-			return (0);
-		else
-			ft_exit("Error\nInvalid name in NO texture!\n");
-	}
-	else if (buffer[0] == 'W')
-	{
-		if (buffer[1] == 'E')
-			return (1);
-		else
-			ft_exit("Error\nInvalid name in WE texture!\n");
-	}
-	return (2);
-}
-
-// THIS FUNCTION CHECK FOR SO EA AND SPRIT
-int		check_so_ea_s(char *buffer)
-{
-	if (buffer[0] == 'S')
-	{
-		if (buffer[1] == 'O')
-			return (0);
-		else if (buffer[1] == ' ' || buffer[1] == '\t')
-			return (2);
-		else
-			ft_exit("Error\nInvalid name in SO or SP texture!\n");
-	}
-	else if (buffer[0] == 'E')
-	{
-		if (buffer[1] == 'A')
-			return (1);
-		else
-			ft_exit("Error\nInvalid name in EA texture!\n");
-	}
-	return (3);
-}
-
-// THIS FUNCTION CHECKS IF THE EVERYTHING'S IS VALID (HARD CODE D zp)
-int			tex_validity(char *buffer, int k)
-{
-	int		i = 0;
-	char	*buf = buffer;
-	char	*tmp = ft_strtrim(buf + k, "\t");
-	while (tmp[i] != '.')
-	{
-		if (tmp[i] == ' ' || tmp[i] == '\t')
-			ft_exit("Error\nSpaces or wrong path names!\n");
-		i++;
-	}
-	ft_strlcpy(tmp, tmp, 9);
-	tmp = ft_strtrim(buf + k, "\t");
-	tmp = ft_strchr(tmp, '.');
-	if (ft_strncmp(tmp, ".xpm", 4) != 0)
-		ft_exit("Error\nExtension != .xpm\n");
-	tmp = ft_strchr(tmp, 'm');
-	i = 1;
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] == ' ')
-			i++;
-		else
-			ft_exit("Error\nInvalid extension!\n");
-	}
-	// free(buffer);
-	return (0);
-}
-
-// THIS FUNCTION STORE THE PATHS OF NO WE SO EA AND SPRITE
-void		store_paths(char *buffer)
-{
-	if (check_no_we(buffer) == 0 && tex_validity(buffer, 3) == 0)
-		g_data.paths.no = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 0 && tex_validity(buffer, 3) == 0)
-		g_data.paths.so = ft_strtrim(buffer + 3, "\t");
-	else if (check_no_we(buffer) == 1 && tex_validity(buffer, 3) == 0)
-		g_data.paths.we = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 1 && tex_validity(buffer, 3) == 0)
-		g_data.paths.ea = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 2 && tex_validity(buffer, 2) == 0)
-		g_data.paths.sp = ft_strtrim(buffer + 2, "\t");
-	g_c += 10;
-}
-
-// RESOLUTION FUNCTIONs
 void		resolution(char *buffer)
 {
 	int		i;
@@ -175,7 +22,7 @@ void		resolution(char *buffer)
 	i = 0;
 	str = ft_split(buffer, ' ');
 	if (!ft_isnum(str[0]) || !ft_isnum(str[1]))
-			ft_exit("Error\nLetters or negative value!\n");
+		ft_exit("Error\nLetters or negative value!\n");
 	if (ft_strlendoubleptr(str) != 2)
 		ft_exit("Error\nWrong number of arguments in Resolution!\n");
 	else
@@ -186,7 +33,6 @@ void		resolution(char *buffer)
 	}
 }
 
-// FLOOR FUNCTION
 void		ft_floor(char *buffer)
 {
 	char	**str;
@@ -196,8 +42,9 @@ void		ft_floor(char *buffer)
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
-		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256 && ft_atoi(str[1]) >= 0 &&
-			ft_atoi(str[1]) < 256 && ft_atoi(str[2]) >= 0 && ft_atoi(str[2]) < 256)
+		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256
+			&& ft_atoi(str[1]) >= 0 && ft_atoi(str[1]) < 256
+			&& ft_atoi(str[2]) >= 0 && ft_atoi(str[2]) < 256)
 		{
 			g_floor_rgb.r = ft_atoi(str[0]);
 			g_floor_rgb.g = ft_atoi(str[1]);
@@ -211,7 +58,6 @@ void		ft_floor(char *buffer)
 	g_c += 27;
 }
 
-// CEILING FUNCTION
 void		ft_ceiling(char *buffer)
 {
 	char	**str;
@@ -247,6 +93,9 @@ void		check(char *buf)
 		i++;
 	if (buf[i] == 'R' && buf[i + 1] == 'R')
 		ft_exit("Error\nMultiple R!");
+	if ((buf[i] == 'C' && buf[i + 1] == 'C')
+		|| (buf[i] == 'F' && buf[i + 1] == 'F'))
+		ft_exit("Error\nMultiple C or F!");
 	else if (buf[i] == 'R' && (buf[++i] == ' ' || buf[++i] == '\t'))
 		resolution(&buf[i]);
 	else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' || buf[i] == 'E')
@@ -255,8 +104,10 @@ void		check(char *buf)
 		ft_floor(&buf[i]);
 	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[++i] == '\t'))
 		ft_ceiling(&buf[i]);
+	else if (ft_isalpha(buf[i]))
+		g_c += 50;
 	else if (g_c > 150)
-		ft_exit("Error\nSomething is being repeated more than once!");
+		ft_exit("Error\nSomething is being repeated or Invalid line!\n");
 }
 
 void		read_file(int argc, char **argv)

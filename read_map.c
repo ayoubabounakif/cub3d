@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/14 18:10:26 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/15 19:02:17 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,29 @@ static void		first_init(void)
 	g_str = NULL;
 }
 
+int				map_error(void)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (++i < ROWS)
+	{
+		j = -1;
+		while (++j < COLS)
+		{
+			if (g_map[i][j] == '0' || g_map[i][j] == 'N' || g_map[i][j] == 'S'
+			|| g_map[i][j] == 'W' || g_map[i][j] == 'E' || g_map[i][j] == '2')
+			{
+				if (g_map[i - 1][j] == ' ' || g_map[i][j - 1] == ' ' ||
+				g_map[i + 1][j] == ' ' || g_map[i][j + 1] == ' ')
+					return (1);
+			}
+		}
+	}
+	return (0);
+}
+
 void			check_map(void)
 {
 	first_init();
@@ -72,4 +95,6 @@ void			check_map(void)
 	g_map[g_i++] = space_filler(g_biglen);
 	g_map[g_i] = NULL;
 	free_list();
+	if (map_error() == 1)
+		ft_exit("Error\nInvalid map!\n");
 }
