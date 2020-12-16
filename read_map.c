@@ -6,12 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:22:49 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 12:08:47 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
+static int		g_p;
 static int		g_i;
 static t_list	*g_temp;
 static char		*g_str;
@@ -41,6 +42,7 @@ static void		second_init(void)
 
 static void		first_init(void)
 {
+	g_p = 0;
 	g_sizeofmap = 0;
 	g_biglen = 0;
 	g_temp = g_file;
@@ -58,6 +60,9 @@ int				map_error(void)
 		j = -1;
 		while (++j < COLS)
 		{
+			if (g_map[i][j] == 'N' || g_map[i][j] == 'S'
+			|| g_map[i][j] == 'W' || g_map[i][j] == 'E')
+				g_p++;
 			if (g_map[i][j] == '0' || g_map[i][j] == 'N' || g_map[i][j] == 'S'
 			|| g_map[i][j] == 'W' || g_map[i][j] == 'E' || g_map[i][j] == '2')
 			{
@@ -95,6 +100,6 @@ void			check_map(void)
 	g_map[g_i++] = space_filler(g_biglen);
 	g_map[g_i] = NULL;
 	free_list();
-	if (map_error() == 1)
-		ft_exit("Error\nInvalid map!\n");
+	if (map_error() == 1 || g_p != 1)
+		ft_exit("Error\nMultiple or no players or Invalid map!\n");
 }

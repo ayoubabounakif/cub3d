@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:36:58 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 12:10:28 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,8 @@ void			ft_ceiling(char *buffer);
 
 // Map reading handling (read_map.c || map_spacers.c)
 void			check_map(void);
+int				is_notmap_init(void);
+int				is_notmap(char *buffer);
 char			get_fchar(char *buffer);
 char			*spacer(char *buffer, int biglen);
 char			*space_filler(int biglen);

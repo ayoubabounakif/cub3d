@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:22:46 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 12:14:01 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void		check(char *buf)
 		ft_floor(&buf[i]);
 	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[++i] == '\t'))
 		ft_ceiling(&buf[i]);
-	else if (ft_isalpha(buf[i]))
-		g_c += 50;
+	else if ((ft_isalpha(buf[i])
+	|| ((ft_isalpha(buf[i]) || ft_isdigit(buf[i])) && g_c != 150)))
+		ft_exit("Error\nInvalid line!\n");
 	else if (g_c > 150)
 		ft_exit("Error\nSomething is being repeated or Invalid line!\n");
 }
@@ -127,6 +128,8 @@ void		read_file(int argc, char **argv)
 		ft_lstadd_back(&g_file, ft_lstnew(buffer));
 		free(buffer);
 	}
+	if (is_notmap_init() == 1)
+		ft_exit("Error\nInvalid file!\n");
 	if (g_c == 150)
 		check_map();
 }
