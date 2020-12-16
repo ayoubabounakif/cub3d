@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 13:00:33 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 13:16:38 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:34:41 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		x_win(void)
 {
 	mlx_destroy_window(g_mlx.mlx_ptr, g_mlx.win_ptr);
-	free_map();
 	exit(0);
 	return (0);
 }
