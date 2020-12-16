@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 12:14:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:22:26 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 13:16:49 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		loop_key(void)
 {
 	mlx_hook(g_mlx.win_ptr, 2, 0, key_pressed, 0);
 	mlx_hook(g_mlx.win_ptr, 3, 0, key_released, 0);
+	mlx_hook(g_mlx.win_ptr, 17, 0L, x_win, 0);
 	deal_key();
 	return (0);
 }

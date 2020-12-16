@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 00:24:52 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:08:47 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 13:43:28 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,28 @@ static void		first_init(void)
 
 int				map_error(void)
 {
-	int		i;
 	int		j;
 
-	i = 0;
-	while (++i < ROWS)
+	g_i = 0;
+	while (++g_i < ROWS)
 	{
 		j = -1;
 		while (++j < COLS)
 		{
-			if (g_map[i][j] == 'N' || g_map[i][j] == 'S'
-			|| g_map[i][j] == 'W' || g_map[i][j] == 'E')
+			if (g_map[g_i][j] == 'N' || g_map[g_i][j] == 'S'
+	|| g_map[g_i][j] == 'W' || g_map[g_i][j] == 'E')
 				g_p++;
-			if (g_map[i][j] == '0' || g_map[i][j] == 'N' || g_map[i][j] == 'S'
-			|| g_map[i][j] == 'W' || g_map[i][j] == 'E' || g_map[i][j] == '2')
+			if (g_map[g_i][j] == '0' || g_map[g_i][j] == 'N' || g_map[g_i][j] ==
+	'S' || g_map[g_i][j] == 'W' || g_map[g_i][j] == 'E' || g_map[g_i][j] == '2')
 			{
-				if (g_map[i - 1][j] == ' ' || g_map[i][j - 1] == ' ' ||
-				g_map[i + 1][j] == ' ' || g_map[i][j + 1] == ' ')
+				if (g_map[g_i - 1][j] == ' ' || g_map[g_i][j - 1] == ' ' ||
+	g_map[g_i + 1][j] == ' ' || g_map[g_i][j + 1] == ' ')
 					return (1);
 			}
+			else if (g_map[g_i][j] != '0' && g_map[g_i][j] != 'N'
+	&& g_map[g_i][j] != 'S' && g_map[g_i][j] != 'W' && g_map[g_i][j] != 'E'
+	&& g_map[g_i][j] != '2' && g_map[g_i][j] != '1' && g_map[g_i][j] != ' ')
+				return (1);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/16 12:15:49 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/16 13:17:46 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(LIBNAME):
 	cp libft/$(LIBNAME) ./
 
 $(NAME): $(LIBNAME)
-	gcc $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
+	gcc -g3 -fsanitize=address $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC)
 	# We can add the flag "-Ofast" to run the game way more smoothly
 	# export MallocStackLogging=1 for debugging leaks before using cmd leaks
 

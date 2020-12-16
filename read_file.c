@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:14:01 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 12:33:26 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		check(char *buf)
 	int		i;
 
 	i = 0;
-	if (buf[i] == ' ')
+	while (buf[i] == ' ')
 		i++;
 	if (buf[i] == 'R' && buf[i + 1] == 'R')
 		ft_exit("Error\nMultiple R!");
@@ -104,11 +104,11 @@ void		check(char *buf)
 		ft_floor(&buf[i]);
 	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[++i] == '\t'))
 		ft_ceiling(&buf[i]);
+	else if (g_c > 150)
+		ft_exit("Error\nSomething is being repeated or Invalid line!\n");
 	else if ((ft_isalpha(buf[i])
 	|| ((ft_isalpha(buf[i]) || ft_isdigit(buf[i])) && g_c != 150)))
 		ft_exit("Error\nInvalid line!\n");
-	else if (g_c > 150)
-		ft_exit("Error\nSomething is being repeated or Invalid line!\n");
 }
 
 void		read_file(int argc, char **argv)

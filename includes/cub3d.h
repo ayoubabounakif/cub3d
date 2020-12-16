@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:10:28 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 13:16:13 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ int				key_pressed(int keycode);
 int				key_released(int keycode);
 int				loop_key(void);
 int				deal_key(void);
+int				x_win(void);
 
 // Set rotation angle (set_rangle.c)
 void			set_rangle(char player_pos);
