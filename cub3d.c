@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:15:56 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 19:09:15 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	cast_rays(void)
 	int		strip_id;
 	float	ray_angle;
 
-	if (!(g_rays = malloc(sizeof(t_rays) * (WIN_WIDTH))))
-		return ;
 	strip_id = 0;
 	ray_angle = g_player.rangle - RAD(30);
 	ray_angle = normalize_angle(ray_angle);
@@ -60,14 +58,23 @@ void	cast_rays(void)
 	}
 }
 
+void	free_shit(void)
+{
+	free(g_rays);
+	free_sprite();
+	free_map();
+}
+
 int		main(int ac, char **av)
 {
 	read_file(ac, av);
 	init_player();
 	init_mlx();
+	init_rays();
+	init_sprite();
 	init_tex();
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
-	free_map();
+	free_shit();
 	return (0);
 }

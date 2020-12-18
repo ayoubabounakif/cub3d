@@ -6,14 +6,13 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 16:34:54 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 18:30:53 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// Libraries
 # include "mlx.h"
 # include <math.h>
 # include <errno.h>
@@ -21,18 +20,14 @@
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 
-// Duhh
 # define TRUE 1
 # define FALSE 0
 
-// Conversions
 # define RAD(x) (x * M_PI / 180)
 # define DEG(x) (x * 180 / M_PI)
 # define TWO_PI (M_PI * 2)
 # define H_PI (M_PI / 2)
 # define PI_H (M_PI * 1.5)
-
-// Keycodes
 # define W_KEY 13
 # define A_KEY 0
 # define S_KEY 1
@@ -42,29 +37,18 @@
 # define DOWN_ARROW 125
 # define RIGHT_ARROW 124
 # define ESC 53
-
-// Map
 # define TILE_SIZE 64
 # define ROWS g_sizeofmap
 # define COLS g_biglen
-
-// Window Dimensions
 # define WIN_WIDTH g_data.win_width
 # define WIN_HEIGHT g_data.win_height
-
-// Texture Dimensions
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-
-// Player
 # define SIZE 6
 # define MOVEMENT_SPEED 6
 # define ROTATION_SPEED 0.04
-
-// Field of View
 # define FOV_ANGLE RAD(60)
 
-// MLX
 typedef struct	s_mlx
 {
 	void		*mlx_ptr;
@@ -76,7 +60,6 @@ typedef struct	s_mlx
 	void		*img_ptr;
 }				t_mlx;
 
-// Player
 typedef struct	s_player
 {
 	float		x;
@@ -84,7 +67,6 @@ typedef struct	s_player
 	float		rangle;
 }				t_player;
 
-// Keys
 typedef	struct	s_key
 {
 	int			move_straight;
@@ -93,7 +75,6 @@ typedef	struct	s_key
 	int			right_dir;
 }				t_key;
 
-// Ray
 typedef struct	s_ray
 {
 	int			isray_up;
@@ -120,7 +101,6 @@ typedef struct	s_ray
 	float		vert_hit_dist;
 }				t_ray;
 
-// Rays
 typedef struct	s_rays
 {
 	float		ray_angle;
@@ -134,7 +114,6 @@ typedef struct	s_rays
 	int			was_hit_vert;
 }				t_rays;
 
-// Paths
 typedef	struct	s_paths
 {
 	char		*no;
@@ -144,7 +123,6 @@ typedef	struct	s_paths
 	char		*sp;
 }				t_paths;
 
-// Data
 typedef	struct	s_data
 {
 	int			win_width;
@@ -154,7 +132,6 @@ typedef	struct	s_data
 	t_paths		paths;
 }				t_data;
 
-// RGB
 typedef struct	s_color
 {
 	int			r;
@@ -162,7 +139,6 @@ typedef struct	s_color
 	int			b;
 }				t_color;
 
-// Textures
 typedef struct	s_tex
 {
 	void		*ptr;
@@ -191,7 +167,6 @@ typedef struct	s_sprite
 	float		distance;
 }				t_sprite;
 
-// Defining the following t_structures as global_structures
 t_mlx			g_mlx;
 t_player		g_player;
 t_key			g_key;
@@ -204,67 +179,46 @@ t_sprite		**g_sprite;
 t_color			g_floor_rgb;
 t_color			g_ceiling_rgb;
 
-// Map related global variables
 char			**g_map;
 int				g_sizeofmap;
 int				g_biglen;
-
-// Textures related global variables
 int				*g_texnorth;
 int				*g_texwest;
 int				*g_texeast;
 int				*g_texsouth;
 int				g_sprite_count;
 
-// Events || Hooks || Loops (events.c)
 int				key_pressed(int keycode);
 int				key_released(int keycode);
 int				loop_key(void);
 int				deal_key(void);
 int				x_win(void);
-
-// Set rotation angle (set_rangle.c)
 void			set_rangle(char player_pos);
-
-// Wall collision (wall_collision.c)
 int				wall_collision(float x, float y);
-
-// Utils (utils.c)
 void			img_update(int x, int y, int color);
 int				abs(int n);
 float			distance_bpts(float x1, float y1, float x2, float y2);
 float			normalize_angle(float angle);
 int				rgb_to_int(int r, int g, int b);
-
-// Raycasting functions (cub3d.c || cast_horz.c || cast_vert.c)
+void			init_rays(void);
 void			cast_rays(void);
 void			cast_horz(float ray_angle);
 void			cast_vert(float ray_angle);
-
-// Args treatment (args_error.c)
 int				arg_test(int argc, char **argv);
-
-// File helpers (file_helpers.c)
 void			ft_exit(char *msg);
 int				all_n(char *s);
 int				ft_isnum(char *s);
 int				ft_strlendoubleptr(char **str);
 void			check_comma(char *buffer);
-
-// File path check (file_pcheck.c)
 int				tex_validity(char *buffer, int k);
 int				check_no_we(char *buffer);
 int				check_so_ea_s(char *buffer);
 void			store_paths(char *buffer);
-
-// File reading handling (read_file.c)
 void			read_file(int ac, char **av);
 void			check(char *buffer);
 void			resolution(char *buffer);
 void			ft_floor(char *buffer);
 void			ft_ceiling(char *buffer);
-
-// Map reading handling (read_map.c || map_spacers.c)
 void			check_map(void);
 int				is_notmap_init(void);
 int				is_notmap(char *buffer);
@@ -272,31 +226,17 @@ char			get_fchar(char *buffer);
 char			*spacer(char *buffer, int biglen);
 char			*space_filler(int biglen);
 void			free_map(void);
-
-// 2D drawing (bin/draw_minimap.c)
-// void			draw_map(void);
-// void			drawsquare(int x, int y, int color);
-// void			drawemptysquare(int x, int y, int color);
-// void			put_character(void);
-// void			draw_line(int X0, int Y0, int X1, int Y1, int color);
-// void			draw_square(int y, int x, int size, int color);
-
-// 3D Rendering (render_3d.c)
 void			render_3d(void);
 void			draw_wall(int i, int wall_striph);
 void			draw_ceiling(int i);
 void			draw_floor(int i);
-
-// Sprite rendering (render_sprite.c || sprite_utils.c)
 void			init_sprite(void);
+void			update_sprite(void);
 void			ft_sprite_sort(void);
 void			ft_sprite(void);
-
-// Initialization (init.c)
+void			free_sprite(void);
 void			init_mlx(void);
 void			init_player(void);
 void			init_tex(void);
-
-// Screenshot | Bitmap (generate_bmp.c)
 void			bmp_save(void);
 #endif

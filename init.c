@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:22:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 19:07:59 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,35 @@ void	init_mlx(void)
 	WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	g_mlx.img_ptr = mlx_new_image(g_mlx.mlx_ptr,
 	WIN_WIDTH, WIN_HEIGHT);
+}
+
+void	init_rays(void)
+{
+	if (!(g_rays = malloc(sizeof(t_rays) * (WIN_WIDTH))))
+		return ;
+}
+
+void	init_sprite(void)
+{
+	int		spt_id;
+
+	spt_id = 0;
+	if (!(g_sprite = malloc(sizeof(t_sprite *) * (g_sprite_count + 1))))
+		return ;
+	while (spt_id < g_sprite_count)
+	{
+		if (!(g_sprite[spt_id] = malloc(sizeof(t_sprite))))
+			return ;
+		if (!(g_sprite[spt_id]->ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr,
+		g_data.paths.sp, &g_sprite[spt_id]->width, &g_sprite[spt_id]->height)))
+			ft_exit("Error\nSprite texture file not valid\n");
+		g_sprite[spt_id]->data = (int *)mlx_get_data_addr(g_sprite[spt_id]->ptr,
+		&g_sprite[spt_id]->bpp,
+		&g_sprite[spt_id]->size_line,
+		&g_sprite[spt_id]->endian);
+		spt_id++;
+	}
+	g_sprite[spt_id] = NULL;
 }
 
 void	init_player(void)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aabounak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:53:07 by aabounak          #+#    #+#             */
-/*   Updated: 2019/10/22 21:42:06 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 19:00:09 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		condition(long result, long sign)
+long	condition(long result, long sign)
 {
 	if (result > 2147483648 && sign == -1)
 		return (0);
@@ -19,7 +19,7 @@ int		condition(long result, long sign)
 	return (0);
 }
 
-int		ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	sign;
 	long	result;

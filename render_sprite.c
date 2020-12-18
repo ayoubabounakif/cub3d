@@ -6,20 +6,11 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 05:24:27 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:22:54 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 18:50:50 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
-
-void	init_spt_tex(int k)
-{
-	if (!(g_sprite[k]->ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr,
-	g_data.paths.sp, &g_sprite[k]->width, &g_sprite[k]->height)))
-		ft_exit("Error\nSprite texture file not valid\n");
-	g_sprite[k]->data = (int *)mlx_get_data_addr(g_sprite[k]->ptr,
-	&g_sprite[k]->bpp, &g_sprite[k]->size_line, &g_sprite[k]->endian);
-}
 
 void	render_sprite(int k, int x_fs, int y_fs, int sp_size)
 {
@@ -27,7 +18,6 @@ void	render_sprite(int k, int x_fs, int y_fs, int sp_size)
 	int		j;
 	int		color;
 
-	init_spt_tex(k);
 	i = -1;
 	while (++i < sp_size)
 	{
@@ -75,13 +65,8 @@ void	ft_sprite(void)
 {
 	int		i;
 
-	init_sprite();
+	update_sprite();
 	i = -1;
 	while (++i < g_sprite_count)
 		ft_sprite_traits(i);
-	i = -1;
-	while (++i < g_sprite_count)
-		free(g_sprite[i]);
-	free(g_sprite);
-	free(g_rays);
 }

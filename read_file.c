@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:33:26 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 19:13:38 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void		resolution(char *buffer)
 	{
 		g_data.win_width = (ft_atoi(str[0]) > 2560) ? 2560 : ft_atoi(str[0]);
 		g_data.win_height = (ft_atoi(str[1]) > 1440) ? 1440 : ft_atoi(str[1]);
+		g_data.win_width = (ft_atoi(str[0]) == -1) ? 2560 : ft_atoi(str[0]);
+		g_data.win_height = (ft_atoi(str[1]) == -1) ? 1440 : ft_atoi(str[1]);
 		g_c++;
 	}
 }
@@ -89,7 +91,7 @@ void		check(char *buf)
 	int		i;
 
 	i = 0;
-	while (buf[i] == ' ')
+	if (buf[i] == ' ')
 		i++;
 	if (buf[i] == 'R' && buf[i + 1] == 'R')
 		ft_exit("Error\nMultiple R!");

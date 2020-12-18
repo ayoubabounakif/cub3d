@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:22:04 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:23:01 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 18:26:42 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ void		ft_sprite_sort(void)
 	}
 }
 
-void		init_sprite(void)
+void		update_sprite(void)
 {
-	if (!(g_sprite = malloc(sizeof(t_sprite *) * (g_sprite_count + 1))))
-		return ;
 	g_spt_id = 0;
 	g_j = -1;
 	while (++g_j < ROWS)
@@ -53,8 +51,6 @@ void		init_sprite(void)
 		{
 			if (g_map[g_j][g_i] == '2')
 			{
-				if (!(g_sprite[g_spt_id] = malloc(sizeof(t_sprite))))
-					return ;
 				g_sprite[g_spt_id]->y = (g_j * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[g_spt_id]->x = (g_i * TILE_SIZE) + TILE_SIZE / 2;
 				g_sprite[g_spt_id]->distance = distance_bpts(
@@ -64,6 +60,5 @@ void		init_sprite(void)
 			}
 		}
 	}
-	g_sprite[g_spt_id] = NULL;
 	ft_sprite_sort();
 }

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:10:13 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/16 12:13:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:41:52 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	g_i;
 static char	*g_buf;
 static char	*g_tmp;
 
-// Spaghetti but works (￣▽￣) ( ͡° ͜ʖ ͡°)
 int		tex_validity(char *buffer, int k)
 {
 	g_i = 0;
