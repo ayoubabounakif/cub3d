@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 19:13:38 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 20:06:34 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		ft_floor(char *buffer)
 	char	**str;
 
 	str = ft_split(buffer, ',');
-	buffer = ft_strtrim(buffer + 1, "\t");
+	buffer = ft_strtrim(buffer, " ");
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
@@ -65,7 +65,7 @@ void		ft_ceiling(char *buffer)
 	char	**str;
 
 	str = ft_split(buffer, ',');
-	buffer = ft_strtrim(buffer + 1, "\t");
+	buffer = ft_strtrim(buffer + 1, " ");
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
@@ -91,7 +91,7 @@ void		check(char *buf)
 	int		i;
 
 	i = 0;
-	if (buf[i] == ' ')
+	while (buf[i] == ' ')
 		i++;
 	if (buf[i] == 'R' && buf[i + 1] == 'R')
 		ft_exit("Error\nMultiple R!");

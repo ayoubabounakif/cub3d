@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:03:15 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 16:37:36 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/18 20:01:14 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ int		all_n(char *s)
 {
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (!s)
 		return (0);
-	s = ft_strtrim(s + 1, "\t");
+	while (s[i] == ' ')
+		i++;
+	s = ft_strtrim(s + 1, " ");
+	i = -1;
 	while (s[++i])
 		if (s[i] < 48 || s[i] > 57)
 			return (0);
