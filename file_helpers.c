@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:03:15 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 20:01:14 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/19 13:06:49 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int		all_n(char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] == ' ')
-		i++;
-	s = ft_strtrim(s + 1, " ");
-	i = -1;
-	while (s[++i])
+	i = 0;
+	while (s[i])
+	{
 		if (s[i] < 48 || s[i] > 57)
 			return (0);
+		i++;
+	}
 	return (1);
 }
 
@@ -42,10 +42,9 @@ int		ft_isnum(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] >= '0' && s[i] <= '9')
-			i++;
-		else
+		if (s[i] < '0' && s[i] > '9')
 			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -53,10 +52,20 @@ int		ft_isnum(char *s)
 int		ft_strlendoubleptr(char **str)
 {
 	int		i;
+	int		j;
 
 	i = 0;
 	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (!ft_isdigit(str[i][j]))
+				ft_exit("Error\nLetters in Resolution!\n");
+			j++;
+		}
 		i++;
+	}
 	return (i);
 }
 

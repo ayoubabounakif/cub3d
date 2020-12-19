@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 20:01:36 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:56:06 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ int				*g_texeast;
 int				*g_texsouth;
 int				g_sprite_count;
 
+int				mlx_get_screen_size(void *mlx_ptr,
+				int *sizex, int *sizey);
 int				key_pressed(int keycode);
 int				key_released(int keycode);
 int				loop_key(void);

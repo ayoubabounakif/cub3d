@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 20:06:34 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/19 13:05:01 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,24 @@ void		resolution(char *buffer)
 {
 	int		i;
 	char	**str;
+	int		x;
+	int		y;
 
-	i = 0;
+	mlx_get_screen_size(g_mlx.mlx_ptr, &x, &y);
 	str = ft_split(buffer, ' ');
-	if (!ft_isnum(str[0]) || !ft_isnum(str[1]))
-		ft_exit("Error\nLetters or negative value!\n");
+	i = 0;
+	if (str[0][0] == '-' || str[1][0] == '-')
+		ft_exit("Error\nNegative value!\n");
 	if (ft_strlendoubleptr(str) != 2)
 		ft_exit("Error\nWrong number of arguments in Resolution!\n");
 	else
 	{
-		g_data.win_width = (ft_atoi(str[0]) > 2560) ? 2560 : ft_atoi(str[0]);
-		g_data.win_height = (ft_atoi(str[1]) > 1440) ? 1440 : ft_atoi(str[1]);
-		g_data.win_width = (ft_atoi(str[0]) == -1) ? 2560 : ft_atoi(str[0]);
-		g_data.win_height = (ft_atoi(str[1]) == -1) ? 1440 : ft_atoi(str[1]);
+		g_data.win_width = ft_atoi(str[0]);
+		g_data.win_height = ft_atoi(str[1]);
+		g_data.win_width = g_data.win_width > x ? x : g_data.win_width;
+		g_data.win_height = g_data.win_height > y ? y : g_data.win_height;
+		g_data.win_width = g_data.win_width == -1 ? x : g_data.win_width;
+		g_data.win_height = g_data.win_height == -1 ? y : g_data.win_height;
 		g_c++;
 	}
 }
@@ -39,8 +44,9 @@ void		ft_floor(char *buffer)
 {
 	char	**str;
 
+	while (*buffer == ' ')
+		buffer++;
 	str = ft_split(buffer, ',');
-	buffer = ft_strtrim(buffer, " ");
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
@@ -64,8 +70,9 @@ void		ft_ceiling(char *buffer)
 {
 	char	**str;
 
+	while (*buffer == ' ')
+		buffer++;
 	str = ft_split(buffer, ',');
-	buffer = ft_strtrim(buffer + 1, " ");
 	check_comma(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{

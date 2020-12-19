@@ -6,7 +6,7 @@
 #    By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 04:43:58 by aabounak          #+#    #+#              #
-#    Updated: 2020/12/18 20:07:10 by aabounak         ###   ########.fr        #
+#    Updated: 2020/12/19 12:56:00 by aabounak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(LIBNAME): $(SRC)
 	cp libft/$(LIBNAME) ./
 
 $(NAME): $(LIBNAME)
-	gcc $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC) 
+	gcc $(FLAGS) $(SRC) libft.a $(MLX) $(FRAMEWORKS) -D BUFFER_SIZE=20 -o $(EXEC) libmlx.dylib
 
 clean:
 	make clean -C libft/

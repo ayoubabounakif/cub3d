@@ -1,4 +1,4 @@
-R  1000 1000
+R  1500 1000
 
 NO textures/redbrick.xpm
 SO textures/colorstone.xpm
@@ -6,8 +6,8 @@ WE textures/eagle.xpm
 EA textures/mossy.xpm
 
 S textures/barrel.xpm
-F     128 ,   128  ,   128
-C     64  ,   64   ,   64
+F 128,128,128
+C 64,64,64
 
         1111111111111111111111111
         1000000001100000000000001

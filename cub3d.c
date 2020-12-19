@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:11:18 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 19:18:11 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:56:05 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int		main(int ac, char **av)
 	init_player();
 	init_mlx();
 	init_rays();
-	init_sprite();
 	init_tex();
+	init_sprite();
 	mlx_loop_hook(g_mlx.mlx_ptr, loop_key, 0);
 	mlx_loop(g_mlx.mlx_ptr);
 	free_shit();

@@ -6,43 +6,23 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:10:13 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/18 19:29:14 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/19 13:06:48 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
 extern int	g_c;
-static int	g_i;
-static char	*g_buf;
-static char	*g_tmp;
 
 int		tex_validity(char *buffer, int k)
 {
-	g_i = 0;
-	g_buf = buffer;
-	g_tmp = ft_strtrim(g_buf + k, "\t");
-	while (g_tmp[g_i] != '.')
+	while (buffer[k])
 	{
-		if (g_tmp[g_i] == ' ' || g_tmp[g_i] == '\t')
-			ft_exit("Error\nSpaces or wrong path names!\n");
-		g_i++;
+		if (buffer[k] == '.' || buffer[k] != ' ')
+			return (k);
+		k++;
 	}
-	ft_strlcpy(g_tmp, g_tmp, 9);
-	g_tmp = ft_strtrim(g_buf + k, "\t");
-	g_tmp = ft_strchr(g_tmp, '.');
-	if (ft_strncmp(g_tmp, ".xpm", 4) != 0)
-		ft_exit("Error\nExtension != .xpm\n");
-	g_tmp = ft_strchr(g_tmp, 'm');
-	g_i = 1;
-	while (g_tmp[g_i] != '\0')
-	{
-		if (g_tmp[g_i] == ' ')
-			g_i++;
-		else
-			ft_exit("Error\nInvalid extension!\n");
-	}
-	return (0);
+	return (k);
 }
 
 int		check_no_we(char *buffer)
@@ -87,15 +67,20 @@ int		check_so_ea_s(char *buffer)
 
 void	store_paths(char *buffer)
 {
-	if (check_no_we(buffer) == 0 && tex_validity(buffer, 3) == 0)
-		g_data.paths.no = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 0 && tex_validity(buffer, 3) == 0)
-		g_data.paths.so = ft_strtrim(buffer + 3, "\t");
-	else if (check_no_we(buffer) == 1 && tex_validity(buffer, 3) == 0)
-		g_data.paths.we = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 1 && tex_validity(buffer, 3) == 0)
-		g_data.paths.ea = ft_strtrim(buffer + 3, "\t");
-	else if (check_so_ea_s(buffer) == 2 && tex_validity(buffer, 2) == 0)
-		g_data.paths.sp = ft_strtrim(buffer + 2, "\t");
+	if (check_no_we(buffer) == 0)
+		g_data.paths.no = ft_substr(buffer,
+		tex_validity(buffer, 3), ft_strlen(buffer));
+	else if (check_so_ea_s(buffer) == 0)
+		g_data.paths.so = ft_substr(buffer,
+		tex_validity(buffer, 3), ft_strlen(buffer));
+	else if (check_no_we(buffer) == 1)
+		g_data.paths.we = ft_substr(buffer,
+		tex_validity(buffer, 3), ft_strlen(buffer));
+	else if (check_so_ea_s(buffer) == 1)
+		g_data.paths.ea = ft_substr(buffer,
+		tex_validity(buffer, 3), ft_strlen(buffer));
+	else if (check_so_ea_s(buffer) == 2)
+		g_data.paths.sp = ft_substr(buffer,
+		tex_validity(buffer, 2), ft_strlen(buffer));
 	g_c += 10;
 }
