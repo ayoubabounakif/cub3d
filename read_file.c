@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/22 14:57:05 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:58:21 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void		check(char *buf)
 		resolution(&buf[i]);
 	else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' || buf[i] == 'E')
 		store_paths(&buf[i]);
-	else if ((buf[i] == 'F' && buf[i + 1] == 'C') || (buf[i] == 'C' && buf[i + 1] == 'F'))
+	else if ((buf[i] == 'F' && buf[i + 1] == 'C')
+	|| (buf[i] == 'C' && buf[i + 1] == 'F'))
 		ft_exit("Error\nInvalid line!\n");
 	else if ((buf[i] == 'F' || buf[i] == 'C') && buf[i + 1] == '\0')
 		ft_exit("Error\nInvalid line!\n");
