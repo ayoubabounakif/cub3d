@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:42:41 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/19 12:56:40 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:40:08 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	init_sprite(void)
 	{
 		if (!(g_sprite[spt_id] = malloc(sizeof(t_sprite))))
 			return ;
-		g_sprite[spt_id]->ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr,
-		g_data.paths.sp, &g_sprite[spt_id]->width, &g_sprite[spt_id]->height);
+		if (!(g_sprite[spt_id]->ptr = mlx_xpm_file_to_image(g_mlx.mlx_ptr,
+		g_data.paths.sp, &g_sprite[spt_id]->width, &g_sprite[spt_id]->height)))
+			return (ft_exit("Error\nTexture file not found!\n"));
 		g_sprite[spt_id]->data = (int *)mlx_get_data_addr(g_sprite[spt_id]->ptr,
 		&g_sprite[spt_id]->bpp,
 		&g_sprite[spt_id]->size_line,

@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:07:45 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/19 12:56:06 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:57:15 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ void			store_paths(char *buffer);
 void			read_file(int ac, char **av);
 void			check(char *buffer);
 void			resolution(char *buffer);
+void			fc_error(char *buffer);
 void			ft_floor(char *buffer);
 void			ft_ceiling(char *buffer);
 void			check_map(void);

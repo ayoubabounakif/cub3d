@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 01:29:50 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/19 13:56:25 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:57:05 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		ft_floor(char *buffer)
 		buffer++;
 	str = ft_split(buffer, ',');
 	check_comma(buffer);
+	fc_error(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
 		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256
@@ -61,8 +62,6 @@ void		ft_floor(char *buffer)
 		else
 			ft_exit("Error\nInvalid floor RGB values!\n");
 	}
-	else
-		ft_exit("Error\nInvalid floor RGB values!\n");
 	g_c += 27;
 }
 
@@ -74,6 +73,7 @@ void		ft_ceiling(char *buffer)
 		buffer++;
 	str = ft_split(buffer, ',');
 	check_comma(buffer);
+	fc_error(buffer);
 	if (all_n(str[0]) && all_n(str[1]) && all_n(str[2]) && !str[3])
 	{
 		if (ft_atoi(str[0]) >= 0 && ft_atoi(str[0]) < 256
@@ -100,18 +100,17 @@ void		check(char *buf)
 	i = 0;
 	while (buf[i] == ' ')
 		i++;
-	if (buf[i] == 'R' && buf[i + 1] == 'R')
-		ft_exit("Error\nMultiple R!");
-	if ((buf[i] == 'C' && buf[i + 1] == 'C')
-		|| (buf[i] == 'F' && buf[i + 1] == 'F'))
-		ft_exit("Error\nMultiple C or F!");
-	else if (buf[i] == 'R' && (buf[++i] == ' ' || buf[++i] == '\t'))
+	if (buf[i] == 'R' && (buf[++i] == ' ' || buf[++i] == '\t'))
 		resolution(&buf[i]);
 	else if (buf[i] == 'N' || buf[i] == 'S' || buf[i] == 'W' || buf[i] == 'E')
 		store_paths(&buf[i]);
-	else if (buf[i] == 'F' && (buf[++i] == ' ' || buf[++i] == '\t'))
+	else if ((buf[i] == 'F' && buf[i + 1] == 'C') || (buf[i] == 'C' && buf[i + 1] == 'F'))
+		ft_exit("Error\nInvalid line!\n");
+	else if ((buf[i] == 'F' || buf[i] == 'C') && buf[i + 1] == '\0')
+		ft_exit("Error\nInvalid line!\n");
+	else if (buf[i] == 'F' && (buf[++i] == ' ' || buf[i] == '\t'))
 		ft_floor(&buf[i]);
-	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[++i] == '\t'))
+	else if (buf[i] == 'C' && (buf[++i] == ' ' || buf[i] == '\t'))
 		ft_ceiling(&buf[i]);
 	else if (g_c > 150)
 		ft_exit("Error\nSomething is being repeated or Invalid line!\n");

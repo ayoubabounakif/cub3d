@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 17:51:26 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/15 19:39:20 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:57:02 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,24 @@ int			check_name(char *str)
 	if (ft_split(str, '.')[2] != 0)
 		return (0);
 	return (1);
+}
+
+void		fc_error(char *buffer)
+{
+	int		i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		if (!ft_isdigit(buffer[i]))
+		{
+			if (buffer[i] == ',')
+				i++;
+			else
+				ft_exit("Error\nFloor Error\n");
+		}
+		i++;
+	}
 }
 
 int			arg_test(int argc, char **argv)

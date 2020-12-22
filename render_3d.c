@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 04:39:48 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/19 12:35:23 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 13:01:47 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void		draw_wall(int i, int wall_striph)
 		if ((TEX_WIDTH * g_tex.offset_y + g_tex.offset_x) > 0)
 		{
 			if (g_rays[i].isray_up && !g_rays[i].was_hit_vert)
-				g_tex.color = g_texnorth[(TEX_WIDTH * g_tex.offset_y)
+				g_tex.color = g_texsouth[(TEX_WIDTH * g_tex.offset_y)
 									+ g_tex.offset_x];
 			else if (g_rays[i].isray_down && !g_rays[i].was_hit_vert)
-				g_tex.color = g_texsouth[(TEX_WIDTH * g_tex.offset_y)
+				g_tex.color = g_texnorth[(TEX_WIDTH * g_tex.offset_y)
 									+ g_tex.offset_x];
 			else if (g_rays[i].isray_right && g_rays[i].was_hit_vert)
 				g_tex.color = g_texwest[(TEX_WIDTH * g_tex.offset_y)

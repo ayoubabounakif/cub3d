@@ -6,7 +6,7 @@
 /*   By: aabounak <aabounak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:10:13 by aabounak          #+#    #+#             */
-/*   Updated: 2020/12/19 13:06:48 by aabounak         ###   ########.fr       */
+/*   Updated: 2020/12/22 13:36:24 by aabounak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int		check_no_we(char *buffer)
 {
 	if (buffer[0] == 'N')
 	{
-		if (buffer[1] == 'O')
+		if (buffer[1] == 'O' && (buffer[2] == ' ' || buffer[2] == '\t'))
 			return (0);
 		else
 			ft_exit("Error\nInvalid name in NO texture!\n");
 	}
 	else if (buffer[0] == 'W')
 	{
-		if (buffer[1] == 'E')
+		if (buffer[1] == 'E' && (buffer[2] == ' ' || buffer[2] == '\t'))
 			return (1);
 		else
 			ft_exit("Error\nInvalid name in WE texture!\n");
@@ -48,7 +48,7 @@ int		check_so_ea_s(char *buffer)
 {
 	if (buffer[0] == 'S')
 	{
-		if (buffer[1] == 'O')
+		if (buffer[1] == 'O' && (buffer[2] == ' ' || buffer[2] == '\t'))
 			return (0);
 		else if (buffer[1] == ' ' || buffer[1] == '\t')
 			return (2);
@@ -57,7 +57,7 @@ int		check_so_ea_s(char *buffer)
 	}
 	else if (buffer[0] == 'E')
 	{
-		if (buffer[1] == 'A')
+		if (buffer[1] == 'A' && (buffer[2] == ' ' || buffer[2] == '\t'))
 			return (1);
 		else
 			ft_exit("Error\nInvalid name in EA texture!\n");
